@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "id": "${mod_id}",
+  "version": "${mod_version}",
+  "name": "${mod_name}",
+  "description": "A minimap and world map for the Neroland mod family: performant, highly customisable, and private by design.",
+  "authors": ["${mod_authors}"],
+  "license": "${mod_license}",
+  "icon": "neromaps_logo.png",
+  "accessWidener": "neromaps.accesswidener",
+  "environment": "*",
+  "entrypoints": {
+    "main": ["za.co.neroland.neromaps.fabric.NeroMapsFabric"],
+    "client": ["za.co.neroland.neromaps.fabric.NeroMapsFabricClient"]
+  },
+  "mixins": [
+    "neromaps-common.mixins.json",
+    "neromaps.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=${fabric_loader_version}",
+    "minecraft": ">=${minecraft_version} <${minecraft_version_ceiling}",
+    "java": ">=21",
+    "fabric-api": "*",
+    "nerolandcore": ">=${nerolandcore_version} <2.0.0"
+  }
+}
