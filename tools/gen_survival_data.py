@@ -12,6 +12,9 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent / "common/src/main/resources"
 A = ROOT / "assets/neromaps"
 D = ROOT / "data"
+# MC 26.3 reworked loot-table and advancement-criterion JSON; the resources-26.3 overlay (applied to 26.3+)
+# carries those variants, the shared folder keeps the 1.21.x - 26.2 format.
+D263 = ROOT.parent / "resources-26.3" / "data"
 FACING_Y = {"north": 0, "east": 90, "south": 180, "west": 270}
 
 out = {}
@@ -79,15 +82,25 @@ BLOCKS = ["cartography_desk", "wall_map", "signpost", "map_table", "trail_marker
 def loot():
     for b in BLOCKS:
         entry = {"type": "minecraft:item", "name": f"neromaps:{b}"}
+        entry263 = {"type": "minecraft:item", "name": f"neromaps:{b}"}
         if b == "signpost":
             entry["functions"] = [
                 {"function": "minecraft:set_count", "count": n, "add": False, "conditions": [
                     {"condition": "minecraft:block_state_property", "block": "neromaps:signpost",
                      "properties": {"plates": str(n)}}]} for n in (2, 3)]
+            entry263["modifier"] = [
+                {"type": "minecraft:set_count", "count": n,
+                 "condition": {"type": "minecraft:match_block", "blocks": "neromaps:signpost",
+                               "state": {"plates": str(n)}}} for n in (2, 3)]
         put(D / f"neromaps/loot_table/blocks/{b}.json", {
             "type": "minecraft:block",
             "pools": [{"rolls": 1, "entries": [entry],
                        "conditions": [{"condition": "minecraft:survives_explosion"}]}],
+            "random_sequence": f"neromaps:blocks/{b}"})
+        put(D263 / f"neromaps/loot_table/blocks/{b}.json", {
+            "type": "minecraft:block",
+            "pools": [{"condition": {"type": "minecraft:survives_explosion"},
+                       "entries": [entry263], "rolls": 1}],
             "random_sequence": f"neromaps:blocks/{b}"})
 
 
@@ -126,13 +139,14 @@ def recipes():
     unlocks = {name: unlock for name, (_, unlock) in RECIPES.items()}
     unlocks["waypoint_compass"] = "minecraft:compass"
     for name, item in unlocks.items():
-        put(D / f"neromaps/advancement/recipes/misc/{name}.json", {
-            "parent": "minecraft:recipes/root",
-            "criteria": {
-                "has_item": {"trigger": "minecraft:inventory_changed", "conditions": {"items": [{"items": item}]}},
-                "has_the_recipe": {"trigger": "minecraft:recipe_unlocked", "conditions": {"recipe": f"neromaps:{name}"}}},
-            "requirements": [["has_item", "has_the_recipe"]],
-            "rewards": {"recipes": [f"neromaps:{name}"]}})
+        for base, key in ((D, "recipe"), (D263, "recipes")):
+            put(base / f"neromaps/advancement/recipes/misc/{name}.json", {
+                "parent": "minecraft:recipes/root",
+                "criteria": {
+                    "has_item": {"trigger": "minecraft:inventory_changed", "conditions": {"items": [{"items": item}]}},
+                    "has_the_recipe": {"trigger": "minecraft:recipe_unlocked", "conditions": {key: f"neromaps:{name}"}}},
+                "requirements": [["has_item", "has_the_recipe"]],
+                "rewards": {"recipes": [f"neromaps:{name}"]}})
 
 
 def tag(path, ids):
@@ -159,7 +173,7 @@ def main():
     for path, text in out.items():
         if check:
             if not path.is_file() or path.read_text(encoding="utf-8") != text:
-                drift.append(str(path.relative_to(ROOT)))
+                drift.append(str(path.relative_to(ROOT.parent)))
         else:
             path.parent.mkdir(parents=True, exist_ok=True)
             path.write_text(text, encoding="utf-8", newline="\n")
