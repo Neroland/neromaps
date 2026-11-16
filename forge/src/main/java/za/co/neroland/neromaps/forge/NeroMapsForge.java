@@ -21,5 +21,10 @@ public final class NeroMapsForge {
         //?} else {
         /*RegistrationProvider.attach(context.getModEventBus());
         *///?}
+        // SPIKE (Stage 0 minimap draw path): debug HUD layer, client only, off unless -Dneromaps.spike.minimap=true.
+        // Stage 2 replaces this block with the real client setup.
+        if (net.minecraftforge.fml.loading.FMLEnvironment.dist == net.minecraftforge.api.distmarker.Dist.CLIENT) {
+            za.co.neroland.neromaps.forge.spike.SpikeForgeHud.register(context);
+        }
     }
 }

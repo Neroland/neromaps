@@ -59,12 +59,9 @@ public final class NeroMapsTelemetry {
 
     /**
      * Sentry DSN for the NeroMaps project (EU ingest) - a public client key (write-only ingest), safe to
-     * ship in the jar. <b>PLACEHOLDER:</b> NeroMaps has no Sentry project yet, so this is the placeholder and
-     * {@link #init()} sends nothing. When the project exists, replace this literal with its DSN (the same
-     * way every Nero mod injects it: a compile-time constant in this class) and register the release in
-     * {@code publish.yml}'s Sentry step.
+     * ship in the jar. Injected the same way every Nero mod injects it: a compile-time constant in this class.
      */
-    private static final String DSN = PLACEHOLDER_DSN;
+    private static final String DSN = "https://99df024563060ce6bcbdb2c1b4655723@o4511183823241216.ingest.de.sentry.io/4512441030475856";
 
     /** Stack traces must contain this package for an event to be sent. */
     private static final String PACKAGE_MARKER = "za.co.neroland.neromaps";

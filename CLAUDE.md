@@ -27,7 +27,7 @@ Common packages so far:
 | (root) | `NeroMapsCommon`: `MOD_ID`, `LOGGER`, the numbered `init()` |
 | `platform` | `PlatformInfo` (loader facts) and `Services` (resolved once during init) |
 | `config` | `NeroMapsConfig` (Core `ConfigSchema`, file `config/neromaps.properties`; only `telemetryEnabled` so far) |
-| `telemetry` | `NeroMapsTelemetry` (opt-out Sentry, placeholder DSN), `SentryLogAppender`, `ForeignMixinFailure` |
+| `telemetry` | `NeroMapsTelemetry` (opt-out Sentry, EU DSN), `SentryLogAppender`, `ForeignMixinFailure` |
 | `registry` | `ModCreativeTab` (id `neromaps`, title `itemGroup.neromaps`, through Core's `RegistrationProvider`) |
 | `menu` | `MenuOpener`: the only way any NeroMaps GUI is opened |
 | `data` | `NeroMapsData` (the one composite eraser registered with Core's `PlayerDataErasure`), `NeroMapsSavedData` (every `SavedData` read through Core's `SavedDataRecovery`) |
@@ -94,8 +94,8 @@ Neroland Core is resolved from `mavenLocal()` or GitHub Packages; see [USING-COR
 - **`MenuOpener` for every GUI.** Never call `Player#openMenu` directly.
 - **Config through Core's `ConfigSchema`** (`config/neromaps.properties`).
 - **Opt-out Sentry telemetry** with no personal data. The DSN is a compile-time constant in
-  `NeroMapsTelemetry`; it is still the placeholder, so the build sends nothing. Keep the placeholder guard so a
-  fork stays silent.
+  `NeroMapsTelemetry` (the NeroMaps EU project). Keep the placeholder guard so a fork that blanks the DSN
+  stays silent.
 - **`publish.yml` rules.** Direct-curl CurseForge upload with `max-parallel: 1` and the 4-attempt 5xx retry
   loop. The CurseForge project id is the `CURSEFORGE_PROJECT_ID` secret (not created yet).
 - **Own creative tab** (`registry/ModCreativeTab`, id `neromaps`, title `itemGroup.neromaps`). Never add items to

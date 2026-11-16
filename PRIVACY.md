@@ -26,8 +26,7 @@ the same release that adds it.
 
 ## Crash reports (telemetry)
 
-NeroMaps can send anonymous crash reports about its own errors to Sentry (EU servers). In this build no reporting
-project is configured, so **nothing is sent**. When reporting is switched on in a later build:
+NeroMaps can send anonymous crash reports about its own errors to Sentry (EU servers):
 
 - It is on by default and you can turn it off: set `telemetryEnabled=false` in `config/neromaps.properties`
   (takes effect on restart). This setting is yours; a server cannot change it.

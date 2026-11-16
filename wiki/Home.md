@@ -17,7 +17,7 @@ its config file, and does nothing else yet.
 
 | Key | Default | What it does |
 |-----|---------|--------------|
-| `telemetryEnabled` | `true` | Anonymous NeroMaps-only crash reports. Set `false` to opt out (takes effect on restart). This build sends nothing. |
+| `telemetryEnabled` | `true` | Anonymous NeroMaps-only crash reports. Set `false` to opt out (takes effect on restart). |
 
 ## Privacy
 
