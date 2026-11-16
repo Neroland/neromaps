@@ -1501,6 +1501,69 @@
       "inverted": false,
       "shipped_layer": true
     },
+    "neromaps:badge_side_a": {
+      "slot": 131,
+      "carrier": "badge",
+      "glyph": null,
+      "colour": "#56B4E9",
+      "colour_name": "M_SKY",
+      "uv": [
+        48,
+        128,
+        16,
+        16
+      ],
+      "micro_uv": [
+        24,
+        224,
+        8,
+        8
+      ],
+      "inverted": false,
+      "shipped_layer": true
+    },
+    "neromaps:badge_side_b": {
+      "slot": 132,
+      "carrier": "badge",
+      "glyph": null,
+      "colour": "#E69F00",
+      "colour_name": "M_ORANGE",
+      "uv": [
+        64,
+        128,
+        16,
+        16
+      ],
+      "micro_uv": [
+        32,
+        224,
+        8,
+        8
+      ],
+      "inverted": false,
+      "shipped_layer": true
+    },
+    "neromaps:badge_side_none": {
+      "slot": 133,
+      "carrier": "badge",
+      "glyph": null,
+      "colour": "#F2F5F8",
+      "colour_name": "M_WHITE",
+      "uv": [
+        80,
+        128,
+        16,
+        16
+      ],
+      "micro_uv": [
+        40,
+        224,
+        8,
+        8
+      ],
+      "inverted": false,
+      "shipped_layer": true
+    },
     "neroruins:ruin": {
       "slot": 136,
       "carrier": "diamond",

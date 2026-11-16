@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "GMG",
+    "III",
+    " I "
+  ],
+  "key": {
+    "G": "minecraft:glass_pane",
+    "M": "minecraft:map",
+    "I": "minecraft:iron_ingot"
+  },
+  "result": {
+    "id": "neromaps:map_table",
+    "count": 1
+  }
+}

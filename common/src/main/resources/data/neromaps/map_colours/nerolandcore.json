@@ -1,0 +1,65 @@
+{
+ "version": 1,
+ "blocks": {
+  "nerolandcore:battery": {
+   "rgb": "7b6970",
+   "tint": "none"
+  },
+  "nerolandcore:creative_battery": {
+   "rgb": "917a6f",
+   "tint": "none"
+  },
+  "nerolandcore:creative_fluid_tank": {
+   "rgb": "9d6790",
+   "tint": "none"
+  },
+  "nerolandcore:creative_gas_tank": {
+   "rgb": "9b688f",
+   "tint": "none"
+  },
+  "nerolandcore:creative_item_store": {
+   "rgb": "9d6790",
+   "tint": "none"
+  },
+  "nerolandcore:fluid_tank": {
+   "rgb": "596da5",
+   "tint": "none"
+  },
+  "nerolandcore:gas_tank": {
+   "rgb": "5f916f",
+   "tint": "none"
+  },
+  "nerolandcore:item_store": {
+   "rgb": "50596e",
+   "tint": "none"
+  },
+  "nerolandcore:nero_alloy_block": {
+   "rgb": "26a79b",
+   "tint": "none"
+  },
+  "nerolandcore:plasma_glass_block": {
+   "rgb": "69e9ff",
+   "tint": "none"
+  },
+  "nerolandcore:plasma_glass_pane": {
+   "rgb": "69e9ff",
+   "tint": "none"
+  },
+  "nerolandcore:sentry_test": {
+   "rgb": "bc915f",
+   "tint": "none"
+  },
+  "nerolandcore:starsteel_block": {
+   "rgb": "8cb2d0",
+   "tint": "none"
+  },
+  "nerolandcore:trash_can": {
+   "rgb": "595d6b",
+   "tint": "none"
+  },
+  "nerolandcore:void_crystal_block": {
+   "rgb": "9e5ccf",
+   "tint": "none"
+  }
+ }
+}

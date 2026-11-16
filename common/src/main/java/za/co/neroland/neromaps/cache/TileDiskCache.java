@@ -39,6 +39,7 @@ public final class TileDiskCache {
     private final ConcurrentHashMap<Path, long[]> index = new ConcurrentHashMap<>();
     private final AtomicLong total = new AtomicLong();
     private volatile boolean scanned;
+    private volatile java.util.function.@Nullable Consumer<Path> deleteListener;
 
     public TileDiskCache(Path root, long capBytes) {
         this.root = root;
@@ -124,6 +125,21 @@ public final class TileDiskCache {
         }
     }
 
+    /** Reads the first {@code n} bytes of a tile file (its header) without stamping the access time; null if short. */
+    public byte @Nullable [] readHead(Path file, int n) {
+        try (java.io.InputStream in = Files.newInputStream(file)) {
+            byte[] b = in.readNBytes(n);
+            return b.length == n ? b : null;
+        } catch (IOException e) {
+            return null;
+        }
+    }
+
+    /** Told the path of every file this cache deletes (corrupt, evicted or cleared). Server cache only. */
+    public void onDelete(java.util.function.@Nullable Consumer<Path> listener) {
+        deleteListener = listener;
+    }
+
     /** Writes atomically, then evicts least-recently-used files until under the cap. */
     public void write(Path file, byte[] data) throws IOException {
         Files.createDirectories(file.getParent());
@@ -174,6 +190,10 @@ public final class TileDiskCache {
         long[] e = index.remove(p);
         if (e != null) {
             total.addAndGet(-e[0]);
+            java.util.function.Consumer<Path> l = deleteListener;
+            if (l != null) {
+                l.accept(p);
+            }
         }
     }
 

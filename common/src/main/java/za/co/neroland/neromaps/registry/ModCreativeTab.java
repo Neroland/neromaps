@@ -8,7 +8,6 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
 
 import za.co.neroland.nerolandcore.registry.RegistrationProvider;
@@ -21,8 +20,7 @@ import za.co.neroland.neromaps.NeroMapsCommon;
  * the vanilla {@code CREATIVE_MODE_TAB} registry. Every Nero mod owns its tab; nothing is added to Core's
  * "Neroland" tab, which lists Core's own items only.
  *
- * <p>0.0.1 registers no items, so the tab is empty (and vanilla hides an empty tab). The icon is the vanilla
- * filled map until NeroMaps has an item of its own.
+ * <p>The icon is the filled Atlas.
  */
 public final class ModCreativeTab {
 
@@ -37,7 +35,7 @@ public final class ModCreativeTab {
     public static final RegistryEntry<CreativeModeTab> NEROMAPS = TABS.register("neromaps",
             key -> CreativeModeTab.builder(CreativeModeTab.Row.TOP, 0)
                     .title(Component.translatable("itemGroup.neromaps"))
-                    .icon(() -> new ItemStack(Items.FILLED_MAP))
+                    .icon(() -> new ItemStack(ModItems.ATLAS.get()))
                     .displayItems((params, output) -> CONTENTS.forEach(s -> output.accept(s.get())))
                     .build());
 

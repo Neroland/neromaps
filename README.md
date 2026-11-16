@@ -6,15 +6,17 @@
 minimap that is on by default, a world map, waypoints you can share by consent, and the features of the other
 Nero mods drawn on the map.
 
-> **Status: 0.0.1-alpha.1 — scaffold only.** This build registers the mod, its (empty) creative tab, its config
-> and its crash-reporting opt-out. It has no map yet.
+> **Status: 0.1.0-beta.1.** Minimap and world map, waypoints, consent-only sharing, fog of war, the survival
+> cartography blocks, map layers from the other Nero mods and the `neromaps` NeroLink module. See the
+> [CHANGELOG](CHANGELOG.md) for what shipped, what was cut and what is deferred, and the
+> [wiki](https://github.com/Neroland/neromaps/wiki) for how to use it.
 
 ## Requirements
 
 - Minecraft 26.3 (also built for 26.2, 26.1.2 and 1.21.1 / 1.21.4 / 1.21.5 / 1.21.7-1.21.8 / 1.21.9-1.21.10 /
   1.21.11)
 - Fabric (with Fabric API), NeoForge or Forge
-- [Neroland Core](https://github.com/Neroland/neroland-core) 1.17.6 or newer (below 2.0)
+- [Neroland Core](https://github.com/Neroland/neroland-core) 1.19.0 or newer (below 2.0)
 
 NeroMaps depends on Neroland Core and nothing else.
 

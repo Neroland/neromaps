@@ -1,0 +1,22 @@
+{
+  "title": "quest.neromaps.charting.wall_map.title",
+  "description": "quest.neromaps.charting.wall_map.desc",
+  "icon": "neromaps:wall_map",
+  "prerequisites": [
+    "neromaps:charting/desk"
+  ],
+  "objectives": [
+    {
+      "type": "neroquests:collect_item",
+      "item": "neromaps:wall_map",
+      "count": 1
+    }
+  ],
+  "rewards": [
+    {
+      "type": "neroquests:xp",
+      "amount": 80
+    }
+  ],
+  "scope": "player"
+}

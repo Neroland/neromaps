@@ -1,0 +1,69 @@
+{
+ "version": 1,
+ "blocks": {
+  "nerocolonies:colony_beacon": {
+   "rgb": "294757",
+   "tint": "none"
+  },
+  "nerocolonies:colony_depot": {
+   "rgb": "484441",
+   "tint": "none"
+  },
+  "nerocolonies:fabricator_station": {
+   "rgb": "3f465b",
+   "tint": "none"
+  },
+  "nerocolonies:farm_station": {
+   "rgb": "3c5041",
+   "tint": "none"
+  },
+  "nerocolonies:gratitude_cache": {
+   "rgb": "5d536a",
+   "tint": "none"
+  },
+  "nerocolonies:habitat_block": {
+   "rgb": "6b8292",
+   "tint": "none"
+  },
+  "nerocolonies:habitat_module": {
+   "rgb": "5f7080",
+   "tint": "none"
+  },
+  "nerocolonies:habitat_pod": {
+   "rgb": "637787",
+   "tint": "none"
+  },
+  "nerocolonies:hydroponics_station": {
+   "rgb": "365961",
+   "tint": "none"
+  },
+  "nerocolonies:needs_board": {
+   "rgb": "545e65",
+   "tint": "none"
+  },
+  "nerocolonies:outpost_beacon": {
+   "rgb": "294153",
+   "tint": "none"
+  },
+  "nerocolonies:oxygen_generator": {
+   "rgb": "2e4f5b",
+   "tint": "none"
+  },
+  "nerocolonies:planning_table": {
+   "rgb": "444242",
+   "tint": "none"
+  },
+  "nerocolonies:refinery_station": {
+   "rgb": "504e44",
+   "tint": "none"
+  },
+  "nerocolonies:research_station": {
+   "rgb": "363754",
+   "tint": "none"
+  },
+  "nerocolonies:storage_crate": {
+   "rgb": "42464e",
+   "tint": "none"
+  }
+ }
+}

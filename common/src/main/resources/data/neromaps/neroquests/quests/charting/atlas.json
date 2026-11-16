@@ -1,0 +1,22 @@
+{
+  "title": "quest.neromaps.charting.atlas.title",
+  "description": "quest.neromaps.charting.atlas.desc",
+  "icon": "neromaps:atlas_blank",
+  "prerequisites": [
+    "neromaps:charting/compass"
+  ],
+  "objectives": [
+    {
+      "type": "neroquests:craft_item",
+      "item": "neromaps:atlas_blank",
+      "count": 1
+    }
+  ],
+  "rewards": [
+    {
+      "type": "neroquests:xp",
+      "amount": 50
+    }
+  ],
+  "scope": "player"
+}

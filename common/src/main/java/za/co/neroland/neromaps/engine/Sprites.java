@@ -1,13 +1,23 @@
 package za.co.neroland.neromaps.engine;
 
 /**
- * The minimap's small procedural sprite sheet (32 x 32): a white patch for solid frame geometry, a marker dot and
- * the player arrow. Drawn in code, so the minimap never depends on an art file being present; Fable's frames and
- * icon atlas replace these when they land. Pixels are ARGB.
+ * The minimap's sprite sheet (512 x 512, one texture, so the overlay stays one batch): the procedural 32 x 32 corner
+ * (a white patch for solid geometry, a marker dot, the player arrow) drawn in code so the minimap never depends on an
+ * art file, plus Fable's frame art for the current shape, size and border composited in at load (Stage 7). Pixels
+ * are ARGB.
  */
 public final class Sprites {
 
-    public static final int SIZE = 32;
+    public static final int SIZE = 512;
+    /** Fable's frame art is composited into the sheet at these texel origins (see {@code MinimapHud}). */
+    public static final int SQUARE_X = 32;
+    public static final int SQUARE_Y = 0;
+    public static final int NORTH_X = 64;
+    public static final int NORTH_Y = 0;
+    public static final int BEZEL_X = 0;
+    public static final int BEZEL_Y = 32;
+    public static final int TICKS_X = 176;
+    public static final int TICKS_Y = 32;
     /** Solid white texel centre (frame geometry is tinted by vertex colour). */
     public static final float WHITE_U0 = 1f / SIZE;
     public static final float WHITE_V0 = 1f / SIZE;

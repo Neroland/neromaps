@@ -1,0 +1,105 @@
+{
+ "version": 1,
+ "blocks": {
+  "neroruins:arc_grate": {
+   "rgb": "495f5f",
+   "tint": "none"
+  },
+  "neroruins:ballast_plate": {
+   "rgb": "576d6a",
+   "tint": "none"
+  },
+  "neroruins:card_reader": {
+   "rgb": "5f7a78",
+   "tint": "none"
+  },
+  "neroruins:conduit": {
+   "rgb": "4b3d3a",
+   "tint": "none"
+  },
+  "neroruins:conduit_lock": {
+   "rgb": "34373e",
+   "tint": "none"
+  },
+  "neroruins:conduit_source": {
+   "rgb": "426772",
+   "tint": "none"
+  },
+  "neroruins:glyph_clue": {
+   "rgb": "252033",
+   "tint": "none"
+  },
+  "neroruins:glyph_lock": {
+   "rgb": "1d1a26",
+   "tint": "none"
+  },
+  "neroruins:glyph_stone": {
+   "rgb": "252033",
+   "tint": "none"
+  },
+  "neroruins:lattice_floor": {
+   "rgb": "1d1a26",
+   "tint": "none"
+  },
+  "neroruins:latticework": {
+   "rgb": "292439",
+   "tint": "none"
+  },
+  "neroruins:log_terminal": {
+   "rgb": "5d8587",
+   "tint": "none"
+  },
+  "neroruins:reinforced_lattice_floor": {
+   "rgb": "1d282e",
+   "tint": "none"
+  },
+  "neroruins:reinforced_latticework": {
+   "rgb": "252c38",
+   "tint": "none"
+  },
+  "neroruins:reinforced_rusted_survey_hull": {
+   "rgb": "586865",
+   "tint": "none"
+  },
+  "neroruins:reinforced_survey_hull": {
+   "rgb": "566d6b",
+   "tint": "none"
+  },
+  "neroruins:relic_socket": {
+   "rgb": "1d1a26",
+   "tint": "none"
+  },
+  "neroruins:resonance_clue": {
+   "rgb": "ad3636",
+   "tint": "none"
+  },
+  "neroruins:resonance_crystal_block": {
+   "rgb": "353556",
+   "tint": "none"
+  },
+  "neroruins:resonance_pylon": {
+   "rgb": "241f35",
+   "tint": "none"
+  },
+  "neroruins:ruin_spawner": {
+   "rgb": "557474",
+   "tint": "none"
+  },
+  "neroruins:rusted_survey_hull": {
+   "rgb": "637673",
+   "tint": "none"
+  },
+  "neroruins:sealed_door": {
+   "rgb": "5f7a78",
+   "tint": "none"
+  },
+  "neroruins:survey_hull": {
+   "rgb": "5f7a78",
+   "tint": "none"
+  },
+  "neroruins:vault_cache": {
+   "rgb": "394b4c",
+   "tint": "none"
+  }
+ }
+}

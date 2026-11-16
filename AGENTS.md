@@ -6,8 +6,11 @@ NeroMaps is the minimap and world-map mod of the Neroland mod family, built on *
 the heart of the mod and is on by default; the world map, waypoints, sharing and the companion-app map follow.
 It has to be performant, highly customisable, and show features from the other Nero mods.
 
-**Status: 0.0.1-alpha.1 — empty scaffold.** One entry class per loader, common init, the creative tab, config,
-opt-out telemetry, the `MenuOpener` stub and the `data/` seams. No content, no store, no network payloads yet.
+**Status: 0.1.0-beta.1 working tree (release candidate, untagged; needs Core 1.19.0 released first).** The client map engine (minimap, world map, caches),
+waypoints with the one player store, server policy and sync, the `neromaps:main` payloads, server commands, the
+Waypoint Compass, server terrain capture with fog of war, consent-only sharing, and the consumer side of Core's map
+layer API, the survival blocks and screens, compliance (erasure, `/neromaps export`, retention) and the `neromaps`
+link module are in. The app module lives in the NeroLink app.
 
 ## Repository layout
 
@@ -16,7 +19,7 @@ opt-out telemetry, the `MenuOpener` stub and the `data/` seams. No content, no s
 | `common/src/main/java/za/co/neroland/neromaps/` | Loader-agnostic code (vanilla + Core APIs only, no loader imports) |
 | `common/src/main/resources/` | Shared assets, lang, mixin config, `pack.mcmeta`, mod-list logo |
 | `fabric/`, `forge/`, `neoforge/` | One branch per loader: entry points, `PlatformInfo` implementation, manifest templates |
-| `tools/` | `ecj.prefs` (analyzer settings), `gen_logo.py` (family logo), the Gradle MCP server |
+| `tools/` | `ecj.prefs` (analyzer settings), `gen_logo.py` (family logo), `build_colour_table.py` (block/biome colour table, decision 003), the Gradle MCP server |
 | `art/` | Logo outputs |
 | `wiki/` | Player-facing wiki pages, published to the public GitHub wiki |
 
@@ -26,12 +29,33 @@ Common packages so far:
 |---------|------------------|
 | (root) | `NeroMapsCommon`: `MOD_ID`, `LOGGER`, the numbered `init()` |
 | `platform` | `PlatformInfo` (loader facts) and `Services` (resolved once during init) |
-| `config` | `NeroMapsConfig` (Core `ConfigSchema`, file `config/neromaps.properties`; only `telemetryEnabled` so far) |
+| `config` | `NeroMapsConfig` (Core `ConfigSchema`, file `config/neromaps.properties`: `telemetryEnabled`, every server policy key, server-only capture tuning, `nameDenyList`) |
+| `policy` | `PolicySnapshot` (the policy as one value; wire flags; lock explanation keys) |
+| `text` | `NameFilter` (the one filter and 32-character limit for waypoint names and, later, signpost labels) |
+| `store` | The one player store: `MapPlayerState` (`neromaps:players`, schema-versioned codec), `PlayerRecord`, `Waypoint`, `DeathPoint`, `ExploredMap` (region bitsets), `Grant`, `ShareRequest`, `ShareScope`, `ConsentLedger` (offer / accept / decline / revoke rules), `PlayerStore` (recovery-guarded access, eraser) |
+| `fog` | `Visibility` (own + granted explored maps, public map), `TileMask` (per-chunk mask, masked tile, mixed etag) |
+| `network` | `MapNetwork` (payload registry, channel `neromaps:main`), `Payloads`, `Wire`, `RateLimiter`, `ClientSink` |
+| `server` | `MapServer` (tick-driven sessions, exploration, deaths, live positions, hello), `ServerHandlers` (validated intents), `WorldId`; `server.tiles` (capture: `DirtyMarks`, `CaptureLoop`, `CaptureBudget`, `ChunkAccess`/`LevelChunkAccess` (`getChunkNow` only), `ServerChunkSnapshot`, `ServerTileStore`, `CaptureService`, `TileService`, `CapturePerf`); `server.layers` (`LayerService`, `LayerItems`: the Core map API consumer) |
+| `command` | `MapCommands` (the server `/neromaps` root) |
+| `item` | `WaypointCompassItem` |
 | `telemetry` | `NeroMapsTelemetry` (opt-out Sentry, EU DSN), `SentryLogAppender`, `ForeignMixinFailure` |
-| `registry` | `ModCreativeTab` (id `neromaps`, title `itemGroup.neromaps`, through Core's `RegistrationProvider`) |
+| `registry` | `ModCreativeTab` (id `neromaps`, title `itemGroup.neromaps`, through Core's `RegistrationProvider`), `ModItems` |
 | `menu` | `MenuOpener`: the only way any NeroMaps GUI is opened |
 | `data` | `NeroMapsData` (the one composite eraser registered with Core's `PlayerDataErasure`), `NeroMapsSavedData` (every `SavedData` read through Core's `SavedDataRecovery`) |
 | `compat` | `PlayerMessages` (chat/overlay message seam across Minecraft lines) |
+| `tile` | `Tile` (256 x 256 columns, per-tile palettes), `TileCodec` (schema 1, one `TileCorruptException`), `TileLod`, `TileKey` |
+| `scan` | `ColumnScanner` (surface, roofed, cave) over the `ColumnSource` seam, `ChunkColumns` |
+| `colour` | `ColourTable` (JSON table + vanilla map-colour fallback), `MapRasterizer` (styles, hillshade, water, fog), `MapPalette`, `MapStyle`, `RasterOptions` |
+| `engine` | Pure, tested client engine: `MapStore` (tiles, LOD, disk cache), `Clipmap`, `MinimapFrame`/`MinimapGeometry`/`QuadBatch`, `MinimapLayout`, `LongObjMap`, `Sprites`, `Projection` (HUD beams), `IconAtlas` (`map_icons.json`, generic fallback) |
+| `cache` | `TileDiskCache` (per server/world/dimension, size cap, LRU, atomic writes) |
+| `settings` | `MinimapSettings` (`config/neromaps-client.properties`, client preferences only) |
+| `perf` | `PerfCounters`, `AllocationMeter` (behind `/neromaps perf`) |
+| `client` | Minecraft-facing client: `ClientMap` (chunk polling, dirty marks, scan worker), `ClientState` (everything from the server, memory only), `ClientWaypoints` (key U, spyglass marking, temporary waypoints), `ChunkSnapshot`, `ColourTables` (reload listener), `MapKeys`, `Readouts`, `ClientCommands` (`/neromaps-client perf`); `client.hud` (`MinimapHud`, `WaypointHud`, `MinimapGuiState`, `PerfOverlay`), `client.screen` (`WorldMapScreen` with the layer and waypoint panels, `WaypointEditScreen`), `client.texture` (`MapTexture` holds every upload `//?`, `WorldMapTextures`) |
+| `mixin` | `ClientLevelBlockMixin` (client block-change dirty marks), `ServerLevelBlockMixin` (server capture dirty marks), `GuiGraphicsAccessor` (1.21.6-1.21.11 only, in the non-required `neromaps-gui.mixins.json` overlay) |
+
+**Commands.** The server owns `/neromaps` (`waypoint`, `share`, `unshare`, `privacy`, `policy`, `reload`, `perf`).
+The client registers no `/neromaps` root: Fabric's client dispatcher would answer "unknown argument" for every
+server subcommand instead of forwarding it. The client-only fallback is `/neromaps-client perf`.
 
 ## Build
 

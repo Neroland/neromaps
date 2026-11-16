@@ -46,4 +46,31 @@ public final class MapPalette {
 
     private MapPalette() {
     }
+
+    /** The seven marker colours in picker order (decision 013 section 1: Okabe-Ito derived). */
+    public static final int[] MARKERS = {M_ORANGE, M_SKY, M_GREEN, M_YELLOW, M_VERMILLION, M_PURPLE, M_WHITE};
+    /** The same seven roles in Paul Tol's "bright" scheme, the alternative colour-blind-safe palette. */
+    public static final int[] MARKERS_TOL = {0xFFEE6677, 0xFF66CCEE, 0xFF228833, 0xFFCCBB44, 0xFFAA3377, 0xFF4477AA,
+        0xFFBBBBBB};
+
+    /**
+     * A marker colour in the player's chosen palette: one of the seven Okabe-Ito colours maps to the same role in
+     * the alternative palette; anything else is unchanged. Colour is never the only cue (shape and glyph carry it).
+     */
+    public static int marker(int argb, za.co.neroland.neromaps.settings.MinimapSettings.MarkerPalette palette) {
+        if (palette != za.co.neroland.neromaps.settings.MinimapSettings.MarkerPalette.TOL_BRIGHT) {
+            return argb;
+        }
+        int rgb = argb & 0xFFFFFF;
+        for (int i = 0; i < MARKERS.length; i++) {
+            if ((MARKERS[i] & 0xFFFFFF) == rgb) {
+                return (argb & 0xFF000000) | (MARKERS_TOL[i] & 0xFFFFFF);
+            }
+        }
+        if (rgb == 0x0072B2) { // the pre-0.1 dark blue, kept readable for old waypoints
+            return (argb & 0xFF000000) | (MARKERS_TOL[1] & 0xFFFFFF);
+        }
+        return argb;
+    }
 }
+

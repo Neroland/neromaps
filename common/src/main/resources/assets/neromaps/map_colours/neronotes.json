@@ -1,0 +1,65 @@
+{
+ "version": 1,
+ "blocks": {
+  "neronotes:disk_exchanger": {
+   "rgb": "0c3d45",
+   "tint": "none"
+  },
+  "neronotes:disk_press": {
+   "rgb": "0d3c44",
+   "tint": "none"
+  },
+  "neronotes:harmonic_gate": {
+   "rgb": "351648",
+   "tint": "none"
+  },
+  "neronotes:pattern_wall": {
+   "rgb": "191022",
+   "tint": "none"
+  },
+  "neronotes:publish_lectern": {
+   "rgb": "361648",
+   "tint": "none"
+  },
+  "neronotes:resonant_block_deep_bass": {
+   "rgb": "180d29",
+   "tint": "none"
+  },
+  "neronotes:resonant_block_glassy_pluck": {
+   "rgb": "0e2329",
+   "tint": "none"
+  },
+  "neronotes:resonant_block_high_lead": {
+   "rgb": "112713",
+   "tint": "none"
+  },
+  "neronotes:resonant_block_low_drone": {
+   "rgb": "0e1d1e",
+   "tint": "none"
+  },
+  "neronotes:resonant_block_percussion": {
+   "rgb": "271019",
+   "tint": "none"
+  },
+  "neronotes:resonant_block_sub_pad": {
+   "rgb": "101529",
+   "tint": "none"
+  },
+  "neronotes:resonant_block_synth_texture": {
+   "rgb": "271812",
+   "tint": "none"
+  },
+  "neronotes:resonator": {
+   "rgb": "10252b",
+   "tint": "none"
+  },
+  "neronotes:transport_lectern": {
+   "rgb": "2e143f",
+   "tint": "none"
+  },
+  "neronotes:voice_pedestal": {
+   "rgb": "490d88",
+   "tint": "none"
+  }
+ }
+}

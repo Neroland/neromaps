@@ -1,0 +1,49 @@
+{
+ "version": 1,
+ "blocks": {
+  "nerosecurity:alarm": {
+   "rgb": "40464d",
+   "tint": "none"
+  },
+  "nerosecurity:blast_door": {
+   "rgb": "495159",
+   "tint": "none"
+  },
+  "nerosecurity:force_field": {
+   "rgb": "89cef7",
+   "tint": "none"
+  },
+  "nerosecurity:force_field_emitter": {
+   "rgb": "3f464d",
+   "tint": "none"
+  },
+  "nerosecurity:keycard_programmer": {
+   "rgb": "3f464c",
+   "tint": "none"
+  },
+  "nerosecurity:laser_grid_node": {
+   "rgb": "41474e",
+   "tint": "none"
+  },
+  "nerosecurity:secure_chest": {
+   "rgb": "434a51",
+   "tint": "none"
+  },
+  "nerosecurity:security_camera": {
+   "rgb": "444b52",
+   "tint": "none"
+  },
+  "nerosecurity:security_door": {
+   "rgb": "495159",
+   "tint": "none"
+  },
+  "nerosecurity:security_hub": {
+   "rgb": "41474e",
+   "tint": "none"
+  },
+  "nerosecurity:security_monitor": {
+   "rgb": "4a525a",
+   "tint": "none"
+  }
+ }
+}

@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "neromaps:cartography_desk",
+      "required": false
+    },
+    {
+      "id": "neromaps:map_table",
+      "required": false
+    }
+  ]
+}

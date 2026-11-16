@@ -15,6 +15,7 @@
   },
   "mixins": [
     "neromaps-common.mixins.json",
+    "neromaps-gui.mixins.json",
     "neromaps.mixins.json"
   ],
   "depends": {

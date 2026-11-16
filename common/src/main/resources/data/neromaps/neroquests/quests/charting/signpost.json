@@ -1,0 +1,22 @@
+{
+  "title": "quest.neromaps.charting.signpost.title",
+  "description": "quest.neromaps.charting.signpost.desc",
+  "icon": "neromaps:signpost",
+  "prerequisites": [
+    "neromaps:charting/desk"
+  ],
+  "objectives": [
+    {
+      "type": "neroquests:craft_item",
+      "item": "neromaps:signpost",
+      "count": 1
+    }
+  ],
+  "rewards": [
+    {
+      "type": "neroquests:xp",
+      "amount": 60
+    }
+  ],
+  "scope": "player"
+}

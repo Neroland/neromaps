@@ -1,0 +1,657 @@
+{
+ "version": 1,
+ "blocks": {
+  "nerospace:alien_bricks": {
+   "rgb": "507264",
+   "tint": "none"
+  },
+  "nerospace:alien_crystal_block": {
+   "rgb": "7dc399",
+   "tint": "none"
+  },
+  "nerospace:alien_lamp": {
+   "rgb": "8fdbad",
+   "tint": "none"
+  },
+  "nerospace:alien_pillar": {
+   "rgb": "637672",
+   "tint": "none"
+  },
+  "nerospace:alien_tile": {
+   "rgb": "4b7161",
+   "tint": "none"
+  },
+  "nerospace:amber_sap_ore": {
+   "rgb": "6b543d",
+   "tint": "none"
+  },
+  "nerospace:anorthosite": {
+   "rgb": "c8c8c1",
+   "tint": "none"
+  },
+  "nerospace:ash_layer": {
+   "rgb": "40363c",
+   "tint": "none"
+  },
+  "nerospace:ashstone": {
+   "rgb": "393035",
+   "tint": "none"
+  },
+  "nerospace:aurora_stone": {
+   "rgb": "38749c",
+   "tint": "none"
+  },
+  "nerospace:basalt_column": {
+   "rgb": "6c2f1f",
+   "tint": "none"
+  },
+  "nerospace:basalt_spire": {
+   "rgb": "30282f",
+   "tint": "none"
+  },
+  "nerospace:bio_bark_log": {
+   "rgb": "614e3d",
+   "tint": "none"
+  },
+  "nerospace:budding_nyx_crystal": {
+   "rgb": "7447a4",
+   "tint": "none"
+  },
+  "nerospace:cargo_pad": {
+   "rgb": "758659",
+   "tint": "none"
+  },
+  "nerospace:cheese_ore": {
+   "rgb": "bda882",
+   "tint": "none"
+  },
+  "nerospace:cheese_wheel": {
+   "rgb": "eab639",
+   "tint": "none"
+  },
+  "nerospace:cindrite_block": {
+   "rgb": "885727",
+   "tint": "none"
+  },
+  "nerospace:cindrite_ore": {
+   "rgb": "8c827b",
+   "tint": "none"
+  },
+  "nerospace:combustion_generator": {
+   "rgb": "7e5d56",
+   "tint": "none"
+  },
+  "nerospace:cracked_alien_bricks": {
+   "rgb": "4b6c5f",
+   "tint": "none"
+  },
+  "nerospace:crater_glass": {
+   "rgb": "e9e6da",
+   "tint": "none"
+  },
+  "nerospace:crazed_crystal": {
+   "rgb": "c5d0de",
+   "tint": "none"
+  },
+  "nerospace:crystal_spire": {
+   "rgb": "b079e5",
+   "tint": "none"
+  },
+  "nerospace:dawnband_stone": {
+   "rgb": "564147",
+   "tint": "none"
+  },
+  "nerospace:deepslate_nerosium_ore": {
+   "rgb": "6b4f5c",
+   "tint": "none"
+  },
+  "nerospace:docking_port": {
+   "rgb": "6694a6",
+   "tint": "none"
+  },
+  "nerospace:docking_ring": {
+   "rgb": "9d877c",
+   "tint": "none"
+  },
+  "nerospace:dry_ice": {
+   "rgb": "dee5e9",
+   "tint": "none"
+  },
+  "nerospace:dust_devil_pit": {
+   "rgb": "a44d29",
+   "tint": "none"
+  },
+  "nerospace:ember_cracked_ashstone": {
+   "rgb": "724936",
+   "tint": "none"
+  },
+  "nerospace:frost_crystal_cluster": {
+   "rgb": "b5e0fa",
+   "tint": "none"
+  },
+  "nerospace:frozen_geyser": {
+   "rgb": "608eb1",
+   "tint": "none"
+  },
+  "nerospace:fuel_refinery": {
+   "rgb": "6e6770",
+   "tint": "none"
+  },
+  "nerospace:fuel_tank": {
+   "rgb": "756670",
+   "tint": "none"
+  },
+  "nerospace:glacite_block": {
+   "rgb": "5c869d",
+   "tint": "none"
+  },
+  "nerospace:glacite_ore": {
+   "rgb": "818990",
+   "tint": "none"
+  },
+  "nerospace:glowcap_block": {
+   "rgb": "a2f555",
+   "tint": "none"
+  },
+  "nerospace:glowcap_fungus": {
+   "rgb": "8ad757",
+   "tint": "none"
+  },
+  "nerospace:gravity_plate": {
+   "rgb": "68778e",
+   "tint": "none"
+  },
+  "nerospace:gravity_shard_block": {
+   "rgb": "b7a2f4",
+   "tint": "none"
+  },
+  "nerospace:helium3_pocket": {
+   "rgb": "97a19d",
+   "tint": "none"
+  },
+  "nerospace:hematite_ore": {
+   "rgb": "ae512b",
+   "tint": "none"
+  },
+  "nerospace:hull_plating": {
+   "rgb": "7d888d",
+   "tint": "none"
+  },
+  "nerospace:hull_window": {
+   "rgb": "a2bec2",
+   "tint": "none"
+  },
+  "nerospace:hydration_module": {
+   "rgb": "55718e",
+   "tint": "none"
+  },
+  "nerospace:hydroponics_tray": {
+   "rgb": "52ad7b",
+   "tint": "none"
+  },
+  "nerospace:ilmenite_ore": {
+   "rgb": "989893",
+   "tint": "none"
+  },
+  "nerospace:landing_pod": {
+   "rgb": "6c8a9b",
+   "tint": "none"
+  },
+  "nerospace:launch_controller": {
+   "rgb": "2e343c",
+   "tint": "none"
+  },
+  "nerospace:launch_controller_part": {
+   "rgb": "2e343c",
+   "tint": "none"
+  },
+  "nerospace:launch_gantry": {
+   "rgb": "6e604d",
+   "tint": "none"
+  },
+  "nerospace:lunar_basalt": {
+   "rgb": "494a4f",
+   "tint": "none"
+  },
+  "nerospace:magma_glass": {
+   "rgb": "c84d21",
+   "tint": "none"
+  },
+  "nerospace:martian_sandstone": {
+   "rgb": "ba7148",
+   "tint": "none"
+  },
+  "nerospace:martian_sandstone_strata_1": {
+   "rgb": "ba6c42",
+   "tint": "none"
+  },
+  "nerospace:martian_sandstone_strata_2": {
+   "rgb": "b97047",
+   "tint": "none"
+  },
+  "nerospace:martian_sandstone_strata_3": {
+   "rgb": "b85c35",
+   "tint": "none"
+  },
+  "nerospace:martian_sandstone_strata_4": {
+   "rgb": "b66a42",
+   "tint": "none"
+  },
+  "nerospace:meteor_core": {
+   "rgb": "636c68",
+   "tint": "none"
+  },
+  "nerospace:meteor_rock": {
+   "rgb": "44474c",
+   "tint": "none"
+  },
+  "nerospace:methane_ice": {
+   "rgb": "9fd4f3",
+   "tint": "none"
+  },
+  "nerospace:mirror_crystal": {
+   "rgb": "1f2834",
+   "tint": "none"
+  },
+  "nerospace:nerosium_block": {
+   "rgb": "bd5aa4",
+   "tint": "none"
+  },
+  "nerospace:nerosium_grinder": {
+   "rgb": "7a6987",
+   "tint": "none"
+  },
+  "nerospace:nerosium_ore": {
+   "rgb": "8c7d83",
+   "tint": "none"
+  },
+  "nerospace:nerosteel_block": {
+   "rgb": "698a6c",
+   "tint": "none"
+  },
+  "nerospace:nerosteel_ore": {
+   "rgb": "7f8880",
+   "tint": "none"
+  },
+  "nerospace:nyx_crystal_cluster": {
+   "rgb": "ab84d3",
+   "tint": "none"
+  },
+  "nerospace:nyx_prism": {
+   "rgb": "b48fdc",
+   "tint": "none"
+  },
+  "nerospace:nyx_stone": {
+   "rgb": "32244d",
+   "tint": "none"
+  },
+  "nerospace:oxygen_generator": {
+   "rgb": "6792ba",
+   "tint": "none"
+  },
+  "nerospace:packed_cryo_ice": {
+   "rgb": "c5e8fc",
+   "tint": "none"
+  },
+  "nerospace:passive_generator": {
+   "rgb": "559471",
+   "tint": "none"
+  },
+  "nerospace:perchlorate_crust": {
+   "rgb": "bb7563",
+   "tint": "none"
+  },
+  "nerospace:permafrost": {
+   "rgb": "468bb6",
+   "tint": "none"
+  },
+  "nerospace:polished_lunar_basalt": {
+   "rgb": "4c4d52",
+   "tint": "none"
+  },
+  "nerospace:quarry_controller": {
+   "rgb": "655b70",
+   "tint": "none"
+  },
+  "nerospace:quarry_frame": {
+   "rgb": "4468b5",
+   "tint": "none"
+  },
+  "nerospace:quarry_landmark": {
+   "rgb": "6d537c",
+   "tint": "none"
+  },
+  "nerospace:raw_nerosium_block": {
+   "rgb": "641d49",
+   "tint": "none"
+  },
+  "nerospace:red_regolith": {
+   "rgb": "b3542c",
+   "tint": "none"
+  },
+  "nerospace:regolith": {
+   "rgb": "9b9b95",
+   "tint": "none"
+  },
+  "nerospace:rocket_fuel": {
+   "rgb": "e47e22",
+   "tint": "none"
+  },
+  "nerospace:rocket_launch_pad": {
+   "rgb": "916558",
+   "tint": "none"
+  },
+  "nerospace:rose_crystal": {
+   "rgb": "f6a6d9",
+   "tint": "none"
+  },
+  "nerospace:sentry_test": {
+   "rgb": "9b6067",
+   "tint": "none"
+  },
+  "nerospace:shadow_lichen": {
+   "rgb": "170d25",
+   "tint": "none"
+  },
+  "nerospace:shard_drift": {
+   "rgb": "c9b69d",
+   "tint": "none"
+  },
+  "nerospace:smoke_crystal": {
+   "rgb": "25253a",
+   "tint": "none"
+  },
+  "nerospace:solar_panel": {
+   "rgb": "5f6379",
+   "tint": "none"
+  },
+  "nerospace:solar_panel_t2": {
+   "rgb": "5d637b",
+   "tint": "none"
+  },
+  "nerospace:solar_panel_t3": {
+   "rgb": "5f667a",
+   "tint": "none"
+  },
+  "nerospace:solar_wing": {
+   "rgb": "656f81",
+   "tint": "none"
+  },
+  "nerospace:spore_moss": {
+   "rgb": "4cc474",
+   "tint": "none"
+  },
+  "nerospace:spore_pod": {
+   "rgb": "d885a6",
+   "tint": "none"
+  },
+  "nerospace:star_guide": {
+   "rgb": "6e4f83",
+   "tint": "none"
+  },
+  "nerospace:station_core": {
+   "rgb": "a2a7b7",
+   "tint": "none"
+  },
+  "nerospace:station_floor": {
+   "rgb": "9a9aaa",
+   "tint": "none"
+  },
+  "nerospace:station_wall": {
+   "rgb": "b8b8c6",
+   "tint": "none"
+  },
+  "nerospace:stripped_bio_bark_log": {
+   "rgb": "7d6853",
+   "tint": "none"
+  },
+  "nerospace:sulfur_crust": {
+   "rgb": "67573a",
+   "tint": "none"
+  },
+  "nerospace:sunglass_crystal": {
+   "rgb": "e7cfa9",
+   "tint": "none"
+  },
+  "nerospace:telescope": {
+   "rgb": "7f8c93",
+   "tint": "none"
+  },
+  "nerospace:terraform_monitor": {
+   "rgb": "5b767d",
+   "tint": "none"
+  },
+  "nerospace:terraformer": {
+   "rgb": "618478",
+   "tint": "none"
+  },
+  "nerospace:truss": {
+   "rgb": "6c737a",
+   "tint": "none"
+  },
+  "nerospace:twilight_crystal": {
+   "rgb": "a16fda",
+   "tint": "none"
+  },
+  "nerospace:universal_pipe": {
+   "rgb": "7a808c",
+   "tint": "none"
+  },
+  "nerospace:village_core": {
+   "rgb": "6f9081",
+   "tint": "none"
+  },
+  "nerospace:void_crystal": {
+   "rgb": "a867e3",
+   "tint": "none"
+  },
+  "nerospace:voidglass_ore": {
+   "rgb": "494468",
+   "tint": "none"
+  },
+  "nerospace:xertz_quartz_ore": {
+   "rgb": "848a85",
+   "tint": "none"
+  },
+  "nerospace:xertz_soil": {
+   "rgb": "4c4433",
+   "tint": "none"
+  },
+  "nerospace:xertz_vine": {
+   "rgb": "458840",
+   "tint": "none"
+  }
+ },
+ "biomes": {
+  "nerospace:cindara": {
+   "grass": "4a3a33",
+   "foliage": "5a3a2a",
+   "water": "70402a"
+  },
+  "nerospace:cindara_ember_plains": {
+   "grass": "6a3020",
+   "foliage": "6a3020",
+   "water": "70402a"
+  },
+  "nerospace:cindara_sulfur_vents": {
+   "grass": "7a6a2a",
+   "foliage": "7a6a2a",
+   "water": "70402a"
+  },
+  "nerospace:glacira": {
+   "grass": "c8e8f0",
+   "foliage": "a8d8e8",
+   "water": "77c8e8"
+  },
+  "nerospace:glacira_methane_shore": {
+   "grass": "c8e8f0",
+   "foliage": "a8d8e8",
+   "water": "8a6ac2"
+  },
+  "nerospace:glacira_spires": {
+   "grass": "c8e8f0",
+   "foliage": "a8d8e8",
+   "water": "77c8e8"
+  },
+  "nerospace:greenxertz": {
+   "grass": "5bd46a",
+   "foliage": "4fb85a",
+   "water": "3a8e63"
+  },
+  "nerospace:greenxertz_fungal_depths": {
+   "grass": "3fbf6f",
+   "foliage": "3fbf6f",
+   "water": "2f6e5a"
+  },
+  "nerospace:greenxertz_spore_marsh": {
+   "grass": "7ac85f",
+   "foliage": "6fbf5a",
+   "water": "5a7a5a"
+  },
+  "nerospace:luna_crater_field": {
+   "grass": "7d7d78",
+   "foliage": "7d7d78",
+   "water": "9a9a94"
+  },
+  "nerospace:luna_highlands": {
+   "grass": "7d7d78",
+   "foliage": "7d7d78",
+   "water": "9a9a94"
+  },
+  "nerospace:luna_maria": {
+   "grass": "7d7d78",
+   "foliage": "7d7d78",
+   "water": "9a9a94"
+  },
+  "nerospace:mars_canyons": {
+   "grass": "9a4322",
+   "foliage": "9a4322",
+   "water": "7a4a2e"
+  },
+  "nerospace:mars_dunes": {
+   "grass": "9a4322",
+   "foliage": "9a4322",
+   "water": "7a4a2e"
+  },
+  "nerospace:mars_polar": {
+   "grass": "9a4322",
+   "foliage": "9a4322",
+   "water": "7a4a2e"
+  },
+  "nerospace:nyxara_dayside": {
+   "grass": "b3743a",
+   "foliage": "b3743a",
+   "water": "ffb86b"
+  },
+  "nerospace:nyxara_nightside": {
+   "grass": "2b2440",
+   "foliage": "2b2440",
+   "water": "2b2440"
+  },
+  "nerospace:nyxara_twilight_band": {
+   "grass": "5b2d8e",
+   "foliage": "5b2d8e",
+   "water": "9b5de5"
+  },
+  "nerospace:terraformed": {
+   "grass": "2bffb0",
+   "foliage": "19e8c0",
+   "water": "1ff0e0"
+  },
+  "nerospace:terraformed_cindara_hydrated": {
+   "grass": "9a9244",
+   "foliage": "8a833c",
+   "water": "4c8fbf"
+  },
+  "nerospace:terraformed_cindara_rooted": {
+   "grass": "7a703a",
+   "foliage": "6d6432",
+   "water": "5c8faf"
+  },
+  "nerospace:terraformed_glacira_hydrated": {
+   "grass": "78a68a",
+   "foliage": "689679",
+   "water": "3d67d6"
+  },
+  "nerospace:terraformed_glacira_rooted": {
+   "grass": "6f9a7f",
+   "foliage": "5f8a70",
+   "water": "3d57d6"
+  },
+  "nerospace:terraformed_greenxertz_hydrated": {
+   "grass": "36c98a",
+   "foliage": "2aae78",
+   "water": "2fb7c9"
+  },
+  "nerospace:terraformed_greenxertz_living": {
+   "grass": "4fbf6f",
+   "foliage": "3a9a55",
+   "water": "2a9fc4"
+  },
+  "nerospace:terraformed_greenxertz_rooted": {
+   "grass": "3fd47a",
+   "foliage": "2fb86a",
+   "water": "1fc0d0"
+  },
+  "nerospace:terraformed_luna_hydrated": {
+   "grass": "93a29a",
+   "foliage": "83928a",
+   "water": "a8d4ee"
+  },
+  "nerospace:terraformed_luna_living": {
+   "grass": "a3cfa0",
+   "foliage": "8fbf8c",
+   "water": "5f9fd6"
+  },
+  "nerospace:terraformed_luna_rooted": {
+   "grass": "8f9a8c",
+   "foliage": "7f8a7c",
+   "water": "6e8fb0"
+  },
+  "nerospace:terraformed_mars_hydrated": {
+   "grass": "94844c",
+   "foliage": "857640",
+   "water": "3f6f8f"
+  },
+  "nerospace:terraformed_mars_living": {
+   "grass": "b47e4c",
+   "foliage": "a0703f",
+   "water": "3d79a8"
+  },
+  "nerospace:terraformed_mars_rooted": {
+   "grass": "9a7a4a",
+   "foliage": "8a6a3e",
+   "water": "4f7f9f"
+  },
+  "nerospace:terraformed_meadow": {
+   "grass": "59c93c",
+   "foliage": "3fb04a",
+   "water": "3f76e4"
+  },
+  "nerospace:terraformed_nyxara_hydrated": {
+   "grass": "4f7f8f",
+   "foliage": "436f7e",
+   "water": "2f6f9a"
+  },
+  "nerospace:terraformed_nyxara_living": {
+   "grass": "6a5f9f",
+   "foliage": "5a4f8f",
+   "water": "3f5fb0"
+  },
+  "nerospace:terraformed_nyxara_rooted": {
+   "grass": "5a6f8f",
+   "foliage": "4c607e",
+   "water": "3b5a8a"
+  },
+  "nerospace:terraformed_savanna": {
+   "grass": "bfb755",
+   "foliage": "aea42a",
+   "water": "4c8fbf"
+  },
+  "nerospace:terraformed_tundra": {
+   "grass": "80b497",
+   "foliage": "60a17b",
+   "water": "3d57d6"
+  }
+ }
+}

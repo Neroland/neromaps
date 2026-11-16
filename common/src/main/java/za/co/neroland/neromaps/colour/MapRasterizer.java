@@ -25,6 +25,7 @@ public final class MapRasterizer {
         int[] grass = new int[16];
         int[] foliage = new int[16];
         int[] water = new int[16];
+        int[] style = new int[16];
     }
 
     static TileColours colours(Tile t, ColourTable table) {
@@ -55,12 +56,14 @@ public final class MapRasterizer {
                 c.grass = java.util.Arrays.copyOf(c.grass, n);
                 c.foliage = java.util.Arrays.copyOf(c.foliage, n);
                 c.water = java.util.Arrays.copyOf(c.water, n);
+                c.style = java.util.Arrays.copyOf(c.style, n);
             }
             for (int i = c.biomes; i < nbi; i++) {
                 int[] b = table.biome(t.biomeId(i));
                 c.grass[i] = b[0];
                 c.foliage[i] = b[1];
                 c.water[i] = b[2];
+                c.style[i] = table.biomeStyle(t.biomeId(i));
             }
             c.biomes = nbi;
         }
@@ -90,6 +93,13 @@ public final class MapRasterizer {
         Tile north = z0 == 0 ? neighbours.get(t.lod, tx, tz - 1) : t;
         Tile west = x0 == 0 ? neighbours.get(t.lod, tx - 1, tz) : t;
         int step = 1 << t.lod;
+        // fog edge (decision 013 section 3): which neighbouring chunks are unsurveyed. Fog is chunk-aligned, so one
+        // probe per side tells the whole edge; the explored columns next to it are dithered toward the void.
+        boolean fogW = absent(t, neighbours, tx, tz, x0 - 1, z0 + 8);
+        boolean fogE = absent(t, neighbours, tx, tz, x0 + 16, z0 + 8);
+        boolean fogN = absent(t, neighbours, tx, tz, x0 + 8, z0 - 1);
+        boolean fogS = absent(t, neighbours, tx, tz, x0 + 8, z0 + 16);
+        boolean edges = fogW || fogE || fogN || fogS;
         for (int z = z0; z < z0 + 16; z++) {
             int row = dstOff + (z - z0) * dstStride;
             for (int x = x0; x < x0 + 16; x++) {
@@ -110,10 +120,61 @@ public final class MapRasterizer {
                     if (o.gridLines && (((wx * step) & 127) == 0 || ((wz * step) & 127) == 0)) {
                         argb = mix(argb, MapPalette.MAP_ACCENT, 90);
                     }
+                    if (edges) {
+                        int lx = x - x0;
+                        int lz = z - z0;
+                        int d = 99;
+                        if (fogW) {
+                            d = Math.min(d, lx + 1);
+                        }
+                        if (fogE) {
+                            d = Math.min(d, 16 - lx);
+                        }
+                        if (fogN) {
+                            d = Math.min(d, lz + 1);
+                        }
+                        if (fogS) {
+                            d = Math.min(d, 16 - lz);
+                        }
+                        argb = fogEdge(argb, d, wx, wz, o.style);
+                    }
                 }
                 dst[row + (x - x0)] = argb;
             }
         }
+    }
+
+    /** Whether tile-local column {@code (x, z)} (possibly in a neighbouring tile) is unsurveyed. */
+    private static boolean absent(Tile t, TileLookup neighbours, int tx, int tz, int x, int z) {
+        if (x >= 0 && x < Tile.SIZE && z >= 0 && z < Tile.SIZE) {
+            return !t.present(Tile.index(x, z));
+        }
+        int ntx = tx + Math.floorDiv(x, Tile.SIZE);
+        int ntz = tz + Math.floorDiv(z, Tile.SIZE);
+        Tile n = neighbours.get(t.lod, ntx, ntz);
+        return n == null || !n.present(Tile.index(Math.floorMod(x, Tile.SIZE), Math.floorMod(z, Tile.SIZE)));
+    }
+
+    /**
+     * The explored side of a fog boundary, {@code d} columns from it (decision 013 section 3 and
+     * {@code map_fog_edge.png} read from the fog outward): 50 % ordered dither to the void at 1, 25 % at 2, a
+     * {@code VOID_EDGE} rim blend at 3. High contrast draws a one-pixel white edge instead. Deterministic by world
+     * position, so it never shimmers. Fog itself stays opaque: nothing hidden is ever drawn dimmed.
+     */
+    public static int fogEdge(int argb, int d, int wx, int wz, MapStyle style) {
+        if (style == MapStyle.HIGH_CONTRAST) {
+            return d == 1 ? 0xFFFFFFFF : argb;
+        }
+        if (d == 1) {
+            return ((wx + wz) & 1) == 0 ? MapPalette.VOID : argb;
+        }
+        if (d == 2) {
+            return (wx & 1) == 0 && (wz & 1) == 0 ? MapPalette.VOID : argb;
+        }
+        if (d == 3) {
+            return 0xFF000000 | blendRgb(argb & 0xFFFFFF, MapPalette.VOID_EDGE & 0xFFFFFF, 128);
+        }
+        return argb;
     }
 
     private static int height(Tile t, int i, int fallback) {
@@ -151,13 +212,13 @@ public final class MapRasterizer {
             return 0xFF000000 | mulRgb(rgb, shade);
         }
         if (style == MapStyle.BIOME) {
-            int rgb = water ? c.water[bi] : c.grass[bi];
+            int rgb = water ? c.water[bi] : c.style[bi];
             int half = 256 + ((shade - 256) >> 1);
             rgb = mulRgb(rgb, half);
             boolean border = (z > 0 && t.present(i - Tile.SIZE) && t.biome[i - Tile.SIZE] != t.biome[i])
                     || (x > 0 && t.present(i - 1) && t.biome[i - 1] != t.biome[i]);
             if (border) {
-                rgb = mulRgb(rgb, 200);
+                rgb = mulRgb(rgb, 205);
             }
             return 0xFF000000 | rgb;
         }

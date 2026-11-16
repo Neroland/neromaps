@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
+  "ingredients": [
+    "minecraft:compass",
+    "minecraft:map",
+    "minecraft:redstone"
+  ],
+  "result": {
+    "id": "neromaps:waypoint_compass",
+    "count": 1
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "neromaps:atlas_upgrade_pages",
+      "required": false
+    },
+    {
+      "id": "neromaps:atlas_upgrade_binding",
+      "required": false
+    }
+  ]
+}

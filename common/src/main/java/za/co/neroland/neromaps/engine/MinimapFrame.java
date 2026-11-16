@@ -41,6 +41,47 @@ public final class MinimapFrame {
         return markers;
     }
 
+    /**
+     * Which of Fable's frame textures are in the sprite sheet right now (filled by {@code MinimapHud}). When a piece
+     * is missing the frame falls back to the procedural geometry, so a resource pack can never break the minimap.
+     */
+    public static final class FrameArt {
+        /** Square nine-slice present: image side and nine-slice border (texels = GUI pixels). */
+        public boolean square;
+        public int squareSide;
+        public int squareBorder;
+        /** Round bezel present: image side (map size + 6). */
+        public boolean round;
+        public int roundSide;
+        /** Round tick ring present (Nero border only). */
+        public boolean ticks;
+        /** The 9 x 9 north tab. */
+        public boolean north;
+
+        public void clear() {
+            square = false;
+            round = false;
+            ticks = false;
+            north = false;
+        }
+    }
+
+    public final FrameArt art = new FrameArt();
+
+    /** Round maps come in the sizes the round frame art is drawn for (decision 013 section 4). */
+    public static final int[] ROUND_SIZES = {64, 96, 128, 160};
+
+    /** The nearest round size to {@code size}. */
+    public static int snapRound(int size) {
+        int best = ROUND_SIZES[0];
+        for (int r : ROUND_SIZES) {
+            if (Math.abs(r - size) < Math.abs(best - size)) {
+                best = r;
+            }
+        }
+        return best;
+    }
+
     /** Frame thickness for a border style. */
     public static int frameWidth(Border border, boolean highContrast) {
         if (highContrast) {
@@ -73,7 +114,9 @@ public final class MinimapFrame {
 
         QuadBatch b = overlay;
         b.clear();
-        frame(b, round, cx, cy, radius, l.frame, border, highContrast, sin, cos);
+        if (!artFrame(b, round, cx, cy, radius, l.frame, border, highContrast, sin, cos)) {
+            frame(b, round, cx, cy, radius, l.frame, border, highContrast, sin, cos);
+        }
         // markers
         float limit = radius - markerHalf;
         float limitSq = limit * limit;
@@ -98,6 +141,72 @@ public final class MinimapFrame {
         }
         b.rotated(cx, cy, 9f, 9f, arrowSin, arrowCos, Sprites.ARROW_U0, Sprites.ARROW_V0, Sprites.ARROW_U1,
                 Sprites.ARROW_V1, 0xFFFFFFFF);
+    }
+
+    private static float u(int texel) {
+        return texel / (float) Sprites.SIZE;
+    }
+
+    /**
+     * Fable's frame textures (decision 013 section 4): the square bezel as a nine-slice, the round bezel as one
+     * static quad, the tick ring as one quad that turns with the map, and the north tab. Returns false (and draws
+     * nothing) when the art for this frame is not in the sheet, so the geometry frame is used instead.
+     */
+    private boolean artFrame(QuadBatch b, boolean round, float cx, float cy, float r, int fw, Border border, boolean hc,
+            float sin, float cos) {
+        FrameArt a = art;
+        if (fw == 0 || (round ? !a.round : !a.square)) {
+            return false;
+        }
+        float nx = -sin;
+        float ny = -cos;
+        int white = 0xFFFFFFFF;
+        if (round) {
+            float half = r + 3f;
+            float u0 = u(Sprites.BEZEL_X);
+            float v0 = u(Sprites.BEZEL_Y);
+            float u1 = u(Sprites.BEZEL_X + a.roundSide);
+            float v1 = u(Sprites.BEZEL_Y + a.roundSide);
+            b.rect(cx - half, cy - half, cx + half, cy + half, u0, v0, u1, v1, white);
+            if (a.ticks) {
+                b.rotated(cx, cy, half * 2f, half * 2f, sin, cos, u(Sprites.TICKS_X), u(Sprites.TICKS_Y),
+                        u(Sprites.TICKS_X + a.roundSide), u(Sprites.TICKS_Y + a.roundSide), white);
+            }
+            if (a.north) {
+                tab(b, cx + nx * (r + 1.5f), cy + ny * (r + 1.5f));
+            }
+            return true;
+        }
+        float x0 = cx - r - fw;
+        float y0 = cy - r - fw;
+        float x1 = cx + r + fw;
+        float y1 = cy + r + fw;
+        int sb = a.squareBorder;
+        int ss = a.squareSide;
+        float[] xs = {x0, x0 + sb, x1 - sb, x1};
+        float[] ys = {y0, y0 + sb, y1 - sb, y1};
+        int[] us = {0, sb, ss - sb, ss};
+        for (int j = 0; j < 3; j++) {
+            for (int i = 0; i < 3; i++) {
+                if (i == 1 && j == 1) {
+                    continue; // the centre is the map
+                }
+                b.rect(xs[i], ys[j], xs[i + 1], ys[j + 1], u(Sprites.SQUARE_X + us[i]), u(Sprites.SQUARE_Y + us[j]),
+                        u(Sprites.SQUARE_X + us[i + 1]), u(Sprites.SQUARE_Y + us[j + 1]), white);
+            }
+        }
+        if (a.north) {
+            float m = Math.max(Math.abs(nx), Math.abs(ny));
+            float d = (r + fw) / Math.max(1e-3f, m);
+            // centred on the north side, overlapping the frame by 2
+            tab(b, cx + nx * (d + 2.5f), cy + ny * (d + 2.5f));
+        }
+        return true;
+    }
+
+    private static void tab(QuadBatch b, float x, float y) {
+        b.rect(x - 4.5f, y - 4.5f, x + 4.5f, y + 4.5f, u(Sprites.NORTH_X), u(Sprites.NORTH_Y), u(Sprites.NORTH_X + 9),
+                u(Sprites.NORTH_Y + 9), 0xFFFFFFFF);
     }
 
     private static void frame(QuadBatch b, boolean round, float cx, float cy, float r, int fw, Border border,

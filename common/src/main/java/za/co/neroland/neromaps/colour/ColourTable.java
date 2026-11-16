@@ -123,6 +123,24 @@ public final class ColourTable {
 
     private static final int[] NEUTRAL = {DEFAULT_GRASS, DEFAULT_FOLIAGE, DEFAULT_WATER};
 
+    /** Biome-style family colours ({@code map/biome_styles.json}), resolved by id and tag on the client. */
+    private final HashMap<String, Integer> biomeStyle = new HashMap<>();
+    private int biomeStyleDefault = 0x7A5C8A;
+
+    public void setBiomeStyle(String biomeId, int rgb) {
+        biomeStyle.put(biomeId, rgb & 0xFFFFFF);
+    }
+
+    public void setBiomeStyleDefault(int rgb) {
+        biomeStyleDefault = rgb & 0xFFFFFF;
+    }
+
+    /** The flat Biome-style colour of a biome. */
+    public int biomeStyle(String id) {
+        Integer v = biomeStyle.get(id);
+        return v != null ? v : biomeStyleDefault;
+    }
+
     public static int rgb(int packed) {
         return packed & 0xFFFFFF;
     }

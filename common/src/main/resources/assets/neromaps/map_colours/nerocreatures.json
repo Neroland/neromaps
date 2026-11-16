@@ -1,0 +1,41 @@
+{
+ "version": 1,
+ "blocks": {
+  "nerocreatures:apex_altar": {
+   "rgb": "b9a39f",
+   "tint": "none"
+  },
+  "nerocreatures:ephemeral_crust": {
+   "rgb": "e0c7e5",
+   "tint": "none"
+  },
+  "nerocreatures:feeding_trough": {
+   "rgb": "ceccc6",
+   "tint": "none"
+  },
+  "nerocreatures:incubator": {
+   "rgb": "cdccc8",
+   "tint": "none"
+  },
+  "nerocreatures:lure_beacon": {
+   "rgb": "a8a99d",
+   "tint": "none"
+  },
+  "nerocreatures:nest": {
+   "rgb": "b79c7c",
+   "tint": "none"
+  },
+  "nerocreatures:sonic_ward": {
+   "rgb": "807e84",
+   "tint": "none"
+  },
+  "nerocreatures:terrarium": {
+   "rgb": "ceccc6",
+   "tint": "none"
+  },
+  "nerocreatures:trophy_plaque": {
+   "rgb": "ceccc6",
+   "tint": "none"
+  }
+ }
+}

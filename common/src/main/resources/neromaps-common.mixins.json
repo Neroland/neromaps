@@ -3,8 +3,12 @@
   "minVersion": "0.8",
   "package": "za.co.neroland.neromaps.mixin",
   "compatibilityLevel": "JAVA_21",
-  "mixins": [],
-  "client": [],
+  "mixins": [
+    "ServerLevelBlockMixin"
+  ],
+  "client": [
+    "ClientLevelBlockMixin"
+  ],
   "injectors": {
     "defaultRequire": 1
   }

@@ -28,6 +28,8 @@ def main():
     w("- `halo_<carrier>`: 16 px = 1 px ring outside the silhouette (draw under or over the icon, tinted MAP_ACCENT_BRIGHT); "
       "8 px = the carrier's outline pixels (draw over the micro icon).")
     w("- Badges (`badge_*`): 7x7 at the cell origin (16 px) and 5x5 at the cell origin (micro); draw at the marker's top-right corner.")
+    w("- War-zone side badges (`badge_side_a` / `_b` / `_none`, slots 131-133): same size and placement as the standing badges; "
+      "the side is carried by plate shape and glyph (diamond + I, square + II, round + O), never by colour alone.")
     w("- Radar blips and `trail_marker` are micro-first; their 16 px cell is the legend version.")
     w("- Machine-readable copy: `tools/art/out/map_icons.json` (ship it as `assets/neromaps/map/map_icons.json`).")
     w("- `layer` = no means the Stage 0 review cut that layer; the icon is drawn so a later release needs no atlas change.\n")
@@ -37,7 +39,7 @@ def main():
         w(f"| `{iid}` | {e['slot']} | {e['carrier']} | {e['glyph'] or '-'} | {e['colour_name']} `{e['colour']}` | "
           f"{', '.join(map(str, e['uv']))} | {', '.join(map(str, e['micro_uv']))} | {'yes' if e['shipped_layer'] else 'no'} |")
     w("")
-    w("Free slots: 30-31, 48-63, 69-71, 73-79, 83-87, 92-95, 100-103, 105-111, 113-119, 122-127, 131-135, 139-143, 146-151, 155-159, 161-191.\n")
+    w("Free slots: 30-31, 48-63, 69-71, 73-79, 83-87, 92-95, 100-103, 105-111, 113-119, 122-127, 134-135, 139-143, 146-151, 155-159, 161-191.\n")
     titles = {"map_widgets": "assets/neromaps/textures/gui/map_widgets.png (256x256)",
               "cartography_desk": "assets/neromaps/textures/gui/cartography_desk.png (256x256)",
               "atlas_frame": "assets/neromaps/textures/gui/atlas_frame.png (256x256)",

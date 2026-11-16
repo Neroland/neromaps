@@ -1,0 +1,138 @@
+{
+  "model": {
+    "type": "minecraft:condition",
+    "property": "minecraft:has_component",
+    "component": "minecraft:lodestone_tracker",
+    "on_true": {
+      "type": "minecraft:range_dispatch",
+      "property": "minecraft:compass",
+      "target": "lodestone",
+      "scale": 16.0,
+      "entries": [
+        {
+          "threshold": 0.0,
+          "model": {
+            "type": "minecraft:model",
+            "model": "neromaps:item/waypoint_compass_locked_00"
+          }
+        },
+        {
+          "threshold": 0.5,
+          "model": {
+            "type": "minecraft:model",
+            "model": "neromaps:item/waypoint_compass_locked_01"
+          }
+        },
+        {
+          "threshold": 1.5,
+          "model": {
+            "type": "minecraft:model",
+            "model": "neromaps:item/waypoint_compass_locked_02"
+          }
+        },
+        {
+          "threshold": 2.5,
+          "model": {
+            "type": "minecraft:model",
+            "model": "neromaps:item/waypoint_compass_locked_03"
+          }
+        },
+        {
+          "threshold": 3.5,
+          "model": {
+            "type": "minecraft:model",
+            "model": "neromaps:item/waypoint_compass_locked_04"
+          }
+        },
+        {
+          "threshold": 4.5,
+          "model": {
+            "type": "minecraft:model",
+            "model": "neromaps:item/waypoint_compass_locked_05"
+          }
+        },
+        {
+          "threshold": 5.5,
+          "model": {
+            "type": "minecraft:model",
+            "model": "neromaps:item/waypoint_compass_locked_06"
+          }
+        },
+        {
+          "threshold": 6.5,
+          "model": {
+            "type": "minecraft:model",
+            "model": "neromaps:item/waypoint_compass_locked_07"
+          }
+        },
+        {
+          "threshold": 7.5,
+          "model": {
+            "type": "minecraft:model",
+            "model": "neromaps:item/waypoint_compass_locked_08"
+          }
+        },
+        {
+          "threshold": 8.5,
+          "model": {
+            "type": "minecraft:model",
+            "model": "neromaps:item/waypoint_compass_locked_09"
+          }
+        },
+        {
+          "threshold": 9.5,
+          "model": {
+            "type": "minecraft:model",
+            "model": "neromaps:item/waypoint_compass_locked_10"
+          }
+        },
+        {
+          "threshold": 10.5,
+          "model": {
+            "type": "minecraft:model",
+            "model": "neromaps:item/waypoint_compass_locked_11"
+          }
+        },
+        {
+          "threshold": 11.5,
+          "model": {
+            "type": "minecraft:model",
+            "model": "neromaps:item/waypoint_compass_locked_12"
+          }
+        },
+        {
+          "threshold": 12.5,
+          "model": {
+            "type": "minecraft:model",
+            "model": "neromaps:item/waypoint_compass_locked_13"
+          }
+        },
+        {
+          "threshold": 13.5,
+          "model": {
+            "type": "minecraft:model",
+            "model": "neromaps:item/waypoint_compass_locked_14"
+          }
+        },
+        {
+          "threshold": 14.5,
+          "model": {
+            "type": "minecraft:model",
+            "model": "neromaps:item/waypoint_compass_locked_15"
+          }
+        },
+        {
+          "threshold": 15.5,
+          "model": {
+            "type": "minecraft:model",
+            "model": "neromaps:item/waypoint_compass_locked_00"
+          }
+        }
+      ]
+    },
+    "on_false": {
+      "type": "minecraft:model",
+      "model": "neromaps:item/waypoint_compass"
+    }
+  }
+}

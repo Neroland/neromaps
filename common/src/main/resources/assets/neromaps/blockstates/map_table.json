@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "neromaps:block/map_table"
+    }
+  }
+}

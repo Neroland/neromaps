@@ -15,6 +15,9 @@ A minimap and world map for the Neroland mod family: performant, highly customis
 [[mixins]]
 config = "neromaps-common.mixins.json"
 
+[[mixins]]
+config = "neromaps-gui.mixins.json"
+
 [[dependencies.${mod_id}]]
 modId = "forge"
 mandatory = true

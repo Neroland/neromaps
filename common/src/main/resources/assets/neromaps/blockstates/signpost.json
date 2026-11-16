@@ -1,0 +1,243 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "model": "neromaps:block/signpost_post"
+      }
+    },
+    {
+      "when": {
+        "plates": "1",
+        "rotation": "0"
+      },
+      "apply": {
+        "model": "neromaps:block/signpost_plate_1"
+      }
+    },
+    {
+      "when": {
+        "plates": "1",
+        "rotation": "1"
+      },
+      "apply": {
+        "model": "neromaps:block/signpost_plate_1_diag"
+      }
+    },
+    {
+      "when": {
+        "plates": "1",
+        "rotation": "2"
+      },
+      "apply": {
+        "model": "neromaps:block/signpost_plate_1",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "plates": "1",
+        "rotation": "3"
+      },
+      "apply": {
+        "model": "neromaps:block/signpost_plate_1_diag",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "plates": "1",
+        "rotation": "4"
+      },
+      "apply": {
+        "model": "neromaps:block/signpost_plate_1",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "plates": "1",
+        "rotation": "5"
+      },
+      "apply": {
+        "model": "neromaps:block/signpost_plate_1_diag",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "plates": "1",
+        "rotation": "6"
+      },
+      "apply": {
+        "model": "neromaps:block/signpost_plate_1",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "plates": "1",
+        "rotation": "7"
+      },
+      "apply": {
+        "model": "neromaps:block/signpost_plate_1_diag",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "plates": "2",
+        "rotation": "0"
+      },
+      "apply": {
+        "model": "neromaps:block/signpost_plate_2"
+      }
+    },
+    {
+      "when": {
+        "plates": "2",
+        "rotation": "1"
+      },
+      "apply": {
+        "model": "neromaps:block/signpost_plate_2_diag"
+      }
+    },
+    {
+      "when": {
+        "plates": "2",
+        "rotation": "2"
+      },
+      "apply": {
+        "model": "neromaps:block/signpost_plate_2",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "plates": "2",
+        "rotation": "3"
+      },
+      "apply": {
+        "model": "neromaps:block/signpost_plate_2_diag",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "plates": "2",
+        "rotation": "4"
+      },
+      "apply": {
+        "model": "neromaps:block/signpost_plate_2",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "plates": "2",
+        "rotation": "5"
+      },
+      "apply": {
+        "model": "neromaps:block/signpost_plate_2_diag",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "plates": "2",
+        "rotation": "6"
+      },
+      "apply": {
+        "model": "neromaps:block/signpost_plate_2",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "plates": "2",
+        "rotation": "7"
+      },
+      "apply": {
+        "model": "neromaps:block/signpost_plate_2_diag",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "plates": "3",
+        "rotation": "0"
+      },
+      "apply": {
+        "model": "neromaps:block/signpost_plate_3"
+      }
+    },
+    {
+      "when": {
+        "plates": "3",
+        "rotation": "1"
+      },
+      "apply": {
+        "model": "neromaps:block/signpost_plate_3_diag"
+      }
+    },
+    {
+      "when": {
+        "plates": "3",
+        "rotation": "2"
+      },
+      "apply": {
+        "model": "neromaps:block/signpost_plate_3",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "plates": "3",
+        "rotation": "3"
+      },
+      "apply": {
+        "model": "neromaps:block/signpost_plate_3_diag",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "plates": "3",
+        "rotation": "4"
+      },
+      "apply": {
+        "model": "neromaps:block/signpost_plate_3",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "plates": "3",
+        "rotation": "5"
+      },
+      "apply": {
+        "model": "neromaps:block/signpost_plate_3_diag",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "plates": "3",
+        "rotation": "6"
+      },
+      "apply": {
+        "model": "neromaps:block/signpost_plate_3",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "plates": "3",
+        "rotation": "7"
+      },
+      "apply": {
+        "model": "neromaps:block/signpost_plate_3_diag",
+        "y": 270
+      }
+    }
+  ]
+}

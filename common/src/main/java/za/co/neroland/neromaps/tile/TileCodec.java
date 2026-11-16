@@ -42,6 +42,7 @@ public final class TileCodec {
     }
 
     /** Encodes {@code t}. */
+    @SuppressWarnings("resource") // Deflater is AutoCloseable only from Java 25; end() runs below
     public static byte[] encode(Tile t) {
         int[] blockMap = new int[Math.max(1, t.blockPaletteSize())];
         int[] biomeMap = new int[Math.max(1, t.biomePaletteSize())];
@@ -150,6 +151,7 @@ public final class TileCodec {
         }
     }
 
+    @SuppressWarnings("resource") // Inflater is AutoCloseable only from Java 25; end() runs in finally
     private static Tile decodeUnchecked(byte[] data) throws TileCorruptException {
         if (data == null || data.length < HEADER) {
             throw new TileCorruptException("short header");

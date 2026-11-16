@@ -8,7 +8,7 @@ public final class TileKey {
 
     /** Key of a tile at {@code lod}. Tile coordinates fit in 28 bits each at every LOD. */
     public static long tile(int lod, int tx, int tz) {
-        return ((long) lod << 56) | (((long) tx & 0x0FFFFFFFL) << 28) | ((long) tz & 0x0FFFFFFFL);
+        return ((long) lod << 56) | ((tx & 0x0FFFFFFFL) << 28) | (tz & 0x0FFFFFFFL);
     }
 
     public static int lod(long key) {

@@ -203,6 +203,10 @@ RAW8 = {  # radar blips and other micro-only art
     'badge_hostile': "#####..|#o#o#..|##o##..|#o#o#..|#####..|.......|.......",
     'badge_neutral': "#####..|#####..|#ooo#..|#####..|#####..|.......|.......",
     'badge_friendly': "#####..|##o##..|#ooo#..|##o##..|#####..|.......|.......",
+    # war-zone side badges: the plate SHAPE and the glyph both differ (diamond I, square II, round O)
+    'badge_side_a': "..#....|.#o#...|##o##..|.#o#...|..#....|.......|.......",
+    'badge_side_b': "#####..|#o#o#..|#o#o#..|#o#o#..|#####..|.......|.......",
+    'badge_side_none': ".###...|#ooo#..|#o#o#..|#ooo#..|.###...|.......|.......",
     'north': ".#####.|.#o#o#.|.#oo##.|.#ooo#.|.##oo#.|.#o#o#.|.#####.",
 }
 
@@ -278,7 +282,11 @@ def badge16(kind):
     """7x7 badge plate at the cell origin: dark plate, white 3x3 glyph doubled is too big, so 5x5 strokes."""
     arts = {'badge_hostile': "#######|#o###o#|##o#o##|###o###|##o#o##|#o###o#|#######",
             'badge_neutral': "#######|#######|#######|#ooooo#|#######|#######|#######",
-            'badge_friendly': "#######|###o###|###o###|#ooooo#|###o###|###o###|#######"}
+            'badge_friendly': "#######|###o###|###o###|#ooooo#|###o###|###o###|#######",
+            # war-zone sides: diamond plate + one bar (I), square plate + two bars (II), round plate + ring (O)
+            'badge_side_a': "...#...|..#o#..|.##o##.|###o###|.##o##.|..#o#..|...#...",
+            'badge_side_b': "#######|##o#o##|##o#o##|##o#o##|##o#o##|##o#o##|#######",
+            'badge_side_none': "..###..|.#####.|##ooo##|##o#o##|##ooo##|.#####.|..###.."}
     cell = Image.new("RGBA", (16, 16), CLEAR)
     cell.paste(paint(arts[kind], 7, 7), (0, 0))
     return cell
@@ -365,6 +373,14 @@ SIB = [
 ]
 for s, iid, car, gl, col, cut in SIB:
     add(s, iid, car, gl, col, cut)
+
+# war-zone side badges (NeroEvents block, 131-133): which side holds a `neroevents:war_zone`. Drawn like the
+# standing badges (7x7 / 5x5 at the cell origin, marker's top-right corner). Side is carried by plate shape AND
+# glyph, never by colour alone: A = diamond + I, B = square + II, unclaimed = round + O. Sky / orange / white
+# are the Okabe-Ito pair that survives every CVD type.
+add(131, 'neromaps:badge_side_a', 'badge', None, 'M_SKY', special='badge_side_a')
+add(132, 'neromaps:badge_side_b', 'badge', None, 'M_ORANGE', special='badge_side_b')
+add(133, 'neromaps:badge_side_none', 'badge', None, 'M_WHITE', special='badge_side_none')
 
 
 def draw(iid):

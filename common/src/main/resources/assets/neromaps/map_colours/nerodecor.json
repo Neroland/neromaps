@@ -1,0 +1,665 @@
+{
+ "version": 1,
+ "blocks": {
+  "nerodecor:access_pad": {
+   "rgb": "1f2b3c",
+   "tint": "none"
+  },
+  "nerodecor:airlock_frame": {
+   "rgb": "43292d",
+   "tint": "none"
+  },
+  "nerodecor:ancient_brick": {
+   "rgb": "535c5e",
+   "tint": "none"
+  },
+  "nerodecor:ancient_pillar": {
+   "rgb": "5a5d5c",
+   "tint": "none"
+  },
+  "nerodecor:arch_lintel": {
+   "rgb": "576063",
+   "tint": "none"
+  },
+  "nerodecor:arrow_sign": {
+   "rgb": "121926",
+   "tint": "none"
+  },
+  "nerodecor:aurora_glass": {
+   "rgb": "2b7976",
+   "tint": "none"
+  },
+  "nerodecor:beam_emitter_prop": {
+   "rgb": "455367",
+   "tint": "none"
+  },
+  "nerodecor:blast_door": {
+   "rgb": "2e3a4e",
+   "tint": "none"
+  },
+  "nerodecor:blinkenlight_panel": {
+   "rgb": "242933",
+   "tint": "none"
+  },
+  "nerodecor:cable_tray": {
+   "rgb": "374353",
+   "tint": "none"
+  },
+  "nerodecor:cage_lamp": {
+   "rgb": "3d4956",
+   "tint": "none"
+  },
+  "nerodecor:canopy_glass": {
+   "rgb": "3c4858",
+   "tint": "none"
+  },
+  "nerodecor:capacitor_bank": {
+   "rgb": "486574",
+   "tint": "none"
+  },
+  "nerodecor:catwalk": {
+   "rgb": "3a495a",
+   "tint": "none"
+  },
+  "nerodecor:catwalk_stairs": {
+   "rgb": "374554",
+   "tint": "none"
+  },
+  "nerodecor:ceiling_coffer": {
+   "rgb": "1b2231",
+   "tint": "none"
+  },
+  "nerodecor:chroma_cube": {
+   "rgb": "d9e0f0",
+   "tint": "none"
+  },
+  "nerodecor:chroma_hub": {
+   "rgb": "3494b6",
+   "tint": "none"
+  },
+  "nerodecor:cindara_ash_tile": {
+   "rgb": "a29388",
+   "tint": "none"
+  },
+  "nerodecor:cindara_ember_basalt": {
+   "rgb": "35161d",
+   "tint": "none"
+  },
+  "nerodecor:cindara_slag_brick": {
+   "rgb": "61454c",
+   "tint": "none"
+  },
+  "nerodecor:circuit_plating": {
+   "rgb": "1e3940",
+   "tint": "none"
+  },
+  "nerodecor:circuit_plating_slab": {
+   "rgb": "1e3940",
+   "tint": "none"
+  },
+  "nerodecor:command_console": {
+   "rgb": "2b3545",
+   "tint": "none"
+  },
+  "nerodecor:coolant_tube": {
+   "rgb": "2d3645",
+   "tint": "none"
+  },
+  "nerodecor:cracked_ancient_brick": {
+   "rgb": "545b5d",
+   "tint": "none"
+  },
+  "nerodecor:crew_bunk": {
+   "rgb": "4e8b9c",
+   "tint": "none"
+  },
+  "nerodecor:crystal_lattice": {
+   "rgb": "543774",
+   "tint": "none"
+  },
+  "nerodecor:data_stream_panel": {
+   "rgb": "17322f",
+   "tint": "none"
+  },
+  "nerodecor:deck_sign": {
+   "rgb": "3b5060",
+   "tint": "none"
+  },
+  "nerodecor:decor_pipe": {
+   "rgb": "303a49",
+   "tint": "none"
+  },
+  "nerodecor:door_status_light": {
+   "rgb": "3d4451",
+   "tint": "none"
+  },
+  "nerodecor:dormant_core": {
+   "rgb": "58534f",
+   "tint": "none"
+  },
+  "nerodecor:drive_rack": {
+   "rgb": "1a212f",
+   "tint": "none"
+  },
+  "nerodecor:duct": {
+   "rgb": "3e4a5e",
+   "tint": "none"
+  },
+  "nerodecor:duct_fan": {
+   "rgb": "3e4a5e",
+   "tint": "none"
+  },
+  "nerodecor:edge_trim": {
+   "rgb": "2e343f",
+   "tint": "none"
+  },
+  "nerodecor:floor_arrow": {
+   "rgb": "daa635",
+   "tint": "none"
+  },
+  "nerodecor:floor_grate": {
+   "rgb": "5f6f84",
+   "tint": "none"
+  },
+  "nerodecor:floor_grate_slab": {
+   "rgb": "485566",
+   "tint": "none"
+  },
+  "nerodecor:floor_tile": {
+   "rgb": "49505b",
+   "tint": "none"
+  },
+  "nerodecor:floor_tile_slab": {
+   "rgb": "131927",
+   "tint": "none"
+  },
+  "nerodecor:fume_hood": {
+   "rgb": "455365",
+   "tint": "none"
+  },
+  "nerodecor:fusion_lamp": {
+   "rgb": "495967",
+   "tint": "none"
+  },
+  "nerodecor:gantry_ladder": {
+   "rgb": "5e7387",
+   "tint": "none"
+  },
+  "nerodecor:glacira_bubble_ice": {
+   "rgb": "acd6e5",
+   "tint": "none"
+  },
+  "nerodecor:glacira_cryo_fin": {
+   "rgb": "38556b",
+   "tint": "none"
+  },
+  "nerodecor:glacira_frost_plate": {
+   "rgb": "648498",
+   "tint": "none"
+  },
+  "nerodecor:glacira_snow_brick": {
+   "rgb": "d3e2ed",
+   "tint": "none"
+  },
+  "nerodecor:glass_cyan": {
+   "rgb": "26ffff",
+   "tint": "none"
+  },
+  "nerodecor:glass_cyan_pane": {
+   "rgb": "26ffff",
+   "tint": "none"
+  },
+  "nerodecor:glass_cyan_slab": {
+   "rgb": "26ffff",
+   "tint": "none"
+  },
+  "nerodecor:glass_light_blue": {
+   "rgb": "66ffff",
+   "tint": "none"
+  },
+  "nerodecor:glass_light_blue_pane": {
+   "rgb": "66ffff",
+   "tint": "none"
+  },
+  "nerodecor:glass_light_blue_slab": {
+   "rgb": "66ffff",
+   "tint": "none"
+  },
+  "nerodecor:glass_plasma_glass": {
+   "rgb": "6effff",
+   "tint": "none"
+  },
+  "nerodecor:glass_plasma_glass_pane": {
+   "rgb": "6effff",
+   "tint": "none"
+  },
+  "nerodecor:glass_plasma_glass_slab": {
+   "rgb": "6effff",
+   "tint": "none"
+  },
+  "nerodecor:glyph_block": {
+   "rgb": "323848",
+   "tint": "none"
+  },
+  "nerodecor:glyph_strip": {
+   "rgb": "675c52",
+   "tint": "none"
+  },
+  "nerodecor:greenxertz_hive_comb": {
+   "rgb": "887838",
+   "tint": "none"
+  },
+  "nerodecor:greenxertz_spore_tile": {
+   "rgb": "2e6834",
+   "tint": "none"
+  },
+  "nerodecor:greenxertz_woven_chitin": {
+   "rgb": "467955",
+   "tint": "none"
+  },
+  "nerodecor:halo_ring": {
+   "rgb": "666d76",
+   "tint": "none"
+  },
+  "nerodecor:hanging_cables": {
+   "rgb": "4d6378",
+   "tint": "none"
+  },
+  "nerodecor:hazard_stripe": {
+   "rgb": "8b7354",
+   "tint": "none"
+  },
+  "nerodecor:holo_curtain": {
+   "rgb": "e1f5fa",
+   "tint": "none"
+  },
+  "nerodecor:holo_grid_floor": {
+   "rgb": "223a40",
+   "tint": "none"
+  },
+  "nerodecor:holo_grid_floor_slab": {
+   "rgb": "223a40",
+   "tint": "none"
+  },
+  "nerodecor:holo_plinth": {
+   "rgb": "1e2737",
+   "tint": "none"
+  },
+  "nerodecor:holo_projector": {
+   "rgb": "1c2534",
+   "tint": "none"
+  },
+  "nerodecor:holo_sign": {
+   "rgb": "171e2d",
+   "tint": "none"
+  },
+  "nerodecor:holo_table": {
+   "rgb": "1b2332",
+   "tint": "none"
+  },
+  "nerodecor:hull_nero_alloy": {
+   "rgb": "1b4c54",
+   "tint": "none"
+  },
+  "nerodecor:hull_nero_alloy_slab": {
+   "rgb": "1b4c54",
+   "tint": "none"
+  },
+  "nerodecor:hull_nero_alloy_stairs": {
+   "rgb": "1b4c54",
+   "tint": "none"
+  },
+  "nerodecor:hull_nero_alloy_wall": {
+   "rgb": "1b4c54",
+   "tint": "none"
+  },
+  "nerodecor:hull_starsteel": {
+   "rgb": "515a5e",
+   "tint": "none"
+  },
+  "nerodecor:hull_starsteel_slab": {
+   "rgb": "515a5e",
+   "tint": "none"
+  },
+  "nerodecor:hull_starsteel_stairs": {
+   "rgb": "515a5e",
+   "tint": "none"
+  },
+  "nerodecor:hull_starsteel_wall": {
+   "rgb": "515a5e",
+   "tint": "none"
+  },
+  "nerodecor:hull_void_crystal": {
+   "rgb": "422559",
+   "tint": "none"
+  },
+  "nerodecor:hull_void_crystal_slab": {
+   "rgb": "422559",
+   "tint": "none"
+  },
+  "nerodecor:hull_void_crystal_stairs": {
+   "rgb": "422559",
+   "tint": "none"
+  },
+  "nerodecor:hull_void_crystal_wall": {
+   "rgb": "422559",
+   "tint": "none"
+  },
+  "nerodecor:ion_vent": {
+   "rgb": "496a91",
+   "tint": "none"
+  },
+  "nerodecor:iris_hatch": {
+   "rgb": "32475b",
+   "tint": "none"
+  },
+  "nerodecor:keyboard_shelf": {
+   "rgb": "1b2231",
+   "tint": "none"
+  },
+  "nerodecor:lab_bench": {
+   "rgb": "97a1ab",
+   "tint": "none"
+  },
+  "nerodecor:lab_stool": {
+   "rgb": "2a5d68",
+   "tint": "none"
+  },
+  "nerodecor:light_pane": {
+   "rgb": "141a28",
+   "tint": "none"
+  },
+  "nerodecor:light_pillar": {
+   "rgb": "495764",
+   "tint": "none"
+  },
+  "nerodecor:light_strip": {
+   "rgb": "677582",
+   "tint": "none"
+  },
+  "nerodecor:locker": {
+   "rgb": "293243",
+   "tint": "none"
+  },
+  "nerodecor:louvre_vent": {
+   "rgb": "536277",
+   "tint": "none"
+  },
+  "nerodecor:lumen_panel": {
+   "rgb": "ddeaf0",
+   "tint": "none"
+  },
+  "nerodecor:lumen_panel_slab": {
+   "rgb": "ddeaf0",
+   "tint": "none"
+  },
+  "nerodecor:luna_bead_glass": {
+   "rgb": "7b674d",
+   "tint": "none"
+  },
+  "nerodecor:luna_bootprint_tile": {
+   "rgb": "918d8f",
+   "tint": "none"
+  },
+  "nerodecor:luna_mare_column": {
+   "rgb": "3c3945",
+   "tint": "none"
+  },
+  "nerodecor:luna_regolith_brick": {
+   "rgb": "7e7e83",
+   "tint": "none"
+  },
+  "nerodecor:maintenance_panel": {
+   "rgb": "595d6d",
+   "tint": "none"
+  },
+  "nerodecor:mars_dust_drift_tile": {
+   "rgb": "a46a4a",
+   "tint": "none"
+  },
+  "nerodecor:mars_rust_plate": {
+   "rgb": "6d5c62",
+   "tint": "none"
+  },
+  "nerodecor:mars_spherule_stone": {
+   "rgb": "c79a74",
+   "tint": "none"
+  },
+  "nerodecor:mars_wind_strata_brick": {
+   "rgb": "996244",
+   "tint": "none"
+  },
+  "nerodecor:neon_blue": {
+   "rgb": "424ba3",
+   "tint": "none"
+  },
+  "nerodecor:neon_cyan": {
+   "rgb": "189f9f",
+   "tint": "none"
+  },
+  "nerodecor:neon_green": {
+   "rgb": "698c1a",
+   "tint": "none"
+  },
+  "nerodecor:neon_light_blue": {
+   "rgb": "40a5b3",
+   "tint": "none"
+  },
+  "nerodecor:neon_lime": {
+   "rgb": "90ac24",
+   "tint": "none"
+  },
+  "nerodecor:neon_magenta": {
+   "rgb": "ac57a8",
+   "tint": "none"
+  },
+  "nerodecor:neon_orange": {
+   "rgb": "bc9021",
+   "tint": "none"
+  },
+  "nerodecor:neon_pink": {
+   "rgb": "bc97a3",
+   "tint": "none"
+  },
+  "nerodecor:neon_purple": {
+   "rgb": "9637a7",
+   "tint": "none"
+  },
+  "nerodecor:neon_red": {
+   "rgb": "a4322b",
+   "tint": "none"
+  },
+  "nerodecor:neon_tube": {
+   "rgb": "7a818a",
+   "tint": "none"
+  },
+  "nerodecor:neon_white": {
+   "rgb": "bcbcbc",
+   "tint": "none"
+  },
+  "nerodecor:neon_yellow": {
+   "rgb": "bcb244",
+   "tint": "none"
+  },
+  "nerodecor:nyxara_faceted_crystal": {
+   "rgb": "724f9e",
+   "tint": "none"
+  },
+  "nerodecor:nyxara_geode_block": {
+   "rgb": "7d6995",
+   "tint": "none"
+  },
+  "nerodecor:nyxara_shard_mosaic": {
+   "rgb": "8156a5",
+   "tint": "none"
+  },
+  "nerodecor:operator_chair": {
+   "rgb": "164654",
+   "tint": "none"
+  },
+  "nerodecor:panel_nero_alloy": {
+   "rgb": "1b525d",
+   "tint": "none"
+  },
+  "nerodecor:panel_nero_alloy_slab": {
+   "rgb": "1b525d",
+   "tint": "none"
+  },
+  "nerodecor:panel_nero_alloy_stairs": {
+   "rgb": "1b525d",
+   "tint": "none"
+  },
+  "nerodecor:panel_starsteel": {
+   "rgb": "5c6c6d",
+   "tint": "none"
+  },
+  "nerodecor:panel_starsteel_slab": {
+   "rgb": "5c6c6d",
+   "tint": "none"
+  },
+  "nerodecor:panel_starsteel_stairs": {
+   "rgb": "5c6c6d",
+   "tint": "none"
+  },
+  "nerodecor:panel_void_crystal": {
+   "rgb": "472667",
+   "tint": "none"
+  },
+  "nerodecor:panel_void_crystal_slab": {
+   "rgb": "472667",
+   "tint": "none"
+  },
+  "nerodecor:panel_void_crystal_stairs": {
+   "rgb": "472667",
+   "tint": "none"
+  },
+  "nerodecor:patch_panel": {
+   "rgb": "171e2c",
+   "tint": "none"
+  },
+  "nerodecor:pipe_bracket": {
+   "rgb": "5b6f81",
+   "tint": "none"
+  },
+  "nerodecor:pipe_gauge": {
+   "rgb": "303b4e",
+   "tint": "none"
+  },
+  "nerodecor:pipe_valve": {
+   "rgb": "343c4c",
+   "tint": "none"
+  },
+  "nerodecor:planter": {
+   "rgb": "9fc1db",
+   "tint": "none"
+  },
+  "nerodecor:plasma_conduit": {
+   "rgb": "52798b",
+   "tint": "none"
+  },
+  "nerodecor:porthole": {
+   "rgb": "242d3d",
+   "tint": "none"
+  },
+  "nerodecor:pressure_trapdoor": {
+   "rgb": "4f4c59",
+   "tint": "none"
+  },
+  "nerodecor:railing": {
+   "rgb": "35404e",
+   "tint": "none"
+  },
+  "nerodecor:rivet_plate": {
+   "rgb": "51627a",
+   "tint": "none"
+  },
+  "nerodecor:sample_fridge": {
+   "rgb": "bdc9d4",
+   "tint": "none"
+  },
+  "nerodecor:sconce_bar": {
+   "rgb": "4d5660",
+   "tint": "none"
+  },
+  "nerodecor:server_rack": {
+   "rgb": "1a212f",
+   "tint": "none"
+  },
+  "nerodecor:shutter": {
+   "rgb": "283243",
+   "tint": "none"
+  },
+  "nerodecor:sliding_door": {
+   "rgb": "2a3547",
+   "tint": "none"
+  },
+  "nerodecor:smart_glass": {
+   "rgb": "e1f5fa",
+   "tint": "none"
+  },
+  "nerodecor:specimen_tank": {
+   "rgb": "283442",
+   "tint": "none"
+  },
+  "nerodecor:starfield_panel": {
+   "rgb": "1f2537",
+   "tint": "none"
+  },
+  "nerodecor:starsteel_pillar": {
+   "rgb": "7794a7",
+   "tint": "none"
+  },
+  "nerodecor:station_plating": {
+   "rgb": "8ea0b7",
+   "tint": "none"
+  },
+  "nerodecor:station_thermal_blanket": {
+   "rgb": "b58a44",
+   "tint": "none"
+  },
+  "nerodecor:station_tread_plate": {
+   "rgb": "49596e",
+   "tint": "none"
+  },
+  "nerodecor:step_light": {
+   "rgb": "3d444f",
+   "tint": "none"
+  },
+  "nerodecor:strut": {
+   "rgb": "232a37",
+   "tint": "none"
+  },
+  "nerodecor:ticker_strip": {
+   "rgb": "202938",
+   "tint": "none"
+  },
+  "nerodecor:truss_beam": {
+   "rgb": "2c3d4e",
+   "tint": "none"
+  },
+  "nerodecor:viewport_frame": {
+   "rgb": "ddfdf4",
+   "tint": "none"
+  },
+  "nerodecor:void_rift": {
+   "rgb": "4d3e61",
+   "tint": "none"
+  },
+  "nerodecor:wall_screen": {
+   "rgb": "171e2c",
+   "tint": "none"
+  },
+  "nerodecor:warning_placard": {
+   "rgb": "aaaba8",
+   "tint": "none"
+  },
+  "nerodecor:world_globe": {
+   "rgb": "212a37",
+   "tint": "none"
+  },
+  "nerodecor:xeno_bloom": {
+   "rgb": "2e4a46",
+   "tint": "none"
+  }
+ }
+}

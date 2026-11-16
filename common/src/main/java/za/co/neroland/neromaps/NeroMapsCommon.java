@@ -42,17 +42,36 @@ public final class NeroMapsCommon {
         //    a build whose DSN is the placeholder stays inert (see NeroMapsTelemetry's PLACEHOLDER_DSN guard).
         NeroMapsTelemetry.init();
 
-        // 3. Content registries. NeroMaps' own creative tab comes last, after every contributor has queued
-        //    its items. 0.0.1 registers no items yet, only the tab.
+        // 3. Content registries: items first, NeroMaps' own creative tab last, after every contributor has queued
+        //    its items.
+        za.co.neroland.neromaps.registry.ModDataComponents.init();
+        za.co.neroland.neromaps.registry.ModSounds.init();
+        za.co.neroland.neromaps.registry.ModBlocks.init();
+        za.co.neroland.neromaps.registry.ModBlockEntities.init();
+        za.co.neroland.neromaps.registry.ModItems.init();
+        za.co.neroland.neromaps.registry.ModMenus.init();
         ModCreativeTab.init();
 
         // 4. Player-data erasure registration, before any store can exist: registering late is how an
-        //    erasure request silently misses a store (POPIA/GDPR). Every player-keyed store adds itself to
-        //    NeroMapsData and reads its SavedData through NeroMapsSavedData (Core's SavedDataRecovery).
-        //    0.0.1 has no store.
+        //    erasure request silently misses a store (POPIA/GDPR). The one player-keyed store, neromaps:players,
+        //    adds itself here and is read through NeroMapsSavedData (Core's SavedDataRecovery).
         NeroMapsData.init();
+        za.co.neroland.neromaps.store.PlayerStore.init();
+        za.co.neroland.neromaps.store.PlayerStore.onErased(za.co.neroland.neromaps.server.MapServer::erased);
 
-        // 5. Compat detection (reserved). 6. Network payloads on NeroMaps' own channel (reserved).
-        // 7. Server hooks (reserved). 8. The NeroLink module goes last and swallows its own failures (reserved).
+        // 5. Compat: NeroMaps consumes Core's map layer API (no sibling is ever referenced). The event listener only
+        //    marks viewers dirty.
+        za.co.neroland.neromaps.server.layers.LayerService.init();
+        //    NeroMaps' own public layers (signposts, trail markers) go through the same Core API as any sibling's.
+        za.co.neroland.neromaps.survival.SurvivalLayers.register();
+
+        // 6. Network payloads on NeroMaps' own channel, before any loader builds it.
+        za.co.neroland.neromaps.network.MapNetwork.init();
+
+        // 7. Server hooks are wired by each loader (server tick, commands, server stopping) into MapServer and
+        //    MapCommands.
+
+        // 8. The NeroLink module (Core's link API) goes last and swallows its own failures.
+        za.co.neroland.neromaps.link.MapsLinkModule.init();
     }
 }

@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "NGN",
+    "GPG",
+    "NGN"
+  ],
+  "key": {
+    "N": "minecraft:iron_nugget",
+    "G": "minecraft:glass_pane",
+    "P": "minecraft:paper"
+  },
+  "result": {
+    "id": "neromaps:wall_map",
+    "count": 4
+  }
+}

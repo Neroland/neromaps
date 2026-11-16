@@ -1,0 +1,57 @@
+{
+ "version": 1,
+ "blocks": {
+  "neropower:battery_bank_controller": {
+   "rgb": "4a4b50",
+   "tint": "none"
+  },
+  "neropower:battery_cell_advanced": {
+   "rgb": "484b51",
+   "tint": "none"
+  },
+  "neropower:battery_cell_basic": {
+   "rgb": "444a52",
+   "tint": "none"
+  },
+  "neropower:battery_cell_elite": {
+   "rgb": "4b4d52",
+   "tint": "none"
+  },
+  "neropower:beam_receiver": {
+   "rgb": "3e4850",
+   "tint": "none"
+  },
+  "neropower:beam_relay": {
+   "rgb": "524e51",
+   "tint": "none"
+  },
+  "neropower:beam_transmitter": {
+   "rgb": "524f51",
+   "tint": "none"
+  },
+  "neropower:control_rod_assembly": {
+   "rgb": "444c54",
+   "tint": "none"
+  },
+  "neropower:fission_casing": {
+   "rgb": "55524d",
+   "tint": "none"
+  },
+  "neropower:fission_core": {
+   "rgb": "3b454d",
+   "tint": "none"
+  },
+  "neropower:orbital_receiver": {
+   "rgb": "484e54",
+   "tint": "none"
+  },
+  "neropower:radioisotope_generator": {
+   "rgb": "696451",
+   "tint": "none"
+  },
+  "neropower:stirling_generator": {
+   "rgb": "3a4750",
+   "tint": "none"
+  }
+ }
+}

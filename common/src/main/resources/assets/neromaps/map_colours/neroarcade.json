@@ -1,0 +1,33 @@
+{
+ "version": 1,
+ "blocks": {
+  "neroarcade:arcade_cabinet": {
+   "rgb": "171d2a",
+   "tint": "none"
+  },
+  "neroarcade:arcade_exchange": {
+   "rgb": "272e3d",
+   "tint": "none"
+  },
+  "neroarcade:cartridge_duplicator": {
+   "rgb": "2b3343",
+   "tint": "none"
+  },
+  "neroarcade:game_bench": {
+   "rgb": "2c3342",
+   "tint": "none"
+  },
+  "neroarcade:link_bus": {
+   "rgb": "2fe3ff",
+   "tint": "none"
+  },
+  "neroarcade:link_cable": {
+   "rgb": "0c3d4b",
+   "tint": "none"
+  },
+  "neroarcade:marquee_screen": {
+   "rgb": "171d2a",
+   "tint": "none"
+  }
+ }
+}

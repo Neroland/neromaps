@@ -77,6 +77,8 @@ ext.legacyRenames = [
             to: '$1.hasPermissions(Commands.LEVEL_GAMEMASTERS)'],
     [below: '1.21.11', from: /\.requires\(Commands\.hasPermission\(Commands\.LEVEL_GAMEMASTERS\)\)/,
             to: '.requires(s -> s.hasPermission(Commands.LEVEL_GAMEMASTERS))'],
+    [below: '1.21.11', from: /Commands\.hasPermission\(Commands\.LEVEL_GAMEMASTERS\)\.test\((\w+)\.getSource\(\)\)/,
+            to: '$1.getSource().hasPermission(Commands.LEVEL_GAMEMASTERS)'],
     // 1.21.5 renamed Entity.moveTo(x, y, z, yaw, pitch) to snapTo.
     [below: '1.21.5', from: /\.snapTo\(/, to: '.moveTo('],
     // ServerPlayer.level() returns the ServerLevel from 1.21.6; before it that is serverLevel().
@@ -84,6 +86,22 @@ ext.legacyRenames = [
     [below: '1.21.6', from: /\bplayer\.level\(\)\.players\(\)/, to: 'player.serverLevel().players()'],
     // 1.21.2 added Item.Properties.useBlockDescriptionPrefix(); before it a BlockItem already uses the block's name.
     [below: '1.21.2', from: /\.useBlockDescriptionPrefix\(\)/, to: ''],
+    // 1.21.6 GUI pipelines: before it, blit took a RenderType factory; RenderPipelines arrived at 1.21.5.
+    [below: '1.21.6', from: /\bRenderPipelines\.GUI_TEXTURED\b/, to: 'net.minecraft.client.renderer.RenderType::guiTextured'],
+    [below: '1.21.5', from: /import net\.minecraft\.client\.renderer\.RenderPipelines;\r?\n/, to: ''],
+    // Before 1.21.9 block-entity renderers draw from one render(..) call; the client/render/compat look-alikes
+    // run the renderers' extract + submit steps from it (see LegacyBlockEntityRenderer). Same as NeroArcade.
+    [below: '1.21.9', from: /import net\.minecraft\.client\.renderer\.(?:blockentity\.state\.|feature\.|state\.)?(SubmitNodeCollector|BlockEntityRenderState|ModelFeatureRenderer|CameraRenderState);/,
+            to: 'import za.co.neroland.neromaps.client.render.compat.$1;'],
+    [below: '1.21.9', from: /implements(\s+)BlockEntityRenderer</,
+            to: 'implements$1za.co.neroland.neromaps.client.render.compat.LegacyBlockEntityRenderer<'],
+    [below: '1.21.9', from: /\bBlockEntityRenderer\.super\./,
+            to: 'za.co.neroland.neromaps.client.render.compat.LegacyBlockEntityRenderer.super.'],
+    // 26.1 renamed the GUI render passes to extract*; before it container screens draw through renderBg(..)
+    // (client/screen/compat/LegacyContainerScreen runs the screens' extractContents(..) from there).
+    [below: '26.1', from: /extends(\s+)AbstractContainerScreen</,
+            to: 'extends$1za.co.neroland.neromaps.client.screen.compat.LegacyContainerScreen<'],
+    [below: '26.1', from: /\bextractLabels\(/, to: 'renderLabels('],
 ]
 
 // Shared common source — pulled into every loader node (single copy -> no drift).

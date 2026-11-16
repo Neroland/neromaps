@@ -1,0 +1,129 @@
+{
+ "version": 1,
+ "blocks": {
+  "nerotech:accelerator_coil": {
+   "rgb": "458b94",
+   "tint": "none"
+  },
+  "nerotech:advanced_fabricator": {
+   "rgb": "425059",
+   "tint": "none"
+  },
+  "nerotech:advanced_ore_processor": {
+   "rgb": "36424a",
+   "tint": "none"
+  },
+  "nerotech:analytics_terminal": {
+   "rgb": "414f59",
+   "tint": "none"
+  },
+  "nerotech:auto_crafter": {
+   "rgb": "3b4851",
+   "tint": "none"
+  },
+  "nerotech:battery_bank": {
+   "rgb": "3c4b54",
+   "tint": "none"
+  },
+  "nerotech:bio_generator": {
+   "rgb": "394851",
+   "tint": "none"
+  },
+  "nerotech:chemical_processor": {
+   "rgb": "364a53",
+   "tint": "none"
+  },
+  "nerotech:collider_core": {
+   "rgb": "3a4b54",
+   "tint": "none"
+  },
+  "nerotech:conveyor_belt": {
+   "rgb": "42575e",
+   "tint": "none"
+  },
+  "nerotech:coolant_pump": {
+   "rgb": "3a4d57",
+   "tint": "none"
+  },
+  "nerotech:electrolyzer": {
+   "rgb": "394d56",
+   "tint": "none"
+  },
+  "nerotech:fabricator": {
+   "rgb": "3c4a53",
+   "tint": "none"
+  },
+  "nerotech:fusion_casing": {
+   "rgb": "3e525c",
+   "tint": "none"
+  },
+  "nerotech:fusion_containment_glass": {
+   "rgb": "24d0de",
+   "tint": "none"
+  },
+  "nerotech:fusion_reactor": {
+   "rgb": "3e4e54",
+   "tint": "none"
+  },
+  "nerotech:gas_turbine": {
+   "rgb": "384a54",
+   "tint": "none"
+  },
+  "nerotech:geothermal_generator": {
+   "rgb": "3a4852",
+   "tint": "none"
+  },
+  "nerotech:grid_controller": {
+   "rgb": "3b4e57",
+   "tint": "none"
+  },
+  "nerotech:item_sorter": {
+   "rgb": "414c55",
+   "tint": "none"
+  },
+  "nerotech:nero_generator": {
+   "rgb": "394650",
+   "tint": "none"
+  },
+  "nerotech:ore_processor": {
+   "rgb": "36414a",
+   "tint": "none"
+  },
+  "nerotech:radiator": {
+   "rgb": "596c78",
+   "tint": "none"
+  },
+  "nerotech:remediator": {
+   "rgb": "44535d",
+   "tint": "none"
+  },
+  "nerotech:robotic_arm": {
+   "rgb": "4b565e",
+   "tint": "none"
+  },
+  "nerotech:scrubber": {
+   "rgb": "424f59",
+   "tint": "none"
+  },
+  "nerotech:singularity_vault": {
+   "rgb": "37444d",
+   "tint": "none"
+  },
+  "nerotech:solar_array": {
+   "rgb": "2e444d",
+   "tint": "none"
+  },
+  "nerotech:tech_guide": {
+   "rgb": "3d5962",
+   "tint": "none"
+  },
+  "nerotech:wind_turbine": {
+   "rgb": "3d5059",
+   "tint": "none"
+  },
+  "nerotech:wireless_node": {
+   "rgb": "3d535c",
+   "tint": "none"
+  }
+ }
+}

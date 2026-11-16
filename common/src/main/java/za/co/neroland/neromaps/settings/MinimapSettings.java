@@ -62,6 +62,34 @@ public final class MinimapSettings {
     public int cacheMb = 256;
     public int memoryTiles = 48;
 
+    // waypoints and layers (Stage 3 / 6)
+    public boolean beams = true;
+    public boolean distanceLabels = true;
+    public int beamRange = 1024;
+    public boolean waypointsOnMinimap = true;
+    public boolean deathPointsShown = true;
+    /** Layer ids the player turned off on the world map / turned on or off on the minimap (overrides defaults). */
+    public final java.util.Set<String> layersOffWorld = new java.util.TreeSet<>();
+    public final java.util.Set<String> layersOnWorld = new java.util.TreeSet<>();
+    public final java.util.Set<String> layersOnMinimap = new java.util.TreeSet<>();
+    public final java.util.Set<String> layersOffMinimap = new java.util.TreeSet<>();
+
+    // presets and accessibility (Stage 7)
+    /** The preset last applied (built-in or user), or empty after a manual change or an import. */
+    public String preset = "explorer";
+    /** Day / Night: darken towards night (off = always the day colours). */
+    public boolean nightDarkening = true;
+    /** No pulsing halos, no zoom easing, no sliding panels. */
+    public boolean reduceMotion;
+    /** A white keyline outside every marker's dark outline. */
+    public boolean keyline;
+    /** Label plates drawn fully opaque. */
+    public boolean solidPlates;
+    /** Marker palette: OKABE_ITO (decision 013, default) or TOL_BRIGHT; both colour-blind safe. */
+    public MarkerPalette markerPalette = MarkerPalette.OKABE_ITO;
+
+    public enum MarkerPalette { OKABE_ITO, TOL_BRIGHT }
+
     /** Bumped on every change, so renderers can compare. */
     public int version;
 
@@ -85,6 +113,48 @@ public final class MinimapSettings {
         textureBudgetMb = Math.max(16, Math.min(1024, textureBudgetMb));
         cacheMb = Math.max(0, Math.min(16384, cacheMb));
         memoryTiles = Math.max(16, Math.min(512, memoryTiles));
+        beamRange = Math.max(16, Math.min(8192, beamRange));
+    }
+
+    /** Whether a layer shows on the world map ({@code def} = the layer's own default). */
+    public boolean layerOnWorld(String layer, boolean def) {
+        return def ? !layersOffWorld.contains(layer) : layersOnWorld.contains(layer);
+    }
+
+    /** Whether a layer shows on the minimap ({@code def} = the layer's own default). */
+    public boolean layerOnMinimap(String layer, boolean def) {
+        return def ? !layersOffMinimap.contains(layer) : layersOnMinimap.contains(layer);
+    }
+
+    public void setLayerOnWorld(String layer, boolean def, boolean on) {
+        toggle(def ? layersOffWorld : layersOnWorld, layer, def != on);
+    }
+
+    public void setLayerOnMinimap(String layer, boolean def, boolean on) {
+        toggle(def ? layersOffMinimap : layersOnMinimap, layer, def != on);
+    }
+
+    private void toggle(java.util.Set<String> set, String layer, boolean present) {
+        if (present) {
+            set.add(layer);
+        } else {
+            set.remove(layer);
+        }
+        changed();
+    }
+
+    private static void setOf(Properties p, String k, java.util.Set<String> out) {
+        String v = p.getProperty(k);
+        if (v == null) {
+            return;
+        }
+        out.clear();
+        for (String part : v.split(",")) {
+            String t = part.trim();
+            if (!t.isEmpty() && t.length() <= 96) {
+                out.add(t);
+            }
+        }
     }
 
     /** Zoom one step in (true) or out, by powers of two. */
@@ -121,6 +191,21 @@ public final class MinimapSettings {
         p.setProperty("textureBudgetMb", Integer.toString(textureBudgetMb));
         p.setProperty("cacheMb", Integer.toString(cacheMb));
         p.setProperty("memoryTiles", Integer.toString(memoryTiles));
+        p.setProperty("beams", Boolean.toString(beams));
+        p.setProperty("distanceLabels", Boolean.toString(distanceLabels));
+        p.setProperty("beamRange", Integer.toString(beamRange));
+        p.setProperty("waypointsOnMinimap", Boolean.toString(waypointsOnMinimap));
+        p.setProperty("deathPointsShown", Boolean.toString(deathPointsShown));
+        p.setProperty("layersOffWorld", String.join(",", layersOffWorld));
+        p.setProperty("layersOnWorld", String.join(",", layersOnWorld));
+        p.setProperty("layersOnMinimap", String.join(",", layersOnMinimap));
+        p.setProperty("layersOffMinimap", String.join(",", layersOffMinimap));
+        p.setProperty("preset", preset);
+        p.setProperty("nightDarkening", Boolean.toString(nightDarkening));
+        p.setProperty("reduceMotion", Boolean.toString(reduceMotion));
+        p.setProperty("keyline", Boolean.toString(keyline));
+        p.setProperty("solidPlates", Boolean.toString(solidPlates));
+        p.setProperty("markerPalette", markerPalette.name());
         return p;
     }
 
@@ -151,6 +236,24 @@ public final class MinimapSettings {
         textureBudgetMb = integer(p, "textureBudgetMb", textureBudgetMb);
         cacheMb = integer(p, "cacheMb", cacheMb);
         memoryTiles = integer(p, "memoryTiles", memoryTiles);
+        beams = bool(p, "beams", beams);
+        distanceLabels = bool(p, "distanceLabels", distanceLabels);
+        beamRange = integer(p, "beamRange", beamRange);
+        waypointsOnMinimap = bool(p, "waypointsOnMinimap", waypointsOnMinimap);
+        deathPointsShown = bool(p, "deathPointsShown", deathPointsShown);
+        setOf(p, "layersOffWorld", layersOffWorld);
+        setOf(p, "layersOnWorld", layersOnWorld);
+        setOf(p, "layersOnMinimap", layersOnMinimap);
+        setOf(p, "layersOffMinimap", layersOffMinimap);
+        String pr = p.getProperty("preset");
+        if (pr != null && pr.length() <= 32) {
+            preset = pr;
+        }
+        nightDarkening = bool(p, "nightDarkening", nightDarkening);
+        reduceMotion = bool(p, "reduceMotion", reduceMotion);
+        keyline = bool(p, "keyline", keyline);
+        solidPlates = bool(p, "solidPlates", solidPlates);
+        markerPalette = enumOf(MarkerPalette.class, p.getProperty("markerPalette"), markerPalette);
         changed();
     }
 

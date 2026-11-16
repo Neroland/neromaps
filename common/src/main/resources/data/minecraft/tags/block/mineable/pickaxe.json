@@ -1,0 +1,25 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "neromaps:cartography_desk",
+      "required": false
+    },
+    {
+      "id": "neromaps:wall_map",
+      "required": false
+    },
+    {
+      "id": "neromaps:signpost",
+      "required": false
+    },
+    {
+      "id": "neromaps:map_table",
+      "required": false
+    },
+    {
+      "id": "neromaps:trail_marker",
+      "required": false
+    }
+  ]
+}

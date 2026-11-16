@@ -1,0 +1,22 @@
+{
+  "title": "quest.neromaps.charting.desk.title",
+  "description": "quest.neromaps.charting.desk.desc",
+  "icon": "neromaps:cartography_desk",
+  "prerequisites": [
+    "neromaps:charting/atlas"
+  ],
+  "objectives": [
+    {
+      "type": "neroquests:craft_item",
+      "item": "neromaps:cartography_desk",
+      "count": 1
+    }
+  ],
+  "rewards": [
+    {
+      "type": "neroquests:xp",
+      "amount": 80
+    }
+  ],
+  "scope": "player"
+}

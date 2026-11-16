@@ -6,6 +6,8 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import za.co.neroland.nerolandcore.registry.RegistrationProvider;
 
 import za.co.neroland.neromaps.NeroMapsCommon;
+import za.co.neroland.neromaps.command.MapCommands;
+import za.co.neroland.neromaps.server.MapServer;
 
 /** MinecraftForge entry point for NeroMaps. */
 @Mod(NeroMapsCommon.MOD_ID)
@@ -21,10 +23,26 @@ public final class NeroMapsForge {
         //?} else {
         /*RegistrationProvider.attach(context.getModEventBus());
         *///?}
-        // SPIKE (Stage 0 minimap draw path): debug HUD layer, client only, off unless -Dneromaps.spike.minimap=true.
-        // Stage 2 replaces this block with the real client setup.
+        ForgeMapNetwork.register();
+        //? if >=1.21.9 {
+        net.minecraftforge.event.TickEvent.ServerTickEvent.Post.BUS.addListener(event -> MapServer.tick(event.server()));
+        net.minecraftforge.event.RegisterCommandsEvent.BUS.addListener(event -> MapCommands.register(event.getDispatcher()));
+        net.minecraftforge.event.server.ServerStoppingEvent.BUS.addListener(event -> MapServer.stopping());
+        //?} else if >=1.21.6 {
+        /*net.minecraftforge.event.TickEvent.ServerTickEvent.Post.BUS.addListener(event -> MapServer.tick(event.getServer()));
+        net.minecraftforge.event.RegisterCommandsEvent.BUS.addListener(event -> MapCommands.register(event.getDispatcher()));
+        net.minecraftforge.event.server.ServerStoppingEvent.BUS.addListener(event -> MapServer.stopping());
+        *///?} else {
+        /*net.minecraftforge.common.MinecraftForge.EVENT_BUS.addListener(
+                (net.minecraftforge.event.TickEvent.ServerTickEvent.Post event) -> MapServer.tick(event.getServer()));
+        net.minecraftforge.common.MinecraftForge.EVENT_BUS.addListener(
+                (net.minecraftforge.event.RegisterCommandsEvent event) -> MapCommands.register(event.getDispatcher()));
+        net.minecraftforge.common.MinecraftForge.EVENT_BUS.addListener(
+                (net.minecraftforge.event.server.ServerStoppingEvent event) -> MapServer.stopping());
+        *///?}
+        // Client-only wiring (minimap, world map, keys); never loaded on a dedicated server.
         if (net.minecraftforge.fml.loading.FMLEnvironment.dist == net.minecraftforge.api.distmarker.Dist.CLIENT) {
-            za.co.neroland.neromaps.forge.spike.SpikeForgeHud.register(context);
+            ForgeClientSetup.init(context);
         }
     }
 }

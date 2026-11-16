@@ -1,0 +1,153 @@
+{
+ "version": 1,
+ "blocks": {
+  "neroagriculture:alien_crop": {
+   "rgb": "402c5b",
+   "tint": "none"
+  },
+  "neroagriculture:biofuel": {
+   "rgb": "c19346",
+   "tint": "none"
+  },
+  "neroagriculture:biofuel_converter": {
+   "rgb": "a8afb4",
+   "tint": "none"
+  },
+  "neroagriculture:colonite_fragment_block": {
+   "rgb": "c3ceda",
+   "tint": "none"
+  },
+  "neroagriculture:colonite_grow_bed": {
+   "rgb": "a3b2b4",
+   "tint": "none"
+  },
+  "neroagriculture:crop_tower_controller": {
+   "rgb": "979fa1",
+   "tint": "none"
+  },
+  "neroagriculture:crop_tower_frame": {
+   "rgb": "abb7b5",
+   "tint": "none"
+  },
+  "neroagriculture:engineered_food_crop": {
+   "rgb": "2c6e36",
+   "tint": "none"
+  },
+  "neroagriculture:fertiliser_applicator": {
+   "rgb": "a7afb4",
+   "tint": "none"
+  },
+  "neroagriculture:fertiliser_processor": {
+   "rgb": "969fa0",
+   "tint": "none"
+  },
+  "neroagriculture:field_generator": {
+   "rgb": "a8afb4",
+   "tint": "none"
+  },
+  "neroagriculture:forgite_fragment_block": {
+   "rgb": "9f8982",
+   "tint": "none"
+  },
+  "neroagriculture:forgite_grow_bed": {
+   "rgb": "9fa9aa",
+   "tint": "none"
+  },
+  "neroagriculture:fragment_decor": {
+   "rgb": "95afae",
+   "tint": "none"
+  },
+  "neroagriculture:fragment_extractor": {
+   "rgb": "979fa1",
+   "tint": "none"
+  },
+  "neroagriculture:fragment_infuser": {
+   "rgb": "979fa1",
+   "tint": "none"
+  },
+  "neroagriculture:genetics_station": {
+   "rgb": "969fa1",
+   "tint": "none"
+  },
+  "neroagriculture:greenhouse_controller": {
+   "rgb": "969fa0",
+   "tint": "none"
+  },
+  "neroagriculture:greenhouse_door": {
+   "rgb": "b3babf",
+   "tint": "none"
+  },
+  "neroagriculture:greenhouse_frame": {
+   "rgb": "b2babe",
+   "tint": "none"
+  },
+  "neroagriculture:greenhouse_glass": {
+   "rgb": "cad6da",
+   "tint": "none"
+  },
+  "neroagriculture:harvester": {
+   "rgb": "a8afb4",
+   "tint": "none"
+  },
+  "neroagriculture:nutrient": {
+   "rgb": "6dc49c",
+   "tint": "none"
+  },
+  "neroagriculture:orbite_fragment_block": {
+   "rgb": "68bca8",
+   "tint": "none"
+  },
+  "neroagriculture:orbite_grow_bed": {
+   "rgb": "9bb0ae",
+   "tint": "none"
+  },
+  "neroagriculture:oxygen_plant": {
+   "rgb": "a8afb4",
+   "tint": "none"
+  },
+  "neroagriculture:planter": {
+   "rgb": "a7afb4",
+   "tint": "none"
+  },
+  "neroagriculture:pollination_beacon": {
+   "rgb": "acbcb3",
+   "tint": "none"
+  },
+  "neroagriculture:prospora_crop": {
+   "rgb": "6e6e6e",
+   "tint": "none"
+  },
+  "neroagriculture:resource_crop": {
+   "rgb": "6e6e6e",
+   "tint": "none"
+  },
+  "neroagriculture:seed_research_bench": {
+   "rgb": "969fa1",
+   "tint": "none"
+  },
+  "neroagriculture:seed_synthesizer": {
+   "rgb": "969fa1",
+   "tint": "none"
+  },
+  "neroagriculture:terraforming_controller": {
+   "rgb": "979fa2",
+   "tint": "none"
+  },
+  "neroagriculture:territe_fragment_block": {
+   "rgb": "545454",
+   "tint": "none"
+  },
+  "neroagriculture:territe_grow_bed": {
+   "rgb": "99a4a6",
+   "tint": "none"
+  },
+  "neroagriculture:voidite_fragment_block": {
+   "rgb": "777b90",
+   "tint": "none"
+  },
+  "neroagriculture:voidite_grow_bed": {
+   "rgb": "9da9ac",
+   "tint": "none"
+  }
+ }
+}

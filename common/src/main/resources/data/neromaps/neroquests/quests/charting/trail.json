@@ -1,0 +1,22 @@
+{
+  "title": "quest.neromaps.charting.trail.title",
+  "description": "quest.neromaps.charting.trail.desc",
+  "icon": "neromaps:trail_marker",
+  "prerequisites": [
+    "neromaps:charting/compass"
+  ],
+  "objectives": [
+    {
+      "type": "neroquests:craft_item",
+      "item": "neromaps:trail_marker",
+      "count": 1
+    }
+  ],
+  "rewards": [
+    {
+      "type": "neroquests:xp",
+      "amount": 40
+    }
+  ],
+  "scope": "player"
+}

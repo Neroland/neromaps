@@ -1,0 +1,43 @@
+{
+  "title": "chapter.neromaps.charting.title",
+  "icon": "neromaps:atlas",
+  "show_when_absent": false,
+  "allow_server_scope": false,
+  "quests": [
+    {
+      "quest": "neromaps:charting/compass",
+      "x": 0,
+      "y": 0
+    },
+    {
+      "quest": "neromaps:charting/atlas",
+      "x": 2,
+      "y": 0
+    },
+    {
+      "quest": "neromaps:charting/desk",
+      "x": 4,
+      "y": 0
+    },
+    {
+      "quest": "neromaps:charting/wall_map",
+      "x": 6,
+      "y": -1
+    },
+    {
+      "quest": "neromaps:charting/signpost",
+      "x": 6,
+      "y": 1
+    },
+    {
+      "quest": "neromaps:charting/trail",
+      "x": 2,
+      "y": 2
+    },
+    {
+      "quest": "neromaps:charting/table",
+      "x": 8,
+      "y": -1
+    }
+  ]
+}

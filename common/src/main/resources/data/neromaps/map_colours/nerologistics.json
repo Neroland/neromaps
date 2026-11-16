@@ -1,0 +1,85 @@
+{
+ "version": 1,
+ "blocks": {
+  "nerologistics:auto_crafter": {
+   "rgb": "2a2d37",
+   "tint": "none"
+  },
+  "nerologistics:buffer": {
+   "rgb": "2a2d37",
+   "tint": "none"
+  },
+  "nerologistics:drive_bay": {
+   "rgb": "2a2d37",
+   "tint": "none"
+  },
+  "nerologistics:drone_hub": {
+   "rgb": "2a2d37",
+   "tint": "none"
+  },
+  "nerologistics:drone_port": {
+   "rgb": "467793",
+   "tint": "none"
+  },
+  "nerologistics:energy_cable": {
+   "rgb": "ef7777",
+   "tint": "none"
+  },
+  "nerologistics:fluid_duct": {
+   "rgb": "6fa0ef",
+   "tint": "none"
+  },
+  "nerologistics:item_duct": {
+   "rgb": "efb970",
+   "tint": "none"
+  },
+  "nerologistics:item_storage": {
+   "rgb": "2a2d37",
+   "tint": "none"
+  },
+  "nerologistics:logistics_dashboard": {
+   "rgb": "2a2d37",
+   "tint": "none"
+  },
+  "nerologistics:logistics_processor": {
+   "rgb": "2a2d37",
+   "tint": "none"
+  },
+  "nerologistics:network_controller": {
+   "rgb": "2a2d37",
+   "tint": "none"
+  },
+  "nerologistics:network_module": {
+   "rgb": "443864",
+   "tint": "none"
+  },
+  "nerologistics:rocket_cargo_port": {
+   "rgb": "2a2d37",
+   "tint": "none"
+  },
+  "nerologistics:storage_request_terminal": {
+   "rgb": "2a2d37",
+   "tint": "none"
+  },
+  "nerologistics:storage_terminal": {
+   "rgb": "2a2d37",
+   "tint": "none"
+  },
+  "nerologistics:train_cargo_interface": {
+   "rgb": "2a2d37",
+   "tint": "none"
+  },
+  "nerologistics:train_station": {
+   "rgb": "2a2d37",
+   "tint": "none"
+  },
+  "nerologistics:universal_duct": {
+   "rgb": "6bddcf",
+   "tint": "none"
+  },
+  "nerologistics:wireless_cargo_terminal": {
+   "rgb": "2a2d37",
+   "tint": "none"
+  }
+ }
+}

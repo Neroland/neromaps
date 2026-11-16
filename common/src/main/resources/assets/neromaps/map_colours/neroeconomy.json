@@ -1,0 +1,33 @@
+{
+ "version": 1,
+ "blocks": {
+  "neroeconomy:auto_trader": {
+   "rgb": "554242",
+   "tint": "none"
+  },
+  "neroeconomy:bank_terminal": {
+   "rgb": "4b433f",
+   "tint": "none"
+  },
+  "neroeconomy:exchange_terminal": {
+   "rgb": "3a3745",
+   "tint": "none"
+  },
+  "neroeconomy:market_board": {
+   "rgb": "655646",
+   "tint": "none"
+  },
+  "neroeconomy:merchant_stall": {
+   "rgb": "a8bd92",
+   "tint": "none"
+  },
+  "neroeconomy:player_shop": {
+   "rgb": "8d6a50",
+   "tint": "none"
+  },
+  "neroeconomy:trading_terminal": {
+   "rgb": "2c4548",
+   "tint": "none"
+  }
+ }
+}

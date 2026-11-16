@@ -4,7 +4,7 @@ render_contact_sheets.py -- review sheets for the NeroMaps art. Run after the th
 
     python3 tools/art/render_contact_sheets.py OUT_DIR
 
-Writes styles.png, minimap.png, icons.png, icons_cvd.png, blocks_items.png, gui.png into OUT_DIR.
+Writes styles.png, minimap.png, icons.png, icons_cvd.png, badges.png, blocks_items.png, gui.png into OUT_DIR.
 """
 import json
 import math
@@ -403,6 +403,33 @@ def sheet_gui(out):
     s.save(os.path.join(out, "gui.png"))
 
 
+def sheet_badges(out):
+    """Standing badges and war-zone side badges: 16 px and micro, alone and on the war-zone marker, per CVD type."""
+    ids = ["neromaps:badge_hostile", "neromaps:badge_neutral", "neromaps:badge_friendly",
+           "neromaps:badge_side_a", "neromaps:badge_side_b", "neromaps:badge_side_none"]
+    bgs = [(0x79, 0xC0, 0x5A), (0x3F, 0x76, 0xE4), C['VOID'], (0x6B, 0x6B, 0x6B)]
+    row = Image.new("RGBA", (len(bgs) * (len(ids) * 26 + 6), 46), BG)
+    for b, bg in enumerate(bgs):
+        strip = Image.new("RGBA", (len(ids) * 26 + 4, 46), tuple(bg) + (255,))
+        for i, iid in enumerate(ids):
+            x = 4 + i * 26
+            strip.alpha_composite(icon(iid).crop((0, 0, 7, 7)), (x + 4, 2))            # 16 px badge alone
+            strip.alpha_composite(icon(iid, micro=True).crop((0, 0, 5, 5)), (x + 14, 3))  # micro badge alone
+            strip.alpha_composite(icon("neroevents:war_zone"), (x, 12))                # on the 16 px marker
+            strip.alpha_composite(icon(iid).crop((0, 0, 7, 7)), (x + 11, 10))
+            strip.alpha_composite(icon("neroevents:war_zone", micro=True), (x + 3, 33))  # on the micro marker
+            strip.alpha_composite(icon(iid, micro=True).crop((0, 0, 5, 5)), (x + 8, 31))
+        row.alpha_composite(strip, (b * (len(ids) * 26 + 6), 0))
+    s = Image.new("RGBA", (row.width * 2 + 20, 5 * 120 + 30), BG)
+    label(s, 10, 6, "badges: hostile x, neutral -, friendly +  |  war side A (diamond, I), B (square, II), unclaimed (round, O)"
+                    "  -  on day, water, fog, grey")
+    for i, (name, m) in enumerate([("normal vision", None)] + list(CVD.items())):
+        r = row if m is None else simulate(row, m)
+        label(s, 10, 24 + i * 120, name)
+        s.alpha_composite(up(r, 2), (10, 40 + i * 120))
+    s.save(os.path.join(out, "badges.png"))
+
+
 def main():
     global ATLAS
     out = sys.argv[1] if len(sys.argv) > 1 else os.path.join(artlib.OUT, "contact-sheets")
@@ -413,9 +440,10 @@ def main():
     sheet_minimap(out)
     sheet_icons(out)
     sheet_cvd(out)
+    sheet_badges(out)
     sheet_blocks(out)
     sheet_gui(out)
-    print("wrote 6 sheets to", out)
+    print("wrote 7 sheets to", out)
 
 
 if __name__ == "__main__":

@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "neromaps:block/cartography_desk"
+    },
+    "facing=east": {
+      "model": "neromaps:block/cartography_desk",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "neromaps:block/cartography_desk",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "neromaps:block/cartography_desk",
+      "y": 270
+    }
+  }
+}

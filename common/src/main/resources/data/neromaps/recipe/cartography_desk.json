@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "PGP",
+    "ICI",
+    "III"
+  ],
+  "key": {
+    "P": "minecraft:paper",
+    "G": "minecraft:glass_pane",
+    "I": "minecraft:iron_ingot",
+    "C": "minecraft:cartography_table"
+  },
+  "result": {
+    "id": "neromaps:cartography_desk",
+    "count": 1
+  }
+}

@@ -1,0 +1,17 @@
+{
+ "version": 1,
+ "blocks": {
+  "nerocompanion:charging_pad": {
+   "rgb": "2f6c68",
+   "tint": "none"
+  },
+  "nerocompanion:companion_bay": {
+   "rgb": "29867e",
+   "tint": "none"
+  },
+  "nerocompanion:hand_crank_charger": {
+   "rgb": "2a2e34",
+   "tint": "none"
+  }
+ }
+}

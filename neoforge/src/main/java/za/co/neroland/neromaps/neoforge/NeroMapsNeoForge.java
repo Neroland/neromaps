@@ -7,6 +7,8 @@ import net.neoforged.fml.common.Mod;
 import za.co.neroland.nerolandcore.registry.RegistrationProvider;
 
 import za.co.neroland.neromaps.NeroMapsCommon;
+import za.co.neroland.neromaps.command.MapCommands;
+import za.co.neroland.neromaps.server.MapServer;
 
 /** NeoForge entry point for NeroMaps. */
 @Mod(NeroMapsCommon.MOD_ID)
@@ -18,14 +20,20 @@ public final class NeroMapsNeoForge {
         // Common init created NeroMaps' deferred registers through Core's registration seam; this attaches them
         // to our mod event bus.
         RegistrationProvider.attach(modEventBus);
-        // SPIKE (Stage 0 minimap draw path): debug HUD layer, client only, off unless -Dneromaps.spike.minimap=true.
-        // Stage 2 replaces this block with the real client setup.
+        NeoForgeMapNetwork.register(modEventBus);
+        net.neoforged.neoforge.common.NeoForge.EVENT_BUS.addListener(
+                (net.neoforged.neoforge.event.tick.ServerTickEvent.Post event) -> MapServer.tick(event.getServer()));
+        net.neoforged.neoforge.common.NeoForge.EVENT_BUS.addListener(
+                (net.neoforged.neoforge.event.RegisterCommandsEvent event) -> MapCommands.register(event.getDispatcher()));
+        net.neoforged.neoforge.common.NeoForge.EVENT_BUS.addListener(
+                (net.neoforged.neoforge.event.server.ServerStoppingEvent event) -> MapServer.stopping());
+        // Client-only wiring (minimap, world map, keys); never loaded on a dedicated server.
         //? if >=1.21.9 {
         if (net.neoforged.fml.loading.FMLEnvironment.getDist() == net.neoforged.api.distmarker.Dist.CLIENT) {
         //?} else {
         /*if (net.neoforged.fml.loading.FMLEnvironment.dist == net.neoforged.api.distmarker.Dist.CLIENT) {
         *///?}
-            za.co.neroland.neromaps.neoforge.spike.SpikeNeoForgeHud.register(modEventBus);
+            NeoForgeClientSetup.init(modEventBus);
         }
     }
 }

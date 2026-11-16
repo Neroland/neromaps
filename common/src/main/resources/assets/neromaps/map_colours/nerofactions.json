@@ -1,0 +1,45 @@
+{
+ "version": 1,
+ "blocks": {
+  "nerofactions:atmosphere_processor": {
+   "rgb": "708677",
+   "tint": "none"
+  },
+  "nerofactions:community_workbench": {
+   "rgb": "6d684c",
+   "tint": "none"
+  },
+  "nerofactions:contract_board": {
+   "rgb": "91907d",
+   "tint": "none"
+  },
+  "nerofactions:corporate_terminal": {
+   "rgb": "806d41",
+   "tint": "none"
+  },
+  "nerofactions:deconstructor": {
+   "rgb": "6b5348",
+   "tint": "none"
+  },
+  "nerofactions:faction_registry": {
+   "rgb": "91907d",
+   "tint": "none"
+  },
+  "nerofactions:navigation_beacon": {
+   "rgb": "506c79",
+   "tint": "none"
+  },
+  "nerofactions:quota_board": {
+   "rgb": "8d7b5c",
+   "tint": "none"
+  },
+  "nerofactions:trade_terminal": {
+   "rgb": "95989c",
+   "tint": "none"
+  },
+  "nerofactions:void_altar": {
+   "rgb": "614b75",
+   "tint": "none"
+  }
+ }
+}

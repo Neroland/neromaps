@@ -1,0 +1,45 @@
+{
+ "version": 1,
+ "blocks": {
+  "neroevents:bent_strut": {
+   "rgb": "515a64",
+   "tint": "none"
+  },
+  "neroevents:cooled_crust": {
+   "rgb": "504846",
+   "tint": "none"
+  },
+  "neroevents:crater_pocket": {
+   "rgb": "382f2d",
+   "tint": "none"
+  },
+  "neroevents:embedded_meteor_ore": {
+   "rgb": "353836",
+   "tint": "none"
+  },
+  "neroevents:event_console": {
+   "rgb": "2d4b4b",
+   "tint": "none"
+  },
+  "neroevents:hull_plating": {
+   "rgb": "666e7a",
+   "tint": "none"
+  },
+  "neroevents:meteor_slag": {
+   "rgb": "3c2f2c",
+   "tint": "none"
+  },
+  "neroevents:salvage_crate": {
+   "rgb": "7b766e",
+   "tint": "none"
+  },
+  "neroevents:scorched_panel": {
+   "rgb": "595a62",
+   "tint": "none"
+  },
+  "neroevents:war_beacon": {
+   "rgb": "343c42",
+   "tint": "none"
+  }
+ }
+}

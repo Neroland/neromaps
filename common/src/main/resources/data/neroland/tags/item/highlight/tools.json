@@ -1,0 +1,17 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "neromaps:waypoint_compass",
+      "required": false
+    },
+    {
+      "id": "neromaps:atlas_blank",
+      "required": false
+    },
+    {
+      "id": "neromaps:atlas",
+      "required": false
+    }
+  ]
+}
