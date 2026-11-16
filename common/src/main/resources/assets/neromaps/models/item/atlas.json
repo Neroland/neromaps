@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "neromaps:item/atlas",
+    "layer1": "neromaps:item/atlas_clasp_glow"
+  }
+}

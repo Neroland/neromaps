@@ -1,0 +1,205 @@
+{
+  "parent": "minecraft:block/block",
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "particle": "neromaps:block/trail_marker",
+    "body": "neromaps:block/trail_marker",
+    "cap": "neromaps:block/trail_marker_cap_glow"
+  },
+  "elements": [
+    {
+      "from": [
+        7,
+        0,
+        7
+      ],
+      "to": [
+        9,
+        6,
+        9
+      ],
+      "faces": {
+        "north": {
+          "texture": "#body",
+          "uv": [
+            0,
+            0,
+            2,
+            6
+          ]
+        },
+        "south": {
+          "texture": "#body",
+          "uv": [
+            0,
+            0,
+            2,
+            6
+          ]
+        },
+        "east": {
+          "texture": "#body",
+          "uv": [
+            0,
+            0,
+            2,
+            6
+          ]
+        },
+        "west": {
+          "texture": "#body",
+          "uv": [
+            0,
+            0,
+            2,
+            6
+          ]
+        },
+        "down": {
+          "texture": "#body",
+          "uv": [
+            0,
+            4,
+            2,
+            6
+          ],
+          "cullface": "down"
+        }
+      }
+    },
+    {
+      "from": [
+        6.5,
+        5,
+        6.5
+      ],
+      "to": [
+        9.5,
+        6,
+        9.5
+      ],
+      "faces": {
+        "north": {
+          "texture": "#body",
+          "uv": [
+            4,
+            0,
+            7,
+            1
+          ]
+        },
+        "south": {
+          "texture": "#body",
+          "uv": [
+            4,
+            0,
+            7,
+            1
+          ]
+        },
+        "east": {
+          "texture": "#body",
+          "uv": [
+            4,
+            0,
+            7,
+            1
+          ]
+        },
+        "west": {
+          "texture": "#body",
+          "uv": [
+            4,
+            0,
+            7,
+            1
+          ]
+        },
+        "up": {
+          "texture": "#body",
+          "uv": [
+            4,
+            2,
+            7,
+            5
+          ]
+        },
+        "down": {
+          "texture": "#body",
+          "uv": [
+            4,
+            2,
+            7,
+            5
+          ]
+        }
+      }
+    },
+    {
+      "from": [
+        7,
+        6,
+        7
+      ],
+      "to": [
+        9,
+        8,
+        9
+      ],
+      "shade": false,
+      "light_emission": 15,
+      "faces": {
+        "north": {
+          "texture": "#cap",
+          "uv": [
+            8,
+            2,
+            10,
+            4
+          ],
+          "tintindex": 0
+        },
+        "south": {
+          "texture": "#cap",
+          "uv": [
+            8,
+            2,
+            10,
+            4
+          ],
+          "tintindex": 0
+        },
+        "east": {
+          "texture": "#cap",
+          "uv": [
+            8,
+            2,
+            10,
+            4
+          ],
+          "tintindex": 0
+        },
+        "west": {
+          "texture": "#cap",
+          "uv": [
+            8,
+            2,
+            10,
+            4
+          ],
+          "tintindex": 0
+        },
+        "up": {
+          "texture": "#cap",
+          "uv": [
+            8,
+            0,
+            10,
+            2
+          ],
+          "tintindex": 0
+        }
+      }
+    }
+  ]
+}

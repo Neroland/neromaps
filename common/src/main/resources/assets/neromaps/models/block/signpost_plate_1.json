@@ -1,0 +1,105 @@
+{
+  "parent": "minecraft:block/block",
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "particle": "neromaps:block/signpost_plate",
+    "plate": "neromaps:block/signpost_plate",
+    "glow": "neromaps:block/signpost_plate_glow"
+  },
+  "elements": [
+    {
+      "from": [
+        1,
+        11,
+        6
+      ],
+      "to": [
+        15,
+        15,
+        7
+      ],
+      "faces": {
+        "north": {
+          "texture": "#plate",
+          "uv": [
+            0,
+            0,
+            14,
+            4
+          ]
+        },
+        "south": {
+          "texture": "#plate",
+          "uv": [
+            0,
+            8,
+            14,
+            12
+          ]
+        },
+        "up": {
+          "texture": "#plate",
+          "uv": [
+            0,
+            5,
+            14,
+            6
+          ]
+        },
+        "down": {
+          "texture": "#plate",
+          "uv": [
+            0,
+            6,
+            14,
+            7
+          ]
+        },
+        "east": {
+          "texture": "#plate",
+          "uv": [
+            0,
+            5,
+            1,
+            7
+          ]
+        },
+        "west": {
+          "texture": "#plate",
+          "uv": [
+            0,
+            5,
+            1,
+            7
+          ]
+        }
+      }
+    },
+    {
+      "from": [
+        1,
+        11,
+        5.98
+      ],
+      "to": [
+        15,
+        15,
+        5.98
+      ],
+      "shade": false,
+      "light_emission": 15,
+      "faces": {
+        "north": {
+          "texture": "#glow",
+          "uv": [
+            0,
+            0,
+            14,
+            4
+          ],
+          "tintindex": 0
+        }
+      }
+    }
+  ]
+}

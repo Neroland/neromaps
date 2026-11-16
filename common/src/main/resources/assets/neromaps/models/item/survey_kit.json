@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "neromaps:item/survey_kit",
+    "layer1": "neromaps:item/survey_kit_lens_glow"
+  }
+}

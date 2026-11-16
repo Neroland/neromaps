@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "neromaps:item/waypoint_compass_02",
+    "layer1": "neromaps:item/waypoint_compass_locked_glow"
+  }
+}

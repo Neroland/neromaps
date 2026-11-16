@@ -1,0 +1,192 @@
+{
+  "atlas.merge": {
+    "subtitle": "subtitles.neromaps.atlas.merge",
+    "sounds": [
+      {
+        "name": "neromaps:atlas/merge",
+        "stream": false
+      }
+    ]
+  },
+  "atlas.open": {
+    "subtitle": "subtitles.neromaps.atlas.open",
+    "sounds": [
+      {
+        "name": "neromaps:atlas/open",
+        "stream": false
+      }
+    ]
+  },
+  "compass.lock": {
+    "subtitle": "subtitles.neromaps.compass.lock",
+    "sounds": [
+      {
+        "name": "neromaps:compass/lock",
+        "stream": false
+      }
+    ]
+  },
+  "desk.copy": {
+    "subtitle": "subtitles.neromaps.desk.copy",
+    "sounds": [
+      {
+        "name": "neromaps:desk/copy",
+        "stream": false
+      }
+    ]
+  },
+  "desk.print": {
+    "subtitle": "subtitles.neromaps.desk.print",
+    "sounds": [
+      {
+        "name": "neromaps:desk/print",
+        "stream": false
+      }
+    ]
+  },
+  "map_table.hum": {
+    "subtitle": "subtitles.neromaps.map_table.hum",
+    "sounds": [
+      {
+        "name": "neromaps:map_table/hum",
+        "stream": false,
+        "attenuation_distance": 6
+      }
+    ]
+  },
+  "share.accept": {
+    "subtitle": "subtitles.neromaps.share.accept",
+    "sounds": [
+      {
+        "name": "neromaps:share/accept",
+        "stream": false
+      }
+    ]
+  },
+  "share.request": {
+    "subtitle": "subtitles.neromaps.share.request",
+    "sounds": [
+      {
+        "name": "neromaps:share/request",
+        "stream": false
+      }
+    ]
+  },
+  "share.revoke": {
+    "subtitle": "subtitles.neromaps.share.revoke",
+    "sounds": [
+      {
+        "name": "neromaps:share/revoke",
+        "stream": false
+      }
+    ]
+  },
+  "signpost.write": {
+    "subtitle": "subtitles.neromaps.signpost.write",
+    "sounds": [
+      {
+        "name": "neromaps:signpost/write",
+        "stream": false
+      }
+    ]
+  },
+  "spyglass.mark": {
+    "subtitle": "subtitles.neromaps.spyglass.mark",
+    "sounds": [
+      {
+        "name": "neromaps:spyglass/mark",
+        "stream": false
+      }
+    ]
+  },
+  "survey.ping": {
+    "subtitle": "subtitles.neromaps.survey.ping",
+    "sounds": [
+      {
+        "name": "neromaps:survey/ping",
+        "stream": false
+      }
+    ]
+  },
+  "trail_marker.place": {
+    "subtitle": "subtitles.neromaps.trail_marker.place",
+    "sounds": [
+      {
+        "name": "neromaps:trail_marker/place",
+        "stream": false
+      }
+    ]
+  },
+  "ui.click": {
+    "subtitle": "subtitles.neromaps.ui.click",
+    "sounds": [
+      {
+        "name": "neromaps:ui/click",
+        "stream": false
+      }
+    ]
+  },
+  "ui.map_close": {
+    "subtitle": "subtitles.neromaps.ui.map_close",
+    "sounds": [
+      {
+        "name": "neromaps:ui/map_close",
+        "stream": false
+      }
+    ]
+  },
+  "ui.map_open": {
+    "subtitle": "subtitles.neromaps.ui.map_open",
+    "sounds": [
+      {
+        "name": "neromaps:ui/map_open",
+        "stream": false
+      }
+    ]
+  },
+  "ui.zoom": {
+    "subtitle": "subtitles.neromaps.ui.zoom",
+    "sounds": [
+      {
+        "name": "neromaps:ui/zoom",
+        "stream": false
+      }
+    ]
+  },
+  "wall_map.set": {
+    "subtitle": "subtitles.neromaps.wall_map.set",
+    "sounds": [
+      {
+        "name": "neromaps:wall_map/set",
+        "stream": false
+      }
+    ]
+  },
+  "waypoint.create": {
+    "subtitle": "subtitles.neromaps.waypoint.create",
+    "sounds": [
+      {
+        "name": "neromaps:waypoint/create",
+        "stream": false
+      }
+    ]
+  },
+  "waypoint.death": {
+    "subtitle": "subtitles.neromaps.waypoint.death",
+    "sounds": [
+      {
+        "name": "neromaps:waypoint/death",
+        "stream": false
+      }
+    ]
+  },
+  "waypoint.remove": {
+    "subtitle": "subtitles.neromaps.waypoint.remove",
+    "sounds": [
+      {
+        "name": "neromaps:waypoint/remove",
+        "stream": false
+      }
+    ]
+  }
+}
