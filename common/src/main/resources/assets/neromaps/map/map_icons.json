@@ -1,0 +1,1694 @@
+{
+  "texture": "neromaps:textures/gui/map_icons.png",
+  "size": [
+    256,
+    256
+  ],
+  "cell": 16,
+  "micro_cell": 8,
+  "columns": 16,
+  "micro_columns": 32,
+  "micro_y": 192,
+  "art_inset": 1,
+  "micro_art": 7,
+  "fallback": "neromaps:generic",
+  "waypoint_glyphs": [
+    "neromaps:glyph/dot",
+    "neromaps:glyph/home",
+    "neromaps:glyph/bed",
+    "neromaps:glyph/pickaxe",
+    "neromaps:glyph/sword",
+    "neromaps:glyph/chest",
+    "neromaps:glyph/portal",
+    "neromaps:glyph/anchor",
+    "neromaps:glyph/wheat",
+    "neromaps:glyph/tower",
+    "neromaps:glyph/cave",
+    "neromaps:glyph/star",
+    "neromaps:glyph/heart",
+    "neromaps:glyph/flag",
+    "neromaps:glyph/question",
+    "neromaps:glyph/exclamation"
+  ],
+  "icons": {
+    "neromaps:generic": {
+      "slot": 0,
+      "carrier": "ring",
+      "glyph": "dot2",
+      "colour": "#F2F5F8",
+      "colour_name": "M_WHITE",
+      "uv": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "micro_uv": [
+        0,
+        192,
+        8,
+        8
+      ],
+      "inverted": true,
+      "shipped_layer": true
+    },
+    "neromaps:waypoint": {
+      "slot": 1,
+      "carrier": "circle",
+      "glyph": "dot",
+      "colour": "#E69F00",
+      "colour_name": "M_ORANGE",
+      "uv": [
+        16,
+        0,
+        16,
+        16
+      ],
+      "micro_uv": [
+        8,
+        192,
+        8,
+        8
+      ],
+      "inverted": false,
+      "shipped_layer": true
+    },
+    "neromaps:waypoint_temp": {
+      "slot": 2,
+      "carrier": "ring_dashed",
+      "glyph": "dot2",
+      "colour": "#E69F00",
+      "colour_name": "M_ORANGE",
+      "uv": [
+        32,
+        0,
+        16,
+        16
+      ],
+      "micro_uv": [
+        16,
+        192,
+        8,
+        8
+      ],
+      "inverted": true,
+      "shipped_layer": true
+    },
+    "neromaps:death": {
+      "slot": 3,
+      "carrier": "tombstone",
+      "glyph": "skull",
+      "colour": "#F2F5F8",
+      "colour_name": "M_WHITE",
+      "uv": [
+        48,
+        0,
+        16,
+        16
+      ],
+      "micro_uv": [
+        24,
+        192,
+        8,
+        8
+      ],
+      "inverted": false,
+      "shipped_layer": true
+    },
+    "neromaps:signpost": {
+      "slot": 4,
+      "carrier": "pennant",
+      "glyph": "none",
+      "colour": "#F2F5F8",
+      "colour_name": "M_WHITE",
+      "uv": [
+        64,
+        0,
+        16,
+        16
+      ],
+      "micro_uv": [
+        32,
+        192,
+        8,
+        8
+      ],
+      "inverted": false,
+      "shipped_layer": true
+    },
+    "neromaps:trail_marker": {
+      "slot": 5,
+      "carrier": "raw",
+      "glyph": null,
+      "colour": "#F2F5F8",
+      "colour_name": "M_WHITE",
+      "uv": [
+        80,
+        0,
+        16,
+        16
+      ],
+      "micro_uv": [
+        40,
+        192,
+        8,
+        8
+      ],
+      "inverted": false,
+      "shipped_layer": true
+    },
+    "neromaps:player_self": {
+      "slot": 6,
+      "carrier": "arrow",
+      "glyph": "none",
+      "colour": "#B2BEFF",
+      "colour_name": "MAP_ACCENT_BRIGHT",
+      "uv": [
+        96,
+        0,
+        16,
+        16
+      ],
+      "micro_uv": [
+        48,
+        192,
+        8,
+        8
+      ],
+      "inverted": false,
+      "shipped_layer": true
+    },
+    "neromaps:player_shared": {
+      "slot": 7,
+      "carrier": "ring",
+      "glyph": "arrow_s",
+      "colour": "#B2BEFF",
+      "colour_name": "MAP_ACCENT_BRIGHT",
+      "uv": [
+        112,
+        0,
+        16,
+        16
+      ],
+      "micro_uv": [
+        56,
+        192,
+        8,
+        8
+      ],
+      "inverted": true,
+      "shipped_layer": true
+    },
+    "neromaps:radar_hostile": {
+      "slot": 8,
+      "carrier": "raw",
+      "glyph": null,
+      "colour": "#D55E00",
+      "colour_name": "M_VERMILLION",
+      "uv": [
+        128,
+        0,
+        16,
+        16
+      ],
+      "micro_uv": [
+        64,
+        192,
+        8,
+        8
+      ],
+      "inverted": false,
+      "shipped_layer": true
+    },
+    "neromaps:radar_passive": {
+      "slot": 9,
+      "carrier": "raw",
+      "glyph": null,
+      "colour": "#F2F5F8",
+      "colour_name": "M_WHITE",
+      "uv": [
+        144,
+        0,
+        16,
+        16
+      ],
+      "micro_uv": [
+        72,
+        192,
+        8,
+        8
+      ],
+      "inverted": false,
+      "shipped_layer": true
+    },
+    "neromaps:radar_tamed": {
+      "slot": 10,
+      "carrier": "raw",
+      "glyph": null,
+      "colour": "#CC79A7",
+      "colour_name": "M_PURPLE",
+      "uv": [
+        160,
+        0,
+        16,
+        16
+      ],
+      "micro_uv": [
+        80,
+        192,
+        8,
+        8
+      ],
+      "inverted": false,
+      "shipped_layer": true
+    },
+    "neromaps:radar_vehicle": {
+      "slot": 11,
+      "carrier": "raw",
+      "glyph": null,
+      "colour": "#009E73",
+      "colour_name": "M_GREEN",
+      "uv": [
+        176,
+        0,
+        16,
+        16
+      ],
+      "micro_uv": [
+        88,
+        192,
+        8,
+        8
+      ],
+      "inverted": false,
+      "shipped_layer": true
+    },
+    "neromaps:radar_item": {
+      "slot": 12,
+      "carrier": "raw",
+      "glyph": null,
+      "colour": "#F0E442",
+      "colour_name": "M_YELLOW",
+      "uv": [
+        192,
+        0,
+        16,
+        16
+      ],
+      "micro_uv": [
+        96,
+        192,
+        8,
+        8
+      ],
+      "inverted": false,
+      "shipped_layer": true
+    },
+    "neromaps:radar_player": {
+      "slot": 13,
+      "carrier": "raw",
+      "glyph": null,
+      "colour": "#B2BEFF",
+      "colour_name": "MAP_ACCENT_BRIGHT",
+      "uv": [
+        208,
+        0,
+        16,
+        16
+      ],
+      "micro_uv": [
+        104,
+        192,
+        8,
+        8
+      ],
+      "inverted": false,
+      "shipped_layer": true
+    },
+    "neromaps:area": {
+      "slot": 14,
+      "carrier": "area",
+      "glyph": "none",
+      "colour": "#56B4E9",
+      "colour_name": "M_SKY",
+      "uv": [
+        224,
+        0,
+        16,
+        16
+      ],
+      "micro_uv": [
+        112,
+        192,
+        8,
+        8
+      ],
+      "inverted": true,
+      "shipped_layer": true
+    },
+    "neromaps:badge_hostile": {
+      "slot": 15,
+      "carrier": "badge",
+      "glyph": null,
+      "colour": "#D55E00",
+      "colour_name": "M_VERMILLION",
+      "uv": [
+        240,
+        0,
+        16,
+        16
+      ],
+      "micro_uv": [
+        120,
+        192,
+        8,
+        8
+      ],
+      "inverted": false,
+      "shipped_layer": true
+    },
+    "neromaps:badge_neutral": {
+      "slot": 16,
+      "carrier": "badge",
+      "glyph": null,
+      "colour": "#F2F5F8",
+      "colour_name": "M_WHITE",
+      "uv": [
+        0,
+        16,
+        16,
+        16
+      ],
+      "micro_uv": [
+        128,
+        192,
+        8,
+        8
+      ],
+      "inverted": false,
+      "shipped_layer": true
+    },
+    "neromaps:badge_friendly": {
+      "slot": 17,
+      "carrier": "badge",
+      "glyph": null,
+      "colour": "#009E73",
+      "colour_name": "M_GREEN",
+      "uv": [
+        16,
+        16,
+        16,
+        16
+      ],
+      "micro_uv": [
+        136,
+        192,
+        8,
+        8
+      ],
+      "inverted": false,
+      "shipped_layer": true
+    },
+    "neromaps:star_chart": {
+      "slot": 18,
+      "carrier": "square",
+      "glyph": "sparkle",
+      "colour": "#56B4E9",
+      "colour_name": "M_SKY",
+      "uv": [
+        32,
+        16,
+        16,
+        16
+      ],
+      "micro_uv": [
+        144,
+        192,
+        8,
+        8
+      ],
+      "inverted": false,
+      "shipped_layer": true
+    },
+    "neromaps:north": {
+      "slot": 19,
+      "carrier": "raw",
+      "glyph": null,
+      "colour": "#B2BEFF",
+      "colour_name": "MAP_ACCENT_BRIGHT",
+      "uv": [
+        48,
+        16,
+        16,
+        16
+      ],
+      "micro_uv": [
+        152,
+        192,
+        8,
+        8
+      ],
+      "inverted": false,
+      "shipped_layer": true
+    },
+    "neromaps:offscreen_chevron": {
+      "slot": 20,
+      "carrier": "chevron",
+      "glyph": "none",
+      "colour": "#F2F5F8",
+      "colour_name": "M_WHITE",
+      "uv": [
+        64,
+        16,
+        16,
+        16
+      ],
+      "micro_uv": [
+        160,
+        192,
+        8,
+        8
+      ],
+      "inverted": false,
+      "shipped_layer": true
+    },
+    "neromaps:halo_circle": {
+      "slot": 21,
+      "carrier": "circle",
+      "glyph": null,
+      "colour": "#B2BEFF",
+      "colour_name": "MAP_ACCENT_BRIGHT",
+      "uv": [
+        80,
+        16,
+        16,
+        16
+      ],
+      "micro_uv": [
+        168,
+        192,
+        8,
+        8
+      ],
+      "inverted": false,
+      "shipped_layer": true
+    },
+    "neromaps:halo_tombstone": {
+      "slot": 22,
+      "carrier": "tombstone",
+      "glyph": null,
+      "colour": "#B2BEFF",
+      "colour_name": "MAP_ACCENT_BRIGHT",
+      "uv": [
+        96,
+        16,
+        16,
+        16
+      ],
+      "micro_uv": [
+        176,
+        192,
+        8,
+        8
+      ],
+      "inverted": false,
+      "shipped_layer": true
+    },
+    "neromaps:halo_pennant": {
+      "slot": 23,
+      "carrier": "pennant",
+      "glyph": null,
+      "colour": "#B2BEFF",
+      "colour_name": "MAP_ACCENT_BRIGHT",
+      "uv": [
+        112,
+        16,
+        16,
+        16
+      ],
+      "micro_uv": [
+        184,
+        192,
+        8,
+        8
+      ],
+      "inverted": false,
+      "shipped_layer": true
+    },
+    "neromaps:halo_square": {
+      "slot": 24,
+      "carrier": "square",
+      "glyph": null,
+      "colour": "#B2BEFF",
+      "colour_name": "MAP_ACCENT_BRIGHT",
+      "uv": [
+        128,
+        16,
+        16,
+        16
+      ],
+      "micro_uv": [
+        192,
+        192,
+        8,
+        8
+      ],
+      "inverted": false,
+      "shipped_layer": true
+    },
+    "neromaps:halo_diamond": {
+      "slot": 25,
+      "carrier": "diamond",
+      "glyph": null,
+      "colour": "#B2BEFF",
+      "colour_name": "MAP_ACCENT_BRIGHT",
+      "uv": [
+        144,
+        16,
+        16,
+        16
+      ],
+      "micro_uv": [
+        200,
+        192,
+        8,
+        8
+      ],
+      "inverted": false,
+      "shipped_layer": true
+    },
+    "neromaps:halo_tri_up": {
+      "slot": 26,
+      "carrier": "tri_up",
+      "glyph": null,
+      "colour": "#B2BEFF",
+      "colour_name": "MAP_ACCENT_BRIGHT",
+      "uv": [
+        160,
+        16,
+        16,
+        16
+      ],
+      "micro_uv": [
+        208,
+        192,
+        8,
+        8
+      ],
+      "inverted": false,
+      "shipped_layer": true
+    },
+    "neromaps:halo_tri_down": {
+      "slot": 27,
+      "carrier": "tri_down",
+      "glyph": null,
+      "colour": "#B2BEFF",
+      "colour_name": "MAP_ACCENT_BRIGHT",
+      "uv": [
+        176,
+        16,
+        16,
+        16
+      ],
+      "micro_uv": [
+        216,
+        192,
+        8,
+        8
+      ],
+      "inverted": false,
+      "shipped_layer": true
+    },
+    "neromaps:halo_ring": {
+      "slot": 28,
+      "carrier": "ring",
+      "glyph": null,
+      "colour": "#B2BEFF",
+      "colour_name": "MAP_ACCENT_BRIGHT",
+      "uv": [
+        192,
+        16,
+        16,
+        16
+      ],
+      "micro_uv": [
+        224,
+        192,
+        8,
+        8
+      ],
+      "inverted": true,
+      "shipped_layer": true
+    },
+    "neromaps:halo_arrow": {
+      "slot": 29,
+      "carrier": "arrow",
+      "glyph": null,
+      "colour": "#B2BEFF",
+      "colour_name": "MAP_ACCENT_BRIGHT",
+      "uv": [
+        208,
+        16,
+        16,
+        16
+      ],
+      "micro_uv": [
+        232,
+        192,
+        8,
+        8
+      ],
+      "inverted": false,
+      "shipped_layer": true
+    },
+    "neromaps:glyph/dot": {
+      "slot": 32,
+      "carrier": "circle",
+      "glyph": "dot",
+      "colour": "#E69F00",
+      "colour_name": "M_ORANGE",
+      "uv": [
+        0,
+        32,
+        16,
+        16
+      ],
+      "micro_uv": [
+        0,
+        200,
+        8,
+        8
+      ],
+      "inverted": false,
+      "shipped_layer": true
+    },
+    "neromaps:glyph/home": {
+      "slot": 33,
+      "carrier": "circle",
+      "glyph": "home",
+      "colour": "#E69F00",
+      "colour_name": "M_ORANGE",
+      "uv": [
+        16,
+        32,
+        16,
+        16
+      ],
+      "micro_uv": [
+        8,
+        200,
+        8,
+        8
+      ],
+      "inverted": false,
+      "shipped_layer": true
+    },
+    "neromaps:glyph/bed": {
+      "slot": 34,
+      "carrier": "circle",
+      "glyph": "bed",
+      "colour": "#E69F00",
+      "colour_name": "M_ORANGE",
+      "uv": [
+        32,
+        32,
+        16,
+        16
+      ],
+      "micro_uv": [
+        16,
+        200,
+        8,
+        8
+      ],
+      "inverted": false,
+      "shipped_layer": true
+    },
+    "neromaps:glyph/pickaxe": {
+      "slot": 35,
+      "carrier": "circle",
+      "glyph": "pickaxe",
+      "colour": "#E69F00",
+      "colour_name": "M_ORANGE",
+      "uv": [
+        48,
+        32,
+        16,
+        16
+      ],
+      "micro_uv": [
+        24,
+        200,
+        8,
+        8
+      ],
+      "inverted": false,
+      "shipped_layer": true
+    },
+    "neromaps:glyph/sword": {
+      "slot": 36,
+      "carrier": "circle",
+      "glyph": "sword",
+      "colour": "#E69F00",
+      "colour_name": "M_ORANGE",
+      "uv": [
+        64,
+        32,
+        16,
+        16
+      ],
+      "micro_uv": [
+        32,
+        200,
+        8,
+        8
+      ],
+      "inverted": false,
+      "shipped_layer": true
+    },
+    "neromaps:glyph/chest": {
+      "slot": 37,
+      "carrier": "circle",
+      "glyph": "chest",
+      "colour": "#E69F00",
+      "colour_name": "M_ORANGE",
+      "uv": [
+        80,
+        32,
+        16,
+        16
+      ],
+      "micro_uv": [
+        40,
+        200,
+        8,
+        8
+      ],
+      "inverted": false,
+      "shipped_layer": true
+    },
+    "neromaps:glyph/portal": {
+      "slot": 38,
+      "carrier": "circle",
+      "glyph": "portal",
+      "colour": "#E69F00",
+      "colour_name": "M_ORANGE",
+      "uv": [
+        96,
+        32,
+        16,
+        16
+      ],
+      "micro_uv": [
+        48,
+        200,
+        8,
+        8
+      ],
+      "inverted": false,
+      "shipped_layer": true
+    },
+    "neromaps:glyph/anchor": {
+      "slot": 39,
+      "carrier": "circle",
+      "glyph": "anchor",
+      "colour": "#E69F00",
+      "colour_name": "M_ORANGE",
+      "uv": [
+        112,
+        32,
+        16,
+        16
+      ],
+      "micro_uv": [
+        56,
+        200,
+        8,
+        8
+      ],
+      "inverted": false,
+      "shipped_layer": true
+    },
+    "neromaps:glyph/wheat": {
+      "slot": 40,
+      "carrier": "circle",
+      "glyph": "wheat",
+      "colour": "#E69F00",
+      "colour_name": "M_ORANGE",
+      "uv": [
+        128,
+        32,
+        16,
+        16
+      ],
+      "micro_uv": [
+        64,
+        200,
+        8,
+        8
+      ],
+      "inverted": false,
+      "shipped_layer": true
+    },
+    "neromaps:glyph/tower": {
+      "slot": 41,
+      "carrier": "circle",
+      "glyph": "tower",
+      "colour": "#E69F00",
+      "colour_name": "M_ORANGE",
+      "uv": [
+        144,
+        32,
+        16,
+        16
+      ],
+      "micro_uv": [
+        72,
+        200,
+        8,
+        8
+      ],
+      "inverted": false,
+      "shipped_layer": true
+    },
+    "neromaps:glyph/cave": {
+      "slot": 42,
+      "carrier": "circle",
+      "glyph": "cave",
+      "colour": "#E69F00",
+      "colour_name": "M_ORANGE",
+      "uv": [
+        160,
+        32,
+        16,
+        16
+      ],
+      "micro_uv": [
+        80,
+        200,
+        8,
+        8
+      ],
+      "inverted": false,
+      "shipped_layer": true
+    },
+    "neromaps:glyph/star": {
+      "slot": 43,
+      "carrier": "circle",
+      "glyph": "star",
+      "colour": "#E69F00",
+      "colour_name": "M_ORANGE",
+      "uv": [
+        176,
+        32,
+        16,
+        16
+      ],
+      "micro_uv": [
+        88,
+        200,
+        8,
+        8
+      ],
+      "inverted": false,
+      "shipped_layer": true
+    },
+    "neromaps:glyph/heart": {
+      "slot": 44,
+      "carrier": "circle",
+      "glyph": "heart",
+      "colour": "#E69F00",
+      "colour_name": "M_ORANGE",
+      "uv": [
+        192,
+        32,
+        16,
+        16
+      ],
+      "micro_uv": [
+        96,
+        200,
+        8,
+        8
+      ],
+      "inverted": false,
+      "shipped_layer": true
+    },
+    "neromaps:glyph/flag": {
+      "slot": 45,
+      "carrier": "circle",
+      "glyph": "flag",
+      "colour": "#E69F00",
+      "colour_name": "M_ORANGE",
+      "uv": [
+        208,
+        32,
+        16,
+        16
+      ],
+      "micro_uv": [
+        104,
+        200,
+        8,
+        8
+      ],
+      "inverted": false,
+      "shipped_layer": true
+    },
+    "neromaps:glyph/question": {
+      "slot": 46,
+      "carrier": "circle",
+      "glyph": "question",
+      "colour": "#E69F00",
+      "colour_name": "M_ORANGE",
+      "uv": [
+        224,
+        32,
+        16,
+        16
+      ],
+      "micro_uv": [
+        112,
+        200,
+        8,
+        8
+      ],
+      "inverted": false,
+      "shipped_layer": true
+    },
+    "neromaps:glyph/exclamation": {
+      "slot": 47,
+      "carrier": "circle",
+      "glyph": "exclamation",
+      "colour": "#E69F00",
+      "colour_name": "M_ORANGE",
+      "uv": [
+        240,
+        32,
+        16,
+        16
+      ],
+      "micro_uv": [
+        120,
+        200,
+        8,
+        8
+      ],
+      "inverted": false,
+      "shipped_layer": true
+    },
+    "nerospace:station": {
+      "slot": 64,
+      "carrier": "square",
+      "glyph": "orbit",
+      "colour": "#56B4E9",
+      "colour_name": "M_SKY",
+      "uv": [
+        0,
+        64,
+        16,
+        16
+      ],
+      "micro_uv": [
+        0,
+        208,
+        8,
+        8
+      ],
+      "inverted": false,
+      "shipped_layer": true
+    },
+    "nerospace:launch_pad": {
+      "slot": 65,
+      "carrier": "tri_down",
+      "glyph": "pad",
+      "colour": "#009E73",
+      "colour_name": "M_GREEN",
+      "uv": [
+        16,
+        64,
+        16,
+        16
+      ],
+      "micro_uv": [
+        8,
+        208,
+        8,
+        8
+      ],
+      "inverted": false,
+      "shipped_layer": true
+    },
+    "nerospace:rocket": {
+      "slot": 66,
+      "carrier": "tri_down",
+      "glyph": "rocket",
+      "colour": "#009E73",
+      "colour_name": "M_GREEN",
+      "uv": [
+        32,
+        64,
+        16,
+        16
+      ],
+      "micro_uv": [
+        16,
+        208,
+        8,
+        8
+      ],
+      "inverted": false,
+      "shipped_layer": true
+    },
+    "nerospace:terraform_region": {
+      "slot": 67,
+      "carrier": "area",
+      "glyph": "leaf",
+      "colour": "#009E73",
+      "colour_name": "M_GREEN",
+      "uv": [
+        48,
+        64,
+        16,
+        16
+      ],
+      "micro_uv": [
+        24,
+        208,
+        8,
+        8
+      ],
+      "inverted": true,
+      "shipped_layer": true
+    },
+    "nerospace:meteor_site": {
+      "slot": 68,
+      "carrier": "tri_up",
+      "glyph": "meteor",
+      "colour": "#D55E00",
+      "colour_name": "M_VERMILLION",
+      "uv": [
+        64,
+        64,
+        16,
+        16
+      ],
+      "micro_uv": [
+        32,
+        208,
+        8,
+        8
+      ],
+      "inverted": false,
+      "shipped_layer": false
+    },
+    "nerotech:pollution": {
+      "slot": 72,
+      "carrier": "area",
+      "glyph": "cloud",
+      "colour": "#D55E00",
+      "colour_name": "M_VERMILLION",
+      "uv": [
+        128,
+        64,
+        16,
+        16
+      ],
+      "micro_uv": [
+        64,
+        208,
+        8,
+        8
+      ],
+      "inverted": true,
+      "shipped_layer": true
+    },
+    "neropower:reactor": {
+      "slot": 80,
+      "carrier": "square",
+      "glyph": "atom",
+      "colour": "#56B4E9",
+      "colour_name": "M_SKY",
+      "uv": [
+        0,
+        80,
+        16,
+        16
+      ],
+      "micro_uv": [
+        128,
+        208,
+        8,
+        8
+      ],
+      "inverted": false,
+      "shipped_layer": true
+    },
+    "neropower:beam_link": {
+      "slot": 81,
+      "carrier": "square",
+      "glyph": "bolt",
+      "colour": "#56B4E9",
+      "colour_name": "M_SKY",
+      "uv": [
+        16,
+        80,
+        16,
+        16
+      ],
+      "micro_uv": [
+        136,
+        208,
+        8,
+        8
+      ],
+      "inverted": false,
+      "shipped_layer": true
+    },
+    "neropower:scorch_zone": {
+      "slot": 82,
+      "carrier": "tri_up",
+      "glyph": "flame",
+      "colour": "#D55E00",
+      "colour_name": "M_VERMILLION",
+      "uv": [
+        32,
+        80,
+        16,
+        16
+      ],
+      "micro_uv": [
+        144,
+        208,
+        8,
+        8
+      ],
+      "inverted": false,
+      "shipped_layer": true
+    },
+    "nerologistics:drone_port": {
+      "slot": 88,
+      "carrier": "tri_down",
+      "glyph": "rotor",
+      "colour": "#009E73",
+      "colour_name": "M_GREEN",
+      "uv": [
+        128,
+        80,
+        16,
+        16
+      ],
+      "micro_uv": [
+        192,
+        208,
+        8,
+        8
+      ],
+      "inverted": false,
+      "shipped_layer": true
+    },
+    "nerologistics:train_station": {
+      "slot": 89,
+      "carrier": "tri_down",
+      "glyph": "rails",
+      "colour": "#009E73",
+      "colour_name": "M_GREEN",
+      "uv": [
+        144,
+        80,
+        16,
+        16
+      ],
+      "micro_uv": [
+        200,
+        208,
+        8,
+        8
+      ],
+      "inverted": false,
+      "shipped_layer": true
+    },
+    "nerologistics:drive_bay": {
+      "slot": 90,
+      "carrier": "square",
+      "glyph": "bars",
+      "colour": "#56B4E9",
+      "colour_name": "M_SKY",
+      "uv": [
+        160,
+        80,
+        16,
+        16
+      ],
+      "micro_uv": [
+        208,
+        208,
+        8,
+        8
+      ],
+      "inverted": false,
+      "shipped_layer": false
+    },
+    "nerologistics:rocket_flight": {
+      "slot": 91,
+      "carrier": "tri_down",
+      "glyph": "arrow_up",
+      "colour": "#009E73",
+      "colour_name": "M_GREEN",
+      "uv": [
+        176,
+        80,
+        16,
+        16
+      ],
+      "micro_uv": [
+        216,
+        208,
+        8,
+        8
+      ],
+      "inverted": false,
+      "shipped_layer": false
+    },
+    "nerocolonies:colony_border": {
+      "slot": 96,
+      "carrier": "area",
+      "glyph": "beacon",
+      "colour": "#56B4E9",
+      "colour_name": "M_SKY",
+      "uv": [
+        0,
+        96,
+        16,
+        16
+      ],
+      "micro_uv": [
+        0,
+        216,
+        8,
+        8
+      ],
+      "inverted": true,
+      "shipped_layer": true
+    },
+    "nerocolonies:colony_building": {
+      "slot": 97,
+      "carrier": "square",
+      "glyph": "home",
+      "colour": "#56B4E9",
+      "colour_name": "M_SKY",
+      "uv": [
+        16,
+        96,
+        16,
+        16
+      ],
+      "micro_uv": [
+        8,
+        216,
+        8,
+        8
+      ],
+      "inverted": false,
+      "shipped_layer": true
+    },
+    "nerocolonies:colony_storage": {
+      "slot": 98,
+      "carrier": "square",
+      "glyph": "crate",
+      "colour": "#56B4E9",
+      "colour_name": "M_SKY",
+      "uv": [
+        32,
+        96,
+        16,
+        16
+      ],
+      "micro_uv": [
+        16,
+        216,
+        8,
+        8
+      ],
+      "inverted": false,
+      "shipped_layer": true
+    },
+    "nerocolonies:outpost": {
+      "slot": 99,
+      "carrier": "square",
+      "glyph": "tent",
+      "colour": "#56B4E9",
+      "colour_name": "M_SKY",
+      "uv": [
+        48,
+        96,
+        16,
+        16
+      ],
+      "micro_uv": [
+        24,
+        216,
+        8,
+        8
+      ],
+      "inverted": false,
+      "shipped_layer": true
+    },
+    "nerofactions:outpost": {
+      "slot": 104,
+      "carrier": "diamond",
+      "glyph": "banner",
+      "colour": "#F0E442",
+      "colour_name": "M_YELLOW",
+      "uv": [
+        128,
+        96,
+        16,
+        16
+      ],
+      "micro_uv": [
+        64,
+        216,
+        8,
+        8
+      ],
+      "inverted": false,
+      "shipped_layer": true
+    },
+    "neroeconomy:my_shop": {
+      "slot": 112,
+      "carrier": "square",
+      "glyph": "coin",
+      "colour": "#E69F00",
+      "colour_name": "M_ORANGE",
+      "uv": [
+        0,
+        112,
+        16,
+        16
+      ],
+      "micro_uv": [
+        128,
+        216,
+        8,
+        8
+      ],
+      "inverted": false,
+      "shipped_layer": true
+    },
+    "nerosecurity:installation": {
+      "slot": 120,
+      "carrier": "square",
+      "glyph": "shield",
+      "colour": "#56B4E9",
+      "colour_name": "M_SKY",
+      "uv": [
+        128,
+        112,
+        16,
+        16
+      ],
+      "micro_uv": [
+        192,
+        216,
+        8,
+        8
+      ],
+      "inverted": false,
+      "shipped_layer": true
+    },
+    "nerosecurity:field": {
+      "slot": 121,
+      "carrier": "area",
+      "glyph": "shield",
+      "colour": "#56B4E9",
+      "colour_name": "M_SKY",
+      "uv": [
+        144,
+        112,
+        16,
+        16
+      ],
+      "micro_uv": [
+        200,
+        216,
+        8,
+        8
+      ],
+      "inverted": true,
+      "shipped_layer": true
+    },
+    "neroevents:event": {
+      "slot": 128,
+      "carrier": "tri_up",
+      "glyph": "burst",
+      "colour": "#D55E00",
+      "colour_name": "M_VERMILLION",
+      "uv": [
+        0,
+        128,
+        16,
+        16
+      ],
+      "micro_uv": [
+        0,
+        224,
+        8,
+        8
+      ],
+      "inverted": false,
+      "shipped_layer": true
+    },
+    "neroevents:storm": {
+      "slot": 129,
+      "carrier": "tri_up",
+      "glyph": "lightning",
+      "colour": "#D55E00",
+      "colour_name": "M_VERMILLION",
+      "uv": [
+        16,
+        128,
+        16,
+        16
+      ],
+      "micro_uv": [
+        8,
+        224,
+        8,
+        8
+      ],
+      "inverted": false,
+      "shipped_layer": true
+    },
+    "neroevents:war_zone": {
+      "slot": 130,
+      "carrier": "tri_up",
+      "glyph": "blades",
+      "colour": "#D55E00",
+      "colour_name": "M_VERMILLION",
+      "uv": [
+        32,
+        128,
+        16,
+        16
+      ],
+      "micro_uv": [
+        16,
+        224,
+        8,
+        8
+      ],
+      "inverted": false,
+      "shipped_layer": true
+    },
+    "neroruins:ruin": {
+      "slot": 136,
+      "carrier": "diamond",
+      "glyph": "pillar",
+      "colour": "#F0E442",
+      "colour_name": "M_YELLOW",
+      "uv": [
+        128,
+        128,
+        16,
+        16
+      ],
+      "micro_uv": [
+        64,
+        224,
+        8,
+        8
+      ],
+      "inverted": false,
+      "shipped_layer": true
+    },
+    "neroruins:vault_claimed": {
+      "slot": 137,
+      "carrier": "diamond",
+      "glyph": "lock_open",
+      "colour": "#F0E442",
+      "colour_name": "M_YELLOW",
+      "uv": [
+        144,
+        128,
+        16,
+        16
+      ],
+      "micro_uv": [
+        72,
+        224,
+        8,
+        8
+      ],
+      "inverted": false,
+      "shipped_layer": true
+    },
+    "neroruins:expedition_target": {
+      "slot": 138,
+      "carrier": "diamond",
+      "glyph": "crosshair",
+      "colour": "#F0E442",
+      "colour_name": "M_YELLOW",
+      "uv": [
+        160,
+        128,
+        16,
+        16
+      ],
+      "micro_uv": [
+        80,
+        224,
+        8,
+        8
+      ],
+      "inverted": false,
+      "shipped_layer": true
+    },
+    "nerocreatures:my_creature": {
+      "slot": 144,
+      "carrier": "ring",
+      "glyph": "paw",
+      "colour": "#CC79A7",
+      "colour_name": "M_PURPLE",
+      "uv": [
+        0,
+        144,
+        16,
+        16
+      ],
+      "micro_uv": [
+        128,
+        224,
+        8,
+        8
+      ],
+      "inverted": true,
+      "shipped_layer": true
+    },
+    "nerocreatures:my_altar": {
+      "slot": 145,
+      "carrier": "diamond",
+      "glyph": "bowl",
+      "colour": "#F0E442",
+      "colour_name": "M_YELLOW",
+      "uv": [
+        16,
+        144,
+        16,
+        16
+      ],
+      "micro_uv": [
+        136,
+        224,
+        8,
+        8
+      ],
+      "inverted": false,
+      "shipped_layer": false
+    },
+    "nerocompanion:companion": {
+      "slot": 152,
+      "carrier": "ring",
+      "glyph": "visor",
+      "colour": "#CC79A7",
+      "colour_name": "M_PURPLE",
+      "uv": [
+        128,
+        144,
+        16,
+        16
+      ],
+      "micro_uv": [
+        192,
+        224,
+        8,
+        8
+      ],
+      "inverted": true,
+      "shipped_layer": true
+    },
+    "nerocompanion:companion_lost": {
+      "slot": 153,
+      "carrier": "ring_dashed",
+      "glyph": "question_s",
+      "colour": "#CC79A7",
+      "colour_name": "M_PURPLE",
+      "uv": [
+        144,
+        144,
+        16,
+        16
+      ],
+      "micro_uv": [
+        200,
+        224,
+        8,
+        8
+      ],
+      "inverted": true,
+      "shipped_layer": true
+    },
+    "nerocompanion:home_bay": {
+      "slot": 154,
+      "carrier": "square",
+      "glyph": "arch",
+      "colour": "#56B4E9",
+      "colour_name": "M_SKY",
+      "uv": [
+        160,
+        144,
+        16,
+        16
+      ],
+      "micro_uv": [
+        208,
+        224,
+        8,
+        8
+      ],
+      "inverted": false,
+      "shipped_layer": true
+    },
+    "neroagriculture:farm": {
+      "slot": 160,
+      "carrier": "square",
+      "glyph": "sprout",
+      "colour": "#56B4E9",
+      "colour_name": "M_SKY",
+      "uv": [
+        0,
+        160,
+        16,
+        16
+      ],
+      "micro_uv": [
+        0,
+        232,
+        8,
+        8
+      ],
+      "inverted": false,
+      "shipped_layer": false
+    }
+  }
+}

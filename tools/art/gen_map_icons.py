@@ -422,7 +422,7 @@ def main():
     png = os.path.join(TEX, "map_icons.png")
     mpath = os.path.join(OUT, "map_icons.json")
     if "--check" in sys.argv:
-        ok = os.path.exists(png) and list(Image.open(png).convert("RGBA").getdata()) == list(atlas.getdata())
+        ok = os.path.exists(png) and Image.open(png).convert("RGBA").tobytes() == atlas.tobytes()
         ok2 = os.path.exists(mpath) and open(mpath, encoding="utf-8").read() == mtxt
         print("atlas", "matches" if ok else "DIFFERS", "| manifest", "matches" if ok2 else "DIFFERS",
               "|", len(ICONS), "icons")

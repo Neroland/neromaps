@@ -20,6 +20,9 @@ public final class Tile {
     /** Maximum palette sizes the codec accepts. */
     public static final int MAX_BLOCKS = 4096;
     public static final int MAX_BIOMES = 256;
+    /** Heights are clamped to this range so a zigzag delta always fits the codec's 16 bits. */
+    public static final int MIN_HEIGHT = -8192;
+    public static final int MAX_HEIGHT = 8191;
 
     public static final int F_PRESENT = 1;
     public static final int F_WATER = 1 << 1;
@@ -50,6 +53,8 @@ public final class Tile {
     public final int[] chunkRevision = new int[CHUNKS * CHUNKS];
     /** True when something changed since the last save. Main thread only. */
     public boolean unsaved;
+    /** LRU stamp, main thread only. */
+    public long lastUse;
     /** Render-side colour cache, owned by the colour code. Never serialised. */
     public Object colours;
 
@@ -124,7 +129,7 @@ public final class Tile {
     public void set(int x, int z, int flagBits, int h, int blockIdx, int biomeIdx, int fluidDepth) {
         int i = index(x, z);
         flags[i] = (byte) flagBits;
-        height[i] = (short) h;
+        height[i] = (short) Math.max(MIN_HEIGHT, Math.min(MAX_HEIGHT, h));
         block[i] = (char) blockIdx;
         biome[i] = (byte) biomeIdx;
         depth[i] = (byte) Math.min(255, Math.max(0, fluidDepth));
