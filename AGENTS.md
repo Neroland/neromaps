@@ -121,7 +121,7 @@ Neroland Core is resolved from `mavenLocal()` or GitHub Packages; see [USING-COR
   `NeroMapsTelemetry` (the NeroMaps EU project). Keep the placeholder guard so a fork that blanks the DSN
   stays silent.
 - **`publish.yml` rules.** Direct-curl CurseForge upload with `max-parallel: 1` and the 4-attempt 5xx retry
-  loop. The CurseForge project id is the `CURSEFORGE_PROJECT_ID` secret (not created yet).
+  loop. The CurseForge project id is the `CURSEFORGE_PROJECT_ID` secret (project 1809964).
 - **Own creative tab** (`registry/ModCreativeTab`, id `neromaps`, title `itemGroup.neromaps`). Never add items to
   Core's tab.
 - **Never commit, tag or push.** Leave version control to the owner.

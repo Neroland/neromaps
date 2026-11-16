@@ -310,8 +310,8 @@ jobs:
       - name: Upload to CurseForge (with environment)
         env:
           CF_API_TOKEN: ${{ secrets.CURSE_FORGE_API_TOKEN }}
-          # PLACEHOLDER - NeroMaps has no CurseForge project yet. Create the project, then add its numeric id as
-          # the repository secret CURSEFORGE_PROJECT_ID. Until then the guard below stops the upload.
+          # NeroMaps CurseForge project 1809964 (https://www.curseforge.com/minecraft/mc-mods/neromaps), read from the
+          # repository secret CURSEFORGE_PROJECT_ID like every Nero mod. The guard below stops the upload if it is unset.
           CF_PROJECT_ID: ${{ secrets.CURSEFORGE_PROJECT_ID }}
           DISPLAY_NAME: NeroMaps ${{ needs.detect.outputs.version }} - ${{ matrix.label }} ${{ matrix.mc }}
           RELEASE_TYPE: ${{ needs.build.outputs.version_type }}
@@ -320,7 +320,7 @@ jobs:
           JAR: dist/neromaps-${{ matrix.loader }}-${{ matrix.mc }}-${{ needs.detect.outputs.version }}${{ matrix.suffix }}.jar
         run: |
           if [ -z "$CF_PROJECT_ID" ]; then
-            echo "::error::CURSEFORGE_PROJECT_ID is not set (placeholder): create the NeroMaps CurseForge project first."
+            echo "::error::CURSEFORGE_PROJECT_ID is not set: add the repository secret (NeroMaps is CurseForge project 1809964)."
             exit 1
           fi
           if [ ! -f "$JAR" ]; then
