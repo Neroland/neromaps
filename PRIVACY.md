@@ -101,11 +101,13 @@ when they join.
   backup so the erased data cannot come back from it.
 - **Retention.** Inactive players are erased by Core's scheduled sweep when the server sets `dataRetentionDays`.
   Pending share requests expire after 7 days on their own.
-- **Export.** `/neromaps export` sends everything NeroMaps holds about you to your own game, which saves it as JSON
-  under `neromaps/exports/` in your game folder. Nothing is written on the server. It holds your whole record, the
-  shares other players gave you (what, and the sharer's UUID), and the offers you made that are still waiting (to whom,
-  what, which day). It holds nothing from anyone else's record: not their waypoints, map, position or settings.
-  Once a minute.
+- **Export.** `/neromaps export` sends everything NeroMaps holds about you to your own game. Your game writes nothing
+  until you click **Save** on the chat line that announces it, then saves it as JSON under `neromaps/exports/` in your
+  game folder (the ten newest exports are kept there; older ones are deleted). Nothing is written on the server. It
+  holds your whole record, the shares other players gave you (what, and the sharer's UUID), and the offers you made that
+  are still waiting (to whom, what, which day). It holds nothing from anyone else's record: not their waypoints, map,
+  position or settings. Once a minute. The file stays on your machine until you delete it, and it contains the UUIDs
+  of the players you share with, so treat it like any other personal file before passing it on.
 
 ## The NeroLink companion app
 

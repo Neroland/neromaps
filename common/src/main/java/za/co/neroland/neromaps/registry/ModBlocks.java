@@ -17,7 +17,7 @@ import za.co.neroland.neromaps.block.SignpostBlock;
 import za.co.neroland.neromaps.block.TrailMarkerBlock;
 import za.co.neroland.neromaps.block.WallMapBlock;
 
-/** NeroMaps' five blocks (decision 013 section 8: the whole block budget). */
+/** NeroMaps' five blocks (the whole block budget). */
 public final class ModBlocks {
 
     public static final RegistrationProvider<Block> BLOCKS =

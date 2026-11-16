@@ -13,8 +13,8 @@ import za.co.neroland.neromaps.perf.PerfCounters;
 
 /**
  * Client-side commands: {@code /neromaps-client perf} toggles the perf overlay, {@code /neromaps-client perf reset} clears the
- * counters and {@code /neromaps-client perf dump} prints them to chat (local only). Works on any server: these never
- * reach it.
+ * counters, {@code /neromaps-client perf dump} prints them to chat (local only) and {@code /neromaps-client export save}
+ * saves the export the server last sent (the Save button runs it). Works on any server: these never reach it.
  */
 public final class ClientCommands {
 
@@ -30,6 +30,11 @@ public final class ClientCommands {
 
     public static <S> void register(CommandDispatcher<S> dispatcher) {
         dispatcher.register(LiteralArgumentBuilder.<S>literal(ROOT)
+                .then(LiteralArgumentBuilder.<S>literal("export")
+                        .then(LiteralArgumentBuilder.<S>literal("save").executes(ctx -> {
+                            ClientState.saveExport();
+                            return Command.SINGLE_SUCCESS;
+                        })))
                 .then(LiteralArgumentBuilder.<S>literal("perf")
                         .executes(ctx -> {
                             PerfOverlay.enabled = !PerfOverlay.enabled;

@@ -4,7 +4,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 
 /**
- * Global NeroMaps performance counters behind {@code /neromaps perf} (decision 004). Numbers only: no player,
+ * Global NeroMaps performance counters behind {@code /neromaps perf}. Numbers only: no player,
  * position or name ever appears here. Render-thread fields are plain; worker-written ones are atomic.
  */
 public final class PerfCounters {
@@ -21,7 +21,7 @@ public final class PerfCounters {
     /** Upload batches in the last frame (must never exceed 1 for the minimap). */
     public static int batchesLastFrame;
     public static long frames;
-    /** Bytes held by NeroMaps textures (GPU plus any CPU-side copy, decision 005). */
+    /** Bytes held by NeroMaps textures (GPU plus any CPU-side copy). */
     public static long textureBytes;
     public static int tilesInMemory;
     public static int dirtyChunks;

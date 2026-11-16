@@ -19,7 +19,7 @@ link module are in. The app module lives in the NeroLink app.
 | `common/src/main/java/za/co/neroland/neromaps/` | Loader-agnostic code (vanilla + Core APIs only, no loader imports) |
 | `common/src/main/resources/` | Shared assets, lang, mixin config, `pack.mcmeta`, mod-list logo |
 | `fabric/`, `forge/`, `neoforge/` | One branch per loader: entry points, `PlatformInfo` implementation, manifest templates |
-| `tools/` | `ecj.prefs` (analyzer settings), `gen_logo.py` (family logo), `build_colour_table.py` (block/biome colour table, decision 003), the Gradle MCP server |
+| `tools/` | `ecj.prefs` (analyzer settings), `gen_logo.py` (family logo), `build_colour_table.py` (block/biome colour table), the Gradle MCP server |
 | `art/` | Logo outputs |
 | `wiki/` | Player-facing wiki pages, published to the public GitHub wiki |
 

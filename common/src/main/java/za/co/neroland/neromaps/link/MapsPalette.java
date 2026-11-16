@@ -19,7 +19,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.MapColor;
 
 /**
- * The colour table the app draws server tiles with (the link {@code palette} section, decision 003), built once per
+ * The colour table the app draws server tiles with (the link {@code palette} section), built once per
  * server start off the server thread and kept as a finished JSON document with its etag. Sources, later wins:
  * every block's vanilla map colour, then {@code data/<ns>/map_colours/*.json} in id order. Holds no player data.
  */

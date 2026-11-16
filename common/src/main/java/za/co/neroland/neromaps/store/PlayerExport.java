@@ -11,7 +11,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
 /**
- * {@code /neromaps export} (decision 008): everything NeroMaps holds about one player and nothing about anyone else.
+ * {@code /neromaps export}: everything NeroMaps holds about one player and nothing about anyone else.
  * That is the player's own record, plus the shares other players gave <em>them</em> (the grant lives on the sharer's
  * record, but it is a consent this player accepted, so it is theirs to see: scope and the sharer's id, never the
  * sharer's waypoints, map or anything else), and the share offers this player made that still wait on a recipient's

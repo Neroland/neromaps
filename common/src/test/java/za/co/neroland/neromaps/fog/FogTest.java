@@ -71,7 +71,7 @@ class FogTest {
     }
 
     @Test
-    void maskedTilesCarryNothingHiddenAndEtagsDiffer() {
+    void maskedTilesCarryNothingHiddenAndEtagsDiffer() throws Exception {
         MapPlayerState s = new MapPlayerState();
         for (int cz = 0; cz < 8; cz++) {
             for (int cx = 0; cx < 16; cx++) {
@@ -94,9 +94,16 @@ class FogTest {
                 }
             }
         }
-        assertNotEquals(1234L, m.etag(1234L));
+        // the masked etag is the hash of the masked bytes: a change in a hidden column leaves it as it was
+        long etag = za.co.neroland.neromaps.tile.TileCodec.contentHash(m.encodeMasked(t));
+        Tile hiddenChange = t.copy();
+        hiddenChange.set(10, 200, Tile.F_PRESENT, 300, hiddenChange.internBlock("minecraft:gold_block"), 0, 0);
+        assertEquals(etag, za.co.neroland.neromaps.tile.TileCodec.contentHash(m.encodeMasked(hiddenChange)));
+        Tile visibleChange = t.copy();
+        visibleChange.set(10, 20, Tile.F_PRESENT, 300, visibleChange.internBlock("minecraft:gold_block"), 0, 0);
+        assertNotEquals(etag, za.co.neroland.neromaps.tile.TileCodec.contentHash(m.encodeMasked(visibleChange)));
         assertTrue(TileMask.of(v, 0, 5, 5).none(), "a tile outside the fog is hidden entirely");
-        assertEquals(1234L, TileMask.of(Visibility.of(s, A, OW, true), 0, 0, 0).etag(1234L));
+        assertTrue(TileMask.of(Visibility.of(s, A, OW, true), 0, 0, 0).all());
         // LOD 2: one chunk is one 4 x 4 pixel block
         TileMask m2 = TileMask.of(v, 2, 0, 0);
         Tile lod2 = m2.apply(Fixtures.plains());

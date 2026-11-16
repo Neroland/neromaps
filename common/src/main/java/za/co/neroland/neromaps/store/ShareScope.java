@@ -4,7 +4,7 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 
 /**
- * What one share covers (decision 009): a single waypoint ({@code arg} = its id), the explored map of one dimension or
+ * What one share covers: a single waypoint ({@code arg} = its id), the explored map of one dimension or
  * of all ({@code arg} = dimension id or {@link #ALL}), or the live position ({@code arg} empty).
  */
 public record ShareScope(Kind kind, String arg) {

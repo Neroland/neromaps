@@ -32,7 +32,7 @@ def main():
       "the side is carried by plate shape and glyph (diamond + I, square + II, round + O), never by colour alone.")
     w("- Radar blips and `trail_marker` are micro-first; their 16 px cell is the legend version.")
     w("- Machine-readable copy: `tools/art/out/map_icons.json` (ship it as `assets/neromaps/map/map_icons.json`).")
-    w("- `layer` = no means the Stage 0 review cut that layer; the icon is drawn so a later release needs no atlas change.\n")
+    w("- `layer` = no means 0.1.0 does not ship that layer; the icon is drawn so a later release needs no atlas change.\n")
     w("| Icon id | Slot | Carrier | Glyph | Default colour | 16 px u,v,w,h | 8 px u,v,w,h | Layer |")
     w("|---|---|---|---|---|---|---|---|")
     for iid, e in man["icons"].items():

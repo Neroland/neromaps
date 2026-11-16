@@ -11,7 +11,7 @@ import java.util.Random;
 
 import org.junit.jupiter.api.Test;
 
-/** Round-trip, fuzz and size tests for the one tile codec (decision 002). */
+/** Round-trip, fuzz and size tests for the one tile codec. */
 class TileCodecTest {
 
     private static void roundTrip(Tile t) throws TileCorruptException {

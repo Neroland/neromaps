@@ -13,7 +13,7 @@ import it.unimi.dsi.fastutil.longs.Long2ObjectMap;
 import it.unimi.dsi.fastutil.longs.Long2ObjectOpenHashMap;
 
 /**
- * One player's fog of war (decision 007): per dimension, a sparse map of 32 x 32-chunk regions, each a 1 024-bit set
+ * One player's fog of war: per dimension, a sparse map of 32 x 32-chunk regions, each a 1 024-bit set
  * ({@code long[16]}) of explored chunks. No timestamps, no order, no positions finer than a chunk. A cap on regions
  * per dimension bounds memory and file size; past it new regions are simply not recorded.
  */

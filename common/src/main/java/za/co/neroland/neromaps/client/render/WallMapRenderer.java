@@ -18,7 +18,7 @@ import za.co.neroland.neromaps.block.WallMapBlockEntity;
 
 /**
  * Draws one wall-map panel's share of its array's printed area over the panel glass, inset 2 px on framed sides and
- * flush on joined sides (decision 013 section 8). The terrain comes only from fog-checked server tiles.
+ * flush on joined sides. The terrain comes only from fog-checked server tiles.
  *
  * <p><b>Culling — never blanket true:</b> only within {@value #RANGE} blocks of the panel and only when the camera is
  * in front of it; NeoForge also frustum-tests {@link #getRenderBoundingBox}. CLIENT-ONLY.

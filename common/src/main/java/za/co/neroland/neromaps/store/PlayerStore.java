@@ -12,7 +12,7 @@ import za.co.neroland.neromaps.data.NeroMapsSavedData;
 
 /**
  * Server access to {@link MapPlayerState}: always through Core's {@code SavedDataRecovery} on the overworld, and
- * registered with NeroMaps' composite eraser (decision 008) from {@link #init()}, before any server starts.
+ * registered with NeroMaps' composite eraser from {@link #init()}, before any server starts.
  */
 public final class PlayerStore {
 

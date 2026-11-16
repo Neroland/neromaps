@@ -15,7 +15,7 @@ import org.junit.jupiter.api.io.TempDir;
 import za.co.neroland.neromaps.colour.MapPalette;
 import za.co.neroland.neromaps.colour.MapStyle;
 
-/** Stage 7: built-in presets, cycling, user presets, and JSON export / import with validation. */
+/** Built-in presets, cycling, user presets, and JSON export / import with validation. */
 class MapPresetsTest {
 
     @Test

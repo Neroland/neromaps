@@ -4,7 +4,7 @@ import java.util.List;
 
 /**
  * Every registry path NeroMaps owns, in one place, so the asset checker, the identity scan and the quest-pack test
- * can enumerate them without bootstrapping the game. Block id budget: 5 (decision 013 section 8). The Survey Kit is
+ * can enumerate them without bootstrapping the game. Block id budget: 5. The Survey Kit is
  * cut (first in the build prompt's cut order); its art stays unregistered.
  */
 public final class MapIds {

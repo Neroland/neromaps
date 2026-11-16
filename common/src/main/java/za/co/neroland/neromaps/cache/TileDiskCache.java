@@ -23,7 +23,7 @@ import org.jetbrains.annotations.Nullable;
 import za.co.neroland.neromaps.perf.PerfCounters;
 
 /**
- * The client's terrain cache on disk (decision 005):
+ * The client's terrain cache on disk:
  * {@code <root>/<serverKey>/<worldId>/<dimension ns>/<dimension path>/<lod>/<tx>.<tz>.nmt}, in the tile codec
  * format. It holds only terrain this client captured itself: no positions, no names, nothing a player typed.
  * Size-capped with least-recently-used eviction (file modification time is the access stamp, so the order
@@ -221,10 +221,12 @@ public final class TileDiskCache {
         if (total.get() <= cap) {
             return;
         }
+        // down to 90 % of the cap, so a full cache sorts its index once per many writes, not on every write
+        long target = cap - cap / 10;
         ArrayList<Map.Entry<Path, long[]>> all = new ArrayList<>(index.entrySet());
         all.sort((a, b) -> Long.compare(a.getValue()[1], b.getValue()[1]));
         for (Map.Entry<Path, long[]> e : all) {
-            if (total.get() <= cap) {
+            if (total.get() <= target) {
                 break;
             }
             delete(e.getKey());

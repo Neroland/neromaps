@@ -3,7 +3,7 @@ package za.co.neroland.neromaps.store;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 
-/** Where the player last died: a death point, not a trail (at most three, newest first; decision 008). */
+/** Where the player last died: a death point, not a trail (at most three, newest first). */
 public record DeathPoint(String dimension, int x, int y, int z) {
 
     public static final int KEEP = 3;

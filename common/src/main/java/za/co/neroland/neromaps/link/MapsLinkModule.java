@@ -16,7 +16,7 @@ import za.co.neroland.neromaps.platform.Services;
 import za.co.neroland.neromaps.server.tiles.LinkTiles;
 
 /**
- * NeroMaps' plug into Neroland Core's link API: module {@code neromaps}, schema 1 (decision 011; the contract in the
+ * NeroMaps' plug into Neroland Core's link API: module {@code neromaps}, schema 1 (the contract in the
  * companion app's maps module). Registered last from common init and failure-tolerant: a Core without the link API, or
  * any error here, leaves the rest of NeroMaps untouched. The {@code tiles} route is a bulk route on the bridge (its
  * default {@code bulkSnapshotRoutes} lists {@code neromaps/tiles}), so tile traffic draws from its own per-device

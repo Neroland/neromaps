@@ -22,7 +22,7 @@ import za.co.neroland.neromaps.tile.TileKey;
 /**
  * Server tiles for wall maps and map tables (client memory only, never the disk cache). Renderers say which tiles
  * they would draw; once a second the wanted, stale tiles are asked for through the ordinary {@code tile_request},
- * which the server answers through the fog-of-war read path (decision 007): a tile the viewer may not see is never
+ * which the server answers through the fog-of-war read path: a tile the viewer may not see is never
  * answered, a partly visible one arrives masked. So a wall map shows each viewer only their own explored terrain.
  * Bounded: {@value #MAX_TILES} tiles, {@value #ASK_EVERY_MS} ms between asks for one tile, one request per tick.
  * Render thread only.

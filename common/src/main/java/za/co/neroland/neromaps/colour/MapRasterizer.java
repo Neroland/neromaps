@@ -5,7 +5,7 @@ import org.jetbrains.annotations.Nullable;
 import za.co.neroland.neromaps.tile.Tile;
 
 /**
- * Turns tile columns into ARGB pixels (decision 013 section 2). One chunk (16 x 16 columns) per call, so the
+ * Turns tile columns into ARGB pixels. One chunk (16 x 16 columns) per call, so the
  * render thread can drain the clipmap and world-map textures a chunk at a time. Allocates nothing after the
  * tile's colour cache is warm.
  */
@@ -93,7 +93,7 @@ public final class MapRasterizer {
         Tile north = z0 == 0 ? neighbours.get(t.lod, tx, tz - 1) : t;
         Tile west = x0 == 0 ? neighbours.get(t.lod, tx - 1, tz) : t;
         int step = 1 << t.lod;
-        // fog edge (decision 013 section 3): which neighbouring chunks are unsurveyed. Fog is chunk-aligned, so one
+        // fog edge: which neighbouring chunks are unsurveyed. Fog is chunk-aligned, so one
         // probe per side tells the whole edge; the explored columns next to it are dithered toward the void.
         boolean fogW = absent(t, neighbours, tx, tz, x0 - 1, z0 + 8);
         boolean fogE = absent(t, neighbours, tx, tz, x0 + 16, z0 + 8);
@@ -156,7 +156,7 @@ public final class MapRasterizer {
     }
 
     /**
-     * The explored side of a fog boundary, {@code d} columns from it (decision 013 section 3 and
+     * The explored side of a fog boundary, {@code d} columns from it (see
      * {@code map_fog_edge.png} read from the fog outward): 50 % ordered dither to the void at 1, 25 % at 2, a
      * {@code VOID_EDGE} rim blend at 3. High contrast draws a one-pixel white edge instead. Deterministic by world
      * position, so it never shimmers. Fog itself stays opaque: nothing hidden is ever drawn dimmed.

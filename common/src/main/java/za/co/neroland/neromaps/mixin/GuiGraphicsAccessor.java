@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 
 // 1.21.6 - 1.21.11 only (listed in resources-1.21.6/neromaps-gui.mixins.json, a non-required config): the frame's
 // GUI render state is private there, and the minimap needs it to submit its two reusable render states instead of
-// vanilla blits that allocate per quad (decision 005). If this fails to apply, MinimapHud falls back to blits.
+// vanilla blits that allocate per quad. If this fails to apply, MinimapHud falls back to blits.
 @Mixin(GuiGraphics.class)
 public interface GuiGraphicsAccessor {
 

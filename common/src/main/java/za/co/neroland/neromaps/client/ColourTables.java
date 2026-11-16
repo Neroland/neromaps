@@ -137,7 +137,7 @@ public final class ColourTables implements ResourceManagerReloadListener {
         }
     }
 
-    /** The vanilla map colour of a block id (the fallback of decision 003), or -1. */
+    /** The vanilla map colour of a block id (the colour table's fallback), or -1. */
     static int vanillaMapColour(String id) {
         Identifier rl = Identifier.tryParse(id);
         if (rl == null) {

@@ -16,8 +16,8 @@ import za.co.neroland.neromaps.atlas.AtlasUpgradeItem;
 import za.co.neroland.neromaps.item.WaypointCompassItem;
 
 /**
- * NeroMaps items, registered through Core's registration seam: the Waypoint Compass (Stage 3), the five block items,
- * the atlas (blank and filled) and its two upgrades (Stage 5). The Survey Kit is cut for 0.1.0.
+ * NeroMaps items, registered through Core's registration seam: the Waypoint Compass, the five block items,
+ * the atlas (blank and filled) and its two upgrades. The Survey Kit is cut for 0.1.0.
  */
 public final class ModItems {
 

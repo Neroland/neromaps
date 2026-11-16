@@ -1,7 +1,7 @@
 package za.co.neroland.neromaps.engine;
 
 /**
- * The minimap's toroidal window (decision 005): an N x N texture where texel = world block mod N, so the minimap
+ * The minimap's toroidal window: an N x N texture where texel = world block mod N, so the minimap
  * is always one surface batch. The window is cut into 16 x 16 chunk slots. Each slot remembers which world chunk
  * and which revision it holds; {@link #retarget} marks slots whose wanted chunk or revision changed, and
  * {@link #pollNearest} hands them out nearest-first. Allocation-free after construction.

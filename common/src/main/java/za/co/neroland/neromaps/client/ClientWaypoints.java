@@ -22,7 +22,7 @@ public final class ClientWaypoints {
 
     /** How far spyglass marking reaches, in blocks (only loaded terrain can be hit). */
     public static final double SPYGLASS_RANGE = 512.0;
-    /** The waypoint colour picker: the seven colour-blind-safe marker colours of decision 013, in picker order. */
+    /** The waypoint colour picker: the seven colour-blind-safe marker colours, in picker order. */
     public static final int[] PALETTE = {0xE69F00, 0x56B4E9, 0x009E73, 0xF0E442, 0xD55E00, 0xCC79A7, 0xF2F5F8};
     public static final String[] PALETTE_NAMES = {"orange", "sky", "green", "yellow", "vermillion", "purple", "white"};
     public static final String[] GLYPHS = {"dot", "home", "bed", "pickaxe", "sword", "chest", "portal", "anchor",

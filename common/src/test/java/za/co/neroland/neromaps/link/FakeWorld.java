@@ -71,8 +71,41 @@ final class FakeWorld implements MapsLinkWorld {
             throw new IllegalStateException(e);
         }
         long key = TileKey.tile(lod, tx, tz);
-        stored.put(key, new ServerTileStore.Encoded(b, etag));
+        ServerTileStore.Encoded before = stored.put(key, new ServerTileStore.Encoded(b, etag));
+        if (lod == 0) {
+            // what the capture store reports: each LOD-0 chunk whose pixels differ from what was stored
+            Tile old = null;
+            try {
+                old = before == null ? null : TileCodec.decode(before.bytes());
+            } catch (Exception e) {
+                old = null;
+            }
+            for (int cz = 0; cz < 16; cz++) {
+                for (int cx = 0; cx < 16; cx++) {
+                    if (old == null || !sameChunk(old, t, cx, cz)) {
+                        listener.chunkChanged(tx * 16 + cx, tz * 16 + cz);
+                    }
+                }
+            }
+        }
         listener.written(key, b, etag);
+    }
+
+    private static boolean sameChunk(Tile a, Tile b, int cx, int cz) {
+        for (int z = cz * 16; z < cz * 16 + 16; z++) {
+            for (int x = cx * 16; x < cx * 16 + 16; x++) {
+                int i = Tile.index(x, z);
+                if (a.present(i) != b.present(i)) {
+                    return false;
+                }
+                if (a.present(i) && (a.flags[i] != b.flags[i] || a.height[i] != b.height[i] || a.depth[i] != b.depth[i]
+                        || !a.blockId(a.block[i]).equals(b.blockId(b.block[i]))
+                        || !a.biomeId(a.biome[i] & 0xFF).equals(b.biomeId(b.biome[i] & 0xFF)))) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
     /** Runs every queued worker job (and the ones they queue). */

@@ -20,7 +20,7 @@ import org.junit.jupiter.api.Test;
 import za.co.neroland.neromaps.registry.MapIds;
 
 /**
- * Stage 5: breaking any NeroMaps block returns everything inside it. Every block's loot table drops the block itself
+ * Breaking any NeroMaps block returns everything inside it. Every block's loot table drops the block itself
  * (the signpost one item per plate, matching its three plate states); no block entity holds an item (none has an
  * item field or container), so there is nothing else inside to lose; the Cartography Desk holds nothing at all — its
  * slots belong to the open menu, which hands them back when it closes.

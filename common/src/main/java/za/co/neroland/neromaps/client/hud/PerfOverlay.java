@@ -8,7 +8,7 @@ import za.co.neroland.neromaps.perf.AllocationMeter;
 import za.co.neroland.neromaps.perf.PerfCounters;
 
 /**
- * The {@code /neromaps perf} overlay (decision 004): minimap frame cost (CPU), bytes allocated inside the HUD body,
+ * The {@code /neromaps perf} overlay: minimap frame cost (CPU), bytes allocated inside the HUD body,
  * uploads per frame, scan queue depth, texture memory and cache size. Global numbers only; never a player, name
  * or position. Text is rebuilt every 10 frames and is drawn after the HUD body's allocation measurement ends.
  */

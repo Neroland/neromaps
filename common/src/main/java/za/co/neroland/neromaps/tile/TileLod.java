@@ -3,7 +3,7 @@ package za.co.neroland.neromaps.tile;
 import org.jetbrains.annotations.Nullable;
 
 /**
- * Level-of-detail downsampling (decision 002): four children at level L become one parent at L + 1, each 2 x 2
+ * Level-of-detail downsampling: four children at level L become one parent at L + 1, each 2 x 2
  * block of child columns becoming one column. The column with the greatest height wins, except when at least two
  * of the four are fluid: then the shallowest fluid column wins. All four absent stays absent. Off-thread.
  */

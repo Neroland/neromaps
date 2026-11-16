@@ -7,7 +7,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
 /**
- * The block and biome colour table (decision 003). Built from the JSON files the {@code tools/} script writes
+ * The block and biome colour table. Built from the JSON files the {@code tools/} script writes
  * ({@code map_colours/<namespace>.json}); later files win per key, so a resource pack overrides single blocks.
  * A block missing from the table falls back to its vanilla map colour through {@link Fallback}, computed once and
  * memoised. Main (render) thread only.

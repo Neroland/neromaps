@@ -13,7 +13,7 @@ import za.co.neroland.neromaps.server.tiles.CaptureService;
 
 /**
  * Server. Every block change a server level applies (players, pistons, explosions, fluids) passes through
- * {@code ServerLevel.sendBlockUpdated} on every line from 1.21.1 to 26.3 (decision 006). NeroMaps only adds a dirty
+ * {@code ServerLevel.sendBlockUpdated} on every line from 1.21.1 to 26.3. NeroMaps only adds a dirty
  * mark for the chunk here; capture happens later, within its budget, and only when tiles are needed. Optional
  * ({@code require = 0}): without it, terrain is still captured when first explored.
  */

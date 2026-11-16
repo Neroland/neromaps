@@ -45,10 +45,10 @@ import za.co.neroland.neromaps.tile.TileKey;
 /**
  * The minimap HUD layer each loader registers. Per frame: at most one upload batch (nearest dirty chunk patches,
  * up to the upload budget), the preallocated CPU path in {@link MinimapFrame}, then one surface batch and one
- * overlay batch. NeroMaps code allocates nothing here in steady state (decision 004 B1); the readout text and the
+ * overlay batch. NeroMaps code allocates nothing here in steady state; the readout text and the
  * perf overlay are drawn by vanilla's text renderer.
  *
- * <p>Draw path per line (decision 005): 26.x and 1.21.6 - 1.21.11 submit two reusable {@link MinimapGuiState}s
+ * <p>Draw path per line: 26.x and 1.21.6 - 1.21.11 submit two reusable {@link MinimapGuiState}s
  * (the latter through the accessor mixin, falling back to a square blit if the mixin is missing); 1.21.2 - 1.21.5
  * stream into {@code drawSpecial}'s buffer source; 1.21.1 draws immediately through the {@code Tesselator}.
  */
@@ -455,7 +455,7 @@ public final class MinimapHud {
         if (!fallbackLogged) {
             fallbackLogged = true;
             NeroMapsCommon.LOGGER.warn("[NeroMaps] GUI accessor mixin unavailable: the minimap falls back to a square,"
-                    + " north-locked blit on this Minecraft line (allocates per quad; decision 004 B1 exception)");
+                    + " north-locked blit on this Minecraft line (allocates per quad; an allowed exception to the zero-allocation budget)");
         }
         float[] uv = FRAME.surface.uv;
         g.blit(tex.id, LAYOUT.left, LAYOUT.top, LAYOUT.right(), LAYOUT.bottom(), uv[0], uv[4], uv[1], uv[5]);

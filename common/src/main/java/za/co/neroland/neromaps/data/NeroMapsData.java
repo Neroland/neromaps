@@ -37,7 +37,7 @@ import za.co.neroland.neromaps.NeroMapsCommon;
  *       bare {@code computeIfAbsent}.</li>
  * </ul>
  *
- * <p>0.0.1 has <b>no</b> player-keyed store, so the composite walks an empty list. Erasers must tolerate a
+ * <p>The composite walks one player-keyed store, {@code neromaps:players}. Erasers must tolerate a
  * player they have never heard of (Core's retention sweep and its conformance harness both do that).
  *
  * <p>{@link StoreEraser#backupNow} is called after every erase, with or without a server; a store with nothing

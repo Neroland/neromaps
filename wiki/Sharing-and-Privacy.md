@@ -65,8 +65,9 @@ the `#` (for example `/neromaps unshare 1a2b3c4d`).
 
 ## Export
 
-`/neromaps export` sends everything NeroMaps holds about you to your own game, which saves it as JSON under
-`neromaps/exports/` in your game folder. Nothing is written on the server. It holds your record (waypoints, death
+`/neromaps export` sends everything NeroMaps holds about you to your own game. Click **Save** on the chat line that
+announces it and your game saves it as JSON under `neromaps/exports/` in your game folder (the ten newest are kept).
+Nothing is written on the server, and your game writes nothing you did not ask for. It holds your record (waypoints, death
 points, explored map, the shares you gave, the requests waiting for you, your settings), the shares others gave you
 and the offers you made that are still waiting. Nothing from anyone else's record.
 

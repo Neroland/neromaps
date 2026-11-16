@@ -8,7 +8,7 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.UUIDUtil;
 
 /**
- * An accepted share, stored on the sharer's record only (decision 009): the recipient agreed, so the sharer's
+ * An accepted share, stored on the sharer's record only: the recipient agreed, so the sharer's
  * {@code scope} is visible to {@code to} until either side revokes it.
  */
 public record Grant(UUID to, ShareScope scope) {

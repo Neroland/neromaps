@@ -25,6 +25,7 @@ import za.co.neroland.nerolandcore.link.LinkActionResult;
 import za.co.neroland.nerolandcore.link.LinkEvent;
 
 import za.co.neroland.neromaps.server.tiles.LinkTiles;
+import za.co.neroland.neromaps.server.tiles.ServerTileStore;
 import za.co.neroland.neromaps.store.MapPlayerState;
 import za.co.neroland.neromaps.store.Waypoint;
 import za.co.neroland.neromaps.tile.Fixtures;
@@ -70,7 +71,8 @@ class MapsLinkTest {
 
     JsonObject index(UUID who, String since) {
         JsonObject o = snap.snapshot(who, "tiles", q("dim", OW, "lod", "0", "bx", "0", "bz", "0", "since", since));
-        if (o.has("retryMs")) { // the warm-up shape: let the worker learn the disk etags, then ask again
+        // the pending shape (warm-up, or a viewer's mask not built yet): let the worker catch up, then ask again
+        for (int i = 0; i < 3 && o.has("retryMs"); i++) {
             w.runWorker();
             o = snap.snapshot(who, "tiles", q("dim", OW, "lod", "0", "bx", "0", "bz", "0", "since", since));
         }
@@ -154,7 +156,10 @@ class MapsLinkTest {
         long content = TileCodec.contentHash(TileCodec.encode(t));
         String etag = idx.getAsJsonArray("etags").get(0).getAsString();
         assertNotEquals(LinkTiles.hex(content), etag);
-        assertTrue((LinkTiles.parseMask(page(A, 1L).get("pending").getAsString()).getAsLong() & 1L) != 0);
+        // the etag is the content hash of the masked bytes the viewer receives, nothing else
+        za.co.neroland.neromaps.fog.TileMask mask = za.co.neroland.neromaps.fog.TileMask.of(
+                za.co.neroland.neromaps.fog.Visibility.of(w.state, A, OW, false), 0, 0, 0);
+        assertEquals(LinkTiles.hex(TileCodec.contentHash(mask.encodeMasked(t))), etag);
         w.runWorker();
         JsonObject p = page(A, 1L);
         JsonObject e = p.getAsJsonObject("tiles").getAsJsonObject("0");
@@ -462,7 +467,8 @@ class MapsLinkTest {
             w.tiles.recentViewers(w.now); // prune
             index(A, "0");
             page(A, 1L);
-            w.put(0, 1, 0, Fixtures.plains());
+            w.put(0, 0, 0, Fixtures.mountains()); // A's own tile changes
+            w.put(0, 1, 0, Fixtures.plains()); // same block, a tile A never explored: not A's business
             w.put(0, 40, 40, Fixtures.plains()); // a block nobody saw
             for (int i = 0; i < MapsLinkEvents.TILES_INTERVAL_SECONDS; i++) {
                 MapsLinkEvents.second(w.state, w.tiles, false, w.now);
@@ -524,5 +530,130 @@ class MapsLinkTest {
         assertFalse(o.has("blocks"), "the app keeps the table it holds");
         assertFalse(o.has("same"));
         assertTrue(building.snapshot(A, "palette", Map.of("v", "abc")).get("pending").getAsBoolean());
+    }
+
+    // --- fog side channel ---------------------------------------------------------------------------------------
+
+    /** Everything viewer {@code who} can read about block (0,0): index from scratch, index from a cursor, a page. */
+    String observe(UUID who, String cursor) {
+        return snap.snapshot(who, "tiles", q("dim", OW, "lod", "0", "bx", "0", "bz", "0", "since", "0")) + "|"
+                + snap.snapshot(who, "tiles", q("dim", OW, "lod", "0", "bx", "0", "bz", "0", "since", cursor)) + "|"
+                + page(who, 1L);
+    }
+
+    static Tile withColumn(Tile t, int x, int z, int dh) {
+        Tile out = t.copy();
+        int i = Tile.index(x, z);
+        out.set(x, z, Tile.F_PRESENT, t.height[i] + dh, out.internBlock("minecraft:gold_block"),
+                out.internBiome("minecraft:desert"), 0);
+        return out;
+    }
+
+    static String answer(ServerTileStore.Encoded e, za.co.neroland.neromaps.fog.TileMask m, long clientEtag)
+            throws Exception {
+        za.co.neroland.neromaps.server.tiles.TileService.Reply r =
+                za.co.neroland.neromaps.server.tiles.TileService.answer(e, m, clientEtag);
+        return r == null ? "none" : LinkTiles.hex(r.etag()) + ":" + Base64.getEncoder().encodeToString(r.bytes());
+    }
+
+    @Test
+    void aChangeInAChunkHiddenFromAViewerChangesNothingTheyCanObserve() throws Exception {
+        List<LinkEvent> out = new ArrayList<>();
+        MapsLinkEvents.reset();
+        MapsLinkEvents.publishTo(out::add);
+        try {
+            Tile t = Fixtures.plains();
+            w.put(0, 0, 0, t);
+            exploreTile(w.state, A, 0, 0, 16); // A sees the whole tile
+            w.state.markExplored(B, OW, 0, 0, 4096); // B sees chunk (0,0) of it, nothing else
+            // B's first read builds B's masked copy on the worker
+            JsonObject first = snap.snapshot(B, "tiles", q("dim", OW, "lod", "0", "bx", "0", "bz", "0", "since", "0"));
+            assertEquals("", first.get("cursor").getAsString(), "a mask not built yet answers the pending shape");
+            w.runWorker();
+            JsonObject idx = index(B, "0");
+            String cursor = idx.get("cursor").getAsString();
+            assertFalse(cursor.isEmpty());
+            page(B, 1L);
+            w.runWorker();
+            page(A, 1L);
+            w.runWorker();
+            assertEquals(1, page(B, 1L).getAsJsonObject("tiles").size(), "B reads the masked tile");
+            assertEquals(LinkTiles.hex(0), index(B, cursor).get("changed").getAsString());
+            za.co.neroland.neromaps.fog.TileMask mb = za.co.neroland.neromaps.fog.TileMask.of(
+                    za.co.neroland.neromaps.fog.Visibility.of(w.state, B, OW, false), 0, 0, 0);
+            ServerTileStore.Encoded e0 = w.stored.get(za.co.neroland.neromaps.tile.TileKey.tile(0, 0, 0));
+            String heldEtag = idx.getAsJsonArray("etags").get(0).getAsString();
+            String tsBefore = answer(e0, mb, 0L) + "|" + answer(e0, mb, Long.parseUnsignedLong(heldEtag, 16));
+            String before = observe(B, cursor);
+            MapsLinkEvents.tiles(w.state, w.tiles, false, w.now); // drain what the setup wrote
+            out.clear();
+
+            // a player builds in chunk (5,5), which B never explored: one column changes
+            Tile t2 = withColumn(t, 5 * 16 + 3, 5 * 16 + 9, 9);
+            w.put(0, 0, 0, t2);
+            String stale = observe(B, cursor); // before the worker rebuilt B's mask: the last copy, not "pending"
+            w.runWorker();
+            String after = observe(B, cursor);
+            ServerTileStore.Encoded e1 = w.stored.get(za.co.neroland.neromaps.tile.TileKey.tile(0, 0, 0));
+            assertNotEquals(e0.etag(), e1.etag(), "the content did change");
+            assertEquals(before, stale, "index, cursor, changed, pending and page are unchanged for B");
+            assertEquals(before, after, "and stay unchanged once the worker has caught up");
+            assertEquals(tsBefore, answer(e1, mb, 0L) + "|" + answer(e1, mb, Long.parseUnsignedLong(heldEtag, 16)),
+                    "the in-game tile answer is unchanged too");
+            MapsLinkEvents.tiles(w.state, w.tiles, false, w.now);
+            assertTrue(out.stream().noneMatch(ev -> ev.playerId().equals(B)), "no tiles event for B");
+            assertTrue(out.stream().anyMatch(ev -> ev.playerId().equals(A) && ev.topic().equals("tiles")),
+                    "A, who can see chunk (5,5), is told");
+            // an identical rewrite (block activity that leaves the map as it was) changes nothing for anyone
+            String aBefore = observe(A, index(A, "0").get("cursor").getAsString());
+            out.clear();
+            w.put(0, 0, 0, t2);
+            w.runWorker();
+            assertEquals(aBefore, observe(A, index(A, "0").get("cursor").getAsString()));
+            MapsLinkEvents.tiles(w.state, w.tiles, false, w.now);
+            assertTrue(out.isEmpty(), "no event for an identical rewrite");
+
+            // the same kind of change inside chunk (0,0), which B does see: B observes it
+            w.put(0, 0, 0, withColumn(t2, 4, 7, 5));
+            w.runWorker();
+            JsonObject now = index(B, cursor);
+            assertEquals(LinkTiles.hex(1L), now.get("changed").getAsString());
+            assertNotEquals(heldEtag, now.getAsJsonArray("etags").get(0).getAsString());
+            assertNotEquals(cursor, now.get("cursor").getAsString());
+            assertNotEquals(before, observe(B, cursor));
+            MapsLinkEvents.tiles(w.state, w.tiles, false, w.now);
+            LinkEvent forB = out.stream().filter(ev -> ev.playerId().equals(B)).findFirst().orElseThrow();
+            assertEquals("[[0,0]]", forB.payload().getAsJsonArray("blocks").toString());
+        } finally {
+            MapsLinkEvents.publishTo(e -> { });
+            MapsLinkEvents.reset();
+        }
+    }
+
+    @Test
+    void outOfWorldBlocksAndUnknownDimensionsAreBadRequests() {
+        assertTrue(snap.snapshot(A, "tiles", q("dim", OW, "lod", "4", "bx", "999999", "bz", "0", "since", "0"))
+                .has("needParams"), "beyond the world border");
+        assertTrue(snap.snapshot(A, "tiles", q("dim", "made:up", "lod", "0", "bx", "0", "bz", "0", "since", "0"))
+                .has("needParams"), "not a server dimension");
+        assertTrue(LinkTiles.inWorld(0, 117_187, -117_187));
+        assertFalse(LinkTiles.inWorld(4, 1 << 20, 0));
+        assertFalse(LinkTiles.inWorld(0, Integer.MIN_VALUE, 0));
+    }
+
+    @Test
+    void aMapShareMustNameAServerDimension() {
+        w.online.put(B, new MapsLinkWorld.Online("Bob", OW, 0.5, 64, 0.5, 0f, true));
+        JsonObject body = new JsonObject();
+        body.addProperty("player", "Bob");
+        body.addProperty("scope", "EXPLORED_MAP");
+        body.addProperty("dim", "junk:dimension_0001");
+        LinkActionResult r = act.execute(A, "share_offer", body);
+        assertFalse(r.ok(), "a made-up dimension is refused");
+        assertTrue(w.state.find(B).map(rec -> rec.incoming().isEmpty()).orElse(true));
+        body.addProperty("dim", OW);
+        assertTrue(act.execute(A, "share_offer", body).ok());
+        body.addProperty("dim", "*");
+        assertTrue(act.execute(A, "share_offer", body).ok());
     }
 }

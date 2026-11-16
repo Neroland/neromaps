@@ -25,7 +25,7 @@ import za.co.neroland.neromaps.NeroMapsCommon;
 import za.co.neroland.neromaps.text.NameFilter;
 
 /**
- * NeroMaps' one player-keyed store, {@code neromaps:players} (decision 008), read only through Core's
+ * NeroMaps' one player-keyed store, {@code neromaps:players}, read only through Core's
  * {@code SavedDataRecovery} (see {@link PlayerStore#get}). Keyed by UUID; each value is a {@link PlayerRecord}.
  *
  * <p>All mutation goes through the methods here, on the server thread, and each marks the store dirty. Erasure removes

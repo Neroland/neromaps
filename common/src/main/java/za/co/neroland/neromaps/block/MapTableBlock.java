@@ -26,7 +26,7 @@ import za.co.neroland.neromaps.compat.PlayerMessages;
 import za.co.neroland.neromaps.registry.ModBlockEntities;
 
 /**
- * The Map Table: a horizontal map of its own surroundings, drawn flat in the glass top (decision 013's written
+ * The Map Table: a horizontal map of its own surroundings, drawn flat in the glass top (the art direction's written
  * fallback; the holographic relief is cut for 0.1.0). Each viewer sees only what is inside their own fog of war.
  * Use cycles the span (32, 64 or 128 blocks across). Stores the span only.
  */

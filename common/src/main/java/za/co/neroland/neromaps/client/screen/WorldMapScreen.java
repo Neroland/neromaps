@@ -130,7 +130,7 @@ public final class WorldMapScreen extends Screen {
         }
     }
 
-    // --- side panels (Stage 3 waypoints, Stage 6 layers) ---------------------------------------------------
+    // --- side panels (waypoints, layers) -------------------------------------------------------------------
 
     private enum Panel { NONE, LAYERS, WAYPOINTS }
 

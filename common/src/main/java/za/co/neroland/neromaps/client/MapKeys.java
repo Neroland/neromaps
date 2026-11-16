@@ -10,7 +10,7 @@ import net.minecraft.resources.Identifier;
 //?}
 
 /**
- * Key mappings (decision 010, category {@code key.category.neromaps.neromaps}): M world map, Y toggle minimap,
+ * Key mappings (category {@code key.category.neromaps.neromaps}): M world map, Y toggle minimap,
  * = and - zoom, U new waypoint here; toggle beams, cycle preset and open settings ship unbound. All are rebindable
  * and every action is safe when unbound. Client only.
  */

@@ -28,7 +28,7 @@ import za.co.neroland.neromaps.store.PlayerStore;
 /**
  * The Atlas, blank and filled. A blank atlas records the user's own explored map of the current dimension (nearest
  * regions first, up to its capacity) and becomes a filled atlas. A filled atlas, used, merges its coverage into the
- * reader's own map (permanent, physical sharing: decision 007); sneak-used, it re-records the user's map. The stack
+ * reader's own map (permanent, physical sharing); sneak-used, it re-records the user's map. The stack
  * carries coverage only ({@link AtlasData}), never who recorded it. All of it resolves on the server.
  */
 public final class AtlasItem extends Item {

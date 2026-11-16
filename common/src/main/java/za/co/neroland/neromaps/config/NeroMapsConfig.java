@@ -27,7 +27,7 @@ public final class NeroMapsConfig {
                     + "are scrubbed of your account name. Set false to opt out of all of it (takes effect "
                     + "on restart). See PRIVACY.md");
 
-    // --- server policy (decision 010). "S" values are server-authoritative: Core pushes them to clients at join and
+    // --- server policy. "S" values are server-authoritative: Core pushes them to clients at join and
     // after a reload, and NeroMaps' hello payload repeats them so lock states reset when a client leaves. ---------
 
     private static final ConfigValue<Boolean> CAVE_MODE = SCHEMA.bool(

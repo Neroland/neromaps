@@ -6,7 +6,7 @@ import java.util.UUID;
 import java.util.function.LongSupplier;
 
 /**
- * The consent rules of decision 009 over a {@link MapPlayerState}, pure and clock-injected so they can be tested
+ * The consent rules over a {@link MapPlayerState}, pure and clock-injected so they can be tested
  * without a server. Offers go onto the recipient's record as a pending request with a random server id; only the
  * recipient can accept or decline it (the lookup is in <em>their own</em> incoming list); acceptance writes a grant
  * onto the sharer's record; either side revokes by deleting the grant. Server thread only.
@@ -15,6 +15,9 @@ public final class ConsentLedger {
 
     /** The outcome of an offer. {@code SENT} is also returned when the recipient refuses requests (silently). */
     public enum Offer { SENT, SELF, ALREADY_SHARED, NO_SUCH_WAYPOINT }
+
+    /** Pending offers one sender may have waiting on one recipient (the recipient holds {@link ShareRequest#MAX_PENDING}). */
+    public static final int MAX_PENDING_PER_SENDER = 3;
 
     private final MapPlayerState state;
     private final LongSupplier random;
@@ -50,8 +53,17 @@ public final class ConsentLedger {
         }
         recipient = state.record(to);
         recipient.incoming.removeIf(q -> q.from().equals(from) && q.scope().equals(scope));
-        while (recipient.incoming.size() >= ShareRequest.MAX_PENDING) {
-            recipient.incoming.remove(0); // oldest first
+        // a sender only ever displaces their own oldest offers, never someone else's
+        while (countFrom(recipient, from) >= MAX_PENDING_PER_SENDER) {
+            for (int i = 0; i < recipient.incoming.size(); i++) {
+                if (recipient.incoming.get(i).from().equals(from)) {
+                    recipient.incoming.remove(i);
+                    break;
+                }
+            }
+        }
+        if (recipient.incoming.size() >= ShareRequest.MAX_PENDING) {
+            return Offer.SENT; // the inbox is full of other people's offers: dropped, silently, like a refusal
         }
         long id;
         do {
@@ -63,6 +75,16 @@ public final class ConsentLedger {
         }
         state.changed();
         return Offer.SENT;
+    }
+
+    private static int countFrom(PlayerRecord r, UUID from) {
+        int n = 0;
+        for (ShareRequest q : r.incoming) {
+            if (q.from().equals(from)) {
+                n++;
+            }
+        }
+        return n;
     }
 
     private static ShareRequest findIncoming(PlayerRecord r, long id) {
@@ -181,6 +203,14 @@ public final class ConsentLedger {
             }
             return false;
         });
+        // a waypoint whose last grant went is no longer marked shared (as revokeGrant does)
+        for (int i = 0; i < r.waypoints.size(); i++) {
+            Waypoint w = r.waypoints.get(i);
+            if (w.shared() && r.grants.stream().noneMatch(g -> g.scope().kind() == ShareScope.Kind.WAYPOINT
+                    && g.scope().waypointId() == w.id())) {
+                r.waypoints.set(i, w.withShared(false));
+            }
+        }
     }
 
     /** Drops requests older than {@link ShareRequest#EXPIRE_DAYS}. Returns how many went. */

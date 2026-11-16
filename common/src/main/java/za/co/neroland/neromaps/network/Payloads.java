@@ -586,7 +586,7 @@ public final class Payloads {
         }
     }
 
-    // --- Stage 5: the survival layer ---------------------------------------------------------------------------
+    // --- the survival layer ------------------------------------------------------------------------------------
 
     /** The label typed on the Cartography Desk's Label tab (applies only to the sender's open desk menu). */
     public record DeskLabel(String label) implements CustomPacketPayload {

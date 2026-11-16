@@ -13,7 +13,7 @@ import za.co.neroland.nerolandcore.registry.RegistrationProvider.RegistryEntry;
 
 import za.co.neroland.neromaps.NeroMapsCommon;
 
-/** The sound events of {@code sounds.json} (decision 013 section 9), registered as variable-range events. */
+/** The sound events of {@code sounds.json}, registered as variable-range events. */
 public final class ModSounds {
 
     public static final RegistrationProvider<SoundEvent> SOUNDS =

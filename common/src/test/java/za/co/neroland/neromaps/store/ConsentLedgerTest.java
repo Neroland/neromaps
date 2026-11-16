@@ -68,9 +68,10 @@ class ConsentLedgerTest {
             l.offer(UUID.randomUUID(), B, ShareScope.livePosition(), i, id);
         }
         assertEquals(ShareRequest.MAX_PENDING, s.find(B).orElseThrow().incoming().size());
-        // days 4..19 are pending; on day 20 everything older than 7 days (days 4..12) goes
-        assertEquals(9, l.purgeExpired(20));
-        assertEquals(7, s.find(B).orElseThrow().incoming().size());
+        // a full inbox drops new offers rather than evicting anyone's: days 0..15 are pending; on day 20 everything
+        // older than 7 days (days 0..12) goes
+        assertEquals(13, l.purgeExpired(20));
+        assertEquals(3, s.find(B).orElseThrow().incoming().size());
         l.purgeExpired(1000);
         assertEquals(0, s.find(B).orElseThrow().incoming().size());
     }
@@ -103,5 +104,47 @@ class ConsentLedgerTest {
         assertTrue(l.mapSharersFor(B, "minecraft:overworld").isEmpty());
         l.revoke(A, B, ShareScope.Kind.EXPLORED_MAP);
         assertTrue(l.mapSharersFor(B, "minecraft:the_nether").isEmpty());
+    }
+
+    @Test
+    void aSenderCannotEvictOtherPlayersPendingOffers() {
+        MapPlayerState s = new MapPlayerState();
+        ConsentLedger l = new ConsentLedger(s, new Random(13)::nextLong);
+        long[] id = new long[1];
+        l.offer(C, B, ShareScope.livePosition(), 1, id);
+        long fromC = id[0];
+        // A floods B with offers of every scope it can name
+        for (int i = 0; i < 40; i++) {
+            l.offer(A, B, ShareScope.map("minecraft:dim_" + i), 2, id);
+        }
+        java.util.List<ShareRequest> in = s.find(B).orElseThrow().incoming();
+        assertEquals(1 + ConsentLedger.MAX_PENDING_PER_SENDER, in.size());
+        assertTrue(in.stream().anyMatch(q -> q.requestId() == fromC), "C's offer survives");
+        assertEquals(ConsentLedger.MAX_PENDING_PER_SENDER, in.stream().filter(q -> q.from().equals(A)).count());
+        assertTrue(in.stream().anyMatch(q -> q.scope().arg().equals("minecraft:dim_39")), "A keeps its newest");
+        // other players still reach B until the inbox is full; past that new offers are dropped, nobody is evicted
+        for (int i = 0; i < 30; i++) {
+            l.offer(UUID.randomUUID(), B, ShareScope.livePosition(), 3, id);
+        }
+        in = s.find(B).orElseThrow().incoming();
+        assertEquals(ShareRequest.MAX_PENDING, in.size());
+        assertTrue(in.stream().anyMatch(q -> q.requestId() == fromC), "still there");
+    }
+
+    @Test
+    void revokingTheLastWaypointGrantClearsItsSharedFlag() {
+        MapPlayerState s = new MapPlayerState();
+        int[] wid = new int[1];
+        s.addWaypoint(A, MapPlayerStateTest.wp("Cave", 5), 256, "", wid);
+        ConsentLedger l = new ConsentLedger(s, new Random(17)::nextLong);
+        long[] id = new long[1];
+        l.offer(A, B, ShareScope.waypoint(wid[0]), 1, id);
+        l.accept(B, id[0]);
+        l.offer(A, C, ShareScope.waypoint(wid[0]), 1, id);
+        l.accept(C, id[0]);
+        l.revoke(B, A, null);
+        assertTrue(s.find(A).orElseThrow().waypoint(wid[0]).orElseThrow().shared(), "C still has it");
+        l.revoke(A, C, ShareScope.Kind.WAYPOINT);
+        assertFalse(s.find(A).orElseThrow().waypoint(wid[0]).orElseThrow().shared());
     }
 }

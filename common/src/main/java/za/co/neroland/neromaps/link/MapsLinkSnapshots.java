@@ -186,7 +186,8 @@ public final class MapsLinkSnapshots implements LinkSnapshotProvider {
         String want = p.get("want");
         String dim = dimRaw == null ? null : Waypoint.cleanId(dimRaw, "");
         if (dim == null || dim.isEmpty() || lod.isEmpty() || bx.isEmpty() || bz.isEmpty()
-                || (since == null) == (want == null) || !knownDimension(w, dim)) {
+                || (since == null) == (want == null) || !knownDimension(w, dim)
+                || !LinkTiles.blockInWorld(lod.getAsInt(), bx.getAsInt(), bz.getAsInt())) {
             JsonObject o = new JsonObject();
             o.addProperty("v", V);
             o.addProperty("needParams", true);
@@ -215,7 +216,7 @@ public final class MapsLinkSnapshots implements LinkSnapshotProvider {
                 w.nowMillis());
     }
 
-    private static boolean knownDimension(MapsLinkWorld w, String dim) {
+    static boolean knownDimension(MapsLinkWorld w, String dim) {
         for (MapsLinkWorld.Dim d : w.dimensions()) {
             if (d.id().equals(dim)) {
                 return true;

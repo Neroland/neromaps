@@ -8,7 +8,7 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 
 /**
- * Everything NeroMaps keeps about one player (decision 008), and nothing else: waypoints (with the last three death
+ * Everything NeroMaps keeps about one player, and nothing else: waypoints (with the last three death
  * points), the explored-chunk bitsets, the consent lists (grants this player gave, requests waiting for this player)
  * and two privacy toggles. No name, no position history, no timestamps beyond a request's day. Mutable; the owning
  * {@link MapPlayerState} marks itself dirty after every change.

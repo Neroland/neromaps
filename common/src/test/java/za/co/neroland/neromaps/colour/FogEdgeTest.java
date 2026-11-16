@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import org.junit.jupiter.api.Test;
 
-/** Stage 7: the fog edge dither (decision 013 section 3) is deterministic and touches only the explored side. */
+/** The fog edge dither is deterministic and touches only the explored side. */
 class FogEdgeTest {
 
     private static final int LAND = 0xFF3F9E78;

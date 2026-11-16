@@ -12,7 +12,7 @@ import za.co.neroland.neromaps.tile.Tile;
 import za.co.neroland.neromaps.tile.TileKey;
 
 /**
- * The world map's tile textures (decision 005): one 256 x 256 texture per visible tile at its level of detail,
+ * The world map's tile textures: one 256 x 256 texture per visible tile at its level of detail,
  * pooled, least-recently-used, capped by the texture budget, filled a chunk patch at a time under a per-frame
  * patch budget so a big pan never stalls a frame. Render thread only.
  */

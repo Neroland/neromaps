@@ -53,7 +53,7 @@ import za.co.neroland.neromaps.store.Waypoint;
 import za.co.neroland.neromaps.tile.Tile;
 
 /**
- * Stage 8: erasure (Core's conformance harness), export, retention wiring, "no position on disk" over a simulated world
+ * Erasure (Core's conformance harness), export, retention wiring, "no position on disk" over a simulated world
  * folder, and the log sweep (sources and a runtime capture).
  */
 class PrivacyComplianceTest {

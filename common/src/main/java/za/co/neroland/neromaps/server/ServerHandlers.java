@@ -40,7 +40,8 @@ public final class ServerHandlers {
     static final RateLimiter ANSWERS = new RateLimiter(20, 500);
     static final RateLimiter PRIVACY = new RateLimiter(5, 1_000);
     static final RateLimiter VIEWS = new RateLimiter(10, 200);
-    static final RateLimiter TILES = new RateLimiter(64, 50);
+    /** About 4 tile requests a second, bursts of 8: wall maps ask once a second, the world map once a second. */
+    static final RateLimiter TILES = new RateLimiter(8, 250);
 
     private ServerHandlers() {
     }
@@ -189,7 +190,7 @@ public final class ServerHandlers {
         }
     }
 
-    // --- sharing (decision 009) ------------------------------------------------------------------------------
+    // --- sharing ------------------------------------------------------------------------------
 
     public static void shareAction(Payloads.ShareAction msg, ServerPlayer p) {
         MinecraftServer s = server(p);
@@ -292,6 +293,11 @@ public final class ServerHandlers {
             return 0;
         }
         List<ConsentLedger.Revoked> gone = MapServer.ledger(s).revoke(p.getUUID(), other, kind);
+        if (gone.isEmpty()) {
+            // nothing was shared: touch nobody (no resync, no dropped tile answers, no blanked positions)
+            tell(p, "neromaps.share.revoked", "0");
+            return 0;
+        }
         afterRevoke(s, p.getUUID(), other);
         tell(p, "neromaps.share.revoked", Integer.toString(gone.size()));
         ServerPlayer op = s.getPlayerList().getPlayer(other);

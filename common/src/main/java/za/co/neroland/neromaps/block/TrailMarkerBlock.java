@@ -36,7 +36,7 @@ import za.co.neroland.neromaps.registry.ModBlockEntities;
 import za.co.neroland.neromaps.registry.ModSounds;
 
 /**
- * The Trail Marker: a breadcrumb stake for caves and long trips (decision 013). It shows as a small dot on the map of
+ * The Trail Marker: a breadcrumb stake for caves and long trips. It shows as a small dot on the map of
  * anyone nearby (layer {@code neromaps:trail_markers}, proximity 64). No label, no text, no owner. Use cycles the cap
  * colour through the seven marker colours (the map dot follows it).
  */

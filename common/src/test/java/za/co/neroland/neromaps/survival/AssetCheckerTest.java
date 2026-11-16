@@ -18,7 +18,7 @@ import org.junit.jupiter.api.Test;
 import za.co.neroland.neromaps.registry.MapIds;
 
 /**
- * Stage 7 asset checker: every registered block has a blockstate whose every model exists, every registered item has
+ * Asset checker: every registered block has a blockstate whose every model exists, every registered item has
  * an item model (and, for 1.21.4+, an item model definition), every model's parent and textures exist, every block
  * and item has an English name, and every sound event is registered, has its sound files and has a subtitle. Recipes
  * produce only registered items. Reads the shared resources; no game bootstrap.

@@ -16,7 +16,7 @@ import za.co.neroland.neromaps.NeroMapsCommon;
 import za.co.neroland.neromaps.data.NeroMapsSavedData;
 
 /**
- * A random id for this world, {@code neromaps:world} (decision 010), sent in the hello payload so a client keeps a
+ * A random id for this world, {@code neromaps:world}, sent in the hello payload so a client keeps a
  * separate terrain cache per world on the same server address. Not player data: it identifies the save, not anyone.
  */
 public final class WorldId extends SavedData {

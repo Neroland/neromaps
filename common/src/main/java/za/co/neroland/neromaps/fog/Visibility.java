@@ -10,7 +10,7 @@ import za.co.neroland.neromaps.store.MapPlayerState;
 import za.co.neroland.neromaps.store.PlayerRecord;
 
 /**
- * Fog of war as an access control (decision 007). For one viewer and one dimension it gathers the explored maps the
+ * Fog of war as an access control. For one viewer and one dimension it gathers the explored maps the
  * viewer may see: their own (atlas merges are already copied in) and those of every player with a live
  * {@code EXPLORED_MAP} grant to them. Built per request against live grants, so a revocation takes effect on the next
  * read. The public-map policy makes everything visible. Every server read path of terrain asks this first.

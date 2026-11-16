@@ -3,7 +3,7 @@ package za.co.neroland.neromaps.scan;
 import za.co.neroland.neromaps.tile.Tile;
 
 /**
- * The one column scan (decision 002), pure over {@link ColumnSource}, identical on every Minecraft line:
+ * The one column scan, pure over {@link ColumnSource}, identical on every Minecraft line:
  * <ul>
  *   <li>surface: from {@code WORLD_SURFACE - 1} down through invisible blocks to the first visible one; a fluid
  *       records its kind, then the scan walks down to the floor and counts the depth (capped at 255);</li>

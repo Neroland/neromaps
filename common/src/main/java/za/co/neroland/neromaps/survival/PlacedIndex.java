@@ -14,7 +14,7 @@ import za.co.neroland.neromaps.server.tiles.CaptureService;
 
 /**
  * Server-thread, memory-only index of NeroMaps blocks in ticking chunks: signposts and trail markers (for the
- * proximity map layers) and wall maps / map tables (whose count is capture demand, decision 006). Each block entity
+ * proximity map layers) and wall maps / map tables (whose count is capture demand). Each block entity
  * touches its entry once a second; an entry not touched for three seconds (chunk unloaded, block gone) is dropped.
  * Nothing here is saved, and no entry holds an owner: these blocks have none.
  */

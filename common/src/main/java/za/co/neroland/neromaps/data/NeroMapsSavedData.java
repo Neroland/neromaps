@@ -25,7 +25,7 @@ import za.co.neroland.neromaps.NeroMapsCommon;
  *       the backup file.</li>
  * </ul>
  *
- * <p>0.0.1 has no store; this is the seam the first one uses. Declare types through Core's
+ * <p>Both NeroMaps stores (the player store and the world id) are read through this seam. Declare types through Core's
  * {@code data.SavedDataCompat.type(..)} so the 1.21.1-1.21.4 cells resolve to Core's look-alikes.
  */
 public final class NeroMapsSavedData {

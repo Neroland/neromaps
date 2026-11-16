@@ -14,7 +14,7 @@ import za.co.neroland.neromaps.colour.MapStyle;
 /**
  * Every client display setting of the minimap and world map, stored client-side in
  * {@code config/neromaps-client.properties}. These are preferences, not player data, and never leave the client.
- * Server policy (decision 010) can only take things away: the effective value of a policy-gated setting is
+ * Server policy can only take things away: the effective value of a policy-gated setting is
  * {@code setting AND policy}.
  */
 public final class MinimapSettings {
@@ -56,13 +56,13 @@ public final class MinimapSettings {
     public boolean showDimension;
     public boolean showTime;
     public boolean showLight;
-    /** Chunk patches uploaded per frame (decision 004 B2: default 8, cap 16). */
+    /** Chunk patches uploaded per frame (default 8, cap 16). */
     public int uploadBudget = 8;
     public int textureBudgetMb = 64;
     public int cacheMb = 256;
     public int memoryTiles = 48;
 
-    // waypoints and layers (Stage 3 / 6)
+    // waypoints and layers
     public boolean beams = true;
     public boolean distanceLabels = true;
     public int beamRange = 1024;
@@ -74,7 +74,7 @@ public final class MinimapSettings {
     public final java.util.Set<String> layersOnMinimap = new java.util.TreeSet<>();
     public final java.util.Set<String> layersOffMinimap = new java.util.TreeSet<>();
 
-    // presets and accessibility (Stage 7)
+    // presets and accessibility
     /** The preset last applied (built-in or user), or empty after a manual change or an import. */
     public String preset = "explorer";
     /** Day / Night: darken towards night (off = always the day colours). */
@@ -85,7 +85,7 @@ public final class MinimapSettings {
     public boolean keyline;
     /** Label plates drawn fully opaque. */
     public boolean solidPlates;
-    /** Marker palette: OKABE_ITO (decision 013, default) or TOL_BRIGHT; both colour-blind safe. */
+    /** Marker palette: OKABE_ITO (default) or TOL_BRIGHT; both colour-blind safe. */
     public MarkerPalette markerPalette = MarkerPalette.OKABE_ITO;
 
     public enum MarkerPalette { OKABE_ITO, TOL_BRIGHT }

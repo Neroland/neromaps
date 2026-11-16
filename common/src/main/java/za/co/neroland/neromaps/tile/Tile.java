@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
- * One 256 x 256 block-column tile (decision 002): surface height, surface block and biome as indices into
+ * One 256 x 256 block-column tile: surface height, surface block and biome as indices into
  * per-tile palettes, fluid depth and a flags byte per column. Planar arrays, row-major z then x. Nothing else is
  * recorded: no entities, block entities, text or player data.
  *

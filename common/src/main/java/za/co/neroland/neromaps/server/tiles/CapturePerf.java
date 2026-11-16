@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
 /**
- * Server capture counters for {@code /neromaps perf} and the M6 benchmarks (decision 006). Global numbers only: no
+ * Server capture counters for {@code /neromaps perf} and the M6 benchmarks. Global numbers only: no
  * player, position, dimension name or tile coordinate ever appears here.
  */
 public final class CapturePerf {

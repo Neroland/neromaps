@@ -3,7 +3,7 @@ package za.co.neroland.neromaps.policy;
 import za.co.neroland.neromaps.config.NeroMapsConfig;
 
 /**
- * The server's map policy as one immutable value (decision 010). The server builds it from config; the client receives
+ * The server's map policy as one immutable value. The server builds it from config; the client receives
  * it in the hello payload, resolves {@code effective = client setting AND policy}, and shows why a control is locked.
  * The server enforces every value again on its own paths; this copy only drives the client's display.
  *

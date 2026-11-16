@@ -3,7 +3,7 @@ package za.co.neroland.neromaps.engine;
 /**
  * The minimap's sprite sheet (512 x 512, one texture, so the overlay stays one batch): the procedural 32 x 32 corner
  * (a white patch for solid geometry, a marker dot, the player arrow) drawn in code so the minimap never depends on an
- * art file, plus Fable's frame art for the current shape, size and border composited in at load (Stage 7). Pixels
+ * art file, plus Fable's frame art for the current shape, size and border composited in at load. Pixels
  * are ARGB.
  */
 public final class Sprites {

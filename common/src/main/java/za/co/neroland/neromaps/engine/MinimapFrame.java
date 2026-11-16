@@ -6,7 +6,7 @@ import za.co.neroland.neromaps.settings.MinimapSettings.Border;
 /**
  * The minimap's whole per-frame CPU path: the surface geometry (one quad or a 64-wedge fan) and the overlay batch
  * (frame, north mark, markers, player arrow). Preallocated; {@link #update} allocates nothing. Markers are
- * world positions added by layer code (none in Stage 2 beyond the player); they are projected, rotated with the
+ * world positions added by layer code (none beyond the player at this level); they are projected, rotated with the
  * map and culled to the shape.
  */
 public final class MinimapFrame {
@@ -68,7 +68,7 @@ public final class MinimapFrame {
 
     public final FrameArt art = new FrameArt();
 
-    /** Round maps come in the sizes the round frame art is drawn for (decision 013 section 4). */
+    /** Round maps come in the sizes the round frame art is drawn for. */
     public static final int[] ROUND_SIZES = {64, 96, 128, 160};
 
     /** The nearest round size to {@code size}. */
@@ -148,7 +148,7 @@ public final class MinimapFrame {
     }
 
     /**
-     * Fable's frame textures (decision 013 section 4): the square bezel as a nine-slice, the round bezel as one
+     * Fable's frame textures: the square bezel as a nine-slice, the round bezel as one
      * static quad, the tick ring as one quad that turns with the map, and the north tab. Returns false (and draws
      * nothing) when the art for this frame is not in the sheet, so the geometry frame is used instead.
      */

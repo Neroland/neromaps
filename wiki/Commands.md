@@ -36,7 +36,7 @@ digits), with or without the `#`.
 | `/neromaps privacy` | Everyone | Show your privacy settings |
 | `/neromaps privacy deathpoints <true\|false>` | Everyone | Record your death points or not (off also deletes them) |
 | `/neromaps privacy requests <true\|false>` | Everyone | Accept share requests or not (off also drops pending ones) |
-| `/neromaps export` | Everyone | Save everything NeroMaps holds about you as JSON in your own game folder (`neromaps/exports/`); once a minute |
+| `/neromaps export` | Everyone | Send everything NeroMaps holds about you to your game; click **Save** to keep it as JSON in your own game folder (`neromaps/exports/`); once a minute |
 | `/neroland data eraseme` | Everyone | (Neroland Core) Erase everything every Nero mod holds about you, NeroMaps included |
 
 ## Diagnostics and operators

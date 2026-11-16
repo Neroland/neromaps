@@ -4,7 +4,7 @@ import it.unimi.dsi.fastutil.longs.LongIterator;
 import it.unimi.dsi.fastutil.longs.LongLinkedOpenHashSet;
 
 /**
- * The chunks of one dimension whose terrain changed since they were last captured (decision 006). Marks are memory
+ * The chunks of one dimension whose terrain changed since they were last captured. Marks are memory
  * only and coalesced per chunk; a restart loses them and the next exploration or block change re-marks. Bounded:
  * past {@link #MAX} marks the oldest are forgotten (their chunks are re-marked when they next change).
  */

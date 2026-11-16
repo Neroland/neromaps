@@ -28,7 +28,7 @@ import za.co.neroland.neromaps.tile.TileKey;
 import za.co.neroland.neromaps.tile.TileLod;
 
 /**
- * Decision 004 microbenchmarks (M1, M3, M4, M5) and the allocation gates. Timing is logged, never asserted, so CI
+ * Client microbenchmarks (M1, M3, M4, M5) and the allocation gates. Timing is logged, never asserted, so CI
  * cannot flake; allocation is asserted (the per-frame path must stay at zero in NeroMaps code).
  */
 class ClientBenchTest {

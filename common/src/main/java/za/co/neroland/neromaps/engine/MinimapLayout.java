@@ -4,7 +4,7 @@ import za.co.neroland.neromaps.settings.MinimapSettings;
 import za.co.neroland.neromaps.settings.MinimapSettings.Anchor;
 
 /**
- * Where the minimap goes (decision 010): any corner or a free position, always inside a safe-area margin. The
+ * Where the minimap goes: any corner or a free position, always inside a safe-area margin. The
  * default anchor is top-right, pushed down one 26 px row per active status-effect row so vanilla's effect icons
  * stay visible. Readouts stack under the map (above it is never used). Integers only; allocation-free.
  */

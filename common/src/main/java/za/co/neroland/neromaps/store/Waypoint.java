@@ -6,12 +6,12 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import za.co.neroland.neromaps.text.NameFilter;
 
 /**
- * One saved waypoint: the player's own content, created and deleted at will (decision 008). The name is already
+ * One saved waypoint: the player's own content, created and deleted at will. The name is already
  * filtered ({@link NameFilter}); the colour is RGB; the icon is a waypoint glyph id from the icon atlas.
  *
  * @param id     server-assigned, unique within the owner's record
  * @param set    a free grouping label ("default" unless the player chose one); sets are per dimension
- * @param shared true once the owner has offered it to someone (decision 008 {@code visibility})
+ * @param shared true once the owner has offered it to someone 
  */
 public record Waypoint(int id, String set, String name, int colour, String icon, String dimension, int x, int y,
         int z, boolean shared, boolean beam, boolean distanceLabel) {

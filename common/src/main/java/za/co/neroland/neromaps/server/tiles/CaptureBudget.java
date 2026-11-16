@@ -1,7 +1,7 @@
 package za.co.neroland.neromaps.server.tiles;
 
 /**
- * How much server-thread time capture may spend this tick (decision 006): the configured budget, a quarter of it
+ * How much server-thread time capture may spend this tick: the configured budget, a quarter of it
  * while the server is behind (average MSPT, vanilla's {@code getAverageTickTimeNanos}, above 45), and nothing below
  * the minimum TPS. Pure.
  */

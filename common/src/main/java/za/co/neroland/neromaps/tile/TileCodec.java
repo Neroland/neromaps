@@ -15,7 +15,7 @@ import java.util.zip.Deflater;
 import java.util.zip.Inflater;
 
 /**
- * The tile codec, schema 1 (decision 002). One class, one exception. Layout:
+ * The tile codec, schema 1. One class, one exception. Layout:
  * <pre>
  * 0  u8  schema          1  u8 lod   2  u8 header flags (bit0 roofed, bit1 has-fluid, bit2 partial)   3 u8 0
  * 4  u64 content hash (first 8 bytes of SHA-256 over schema, lod, BODY)

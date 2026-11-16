@@ -47,7 +47,7 @@ import za.co.neroland.neromaps.tile.TileKey;
 public final class ClientMap {
 
     public static final MinimapSettings SETTINGS = new MinimapSettings();
-    /** Scan-queue bound (decision 004 B2). */
+    /** Scan-queue bound. */
     public static final int SCAN_QUEUE = 256;
     /** Chunks snapshotted per tick, and the time cap for that work. */
     public static final int SNAPSHOTS_PER_TICK = 16;

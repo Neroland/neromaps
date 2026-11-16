@@ -23,7 +23,7 @@ import net.minecraft.world.level.material.MapColor;
 import org.jetbrains.annotations.Nullable;
 
 /**
- * The server-thread copy of one loaded chunk for capture (decision 006): WORLD_SURFACE heights, copies of the
+ * The server-thread copy of one loaded chunk for capture: WORLD_SURFACE heights, copies of the
  * block-state containers in the band the scan can reach, and the biome id of each 4 x 4 quart column at the surface.
  * It holds no reference to the chunk, no entity, block entity or text. Block classification runs later on the
  * single capture worker through {@link Keys}.

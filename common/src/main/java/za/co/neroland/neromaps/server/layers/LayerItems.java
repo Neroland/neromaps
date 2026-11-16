@@ -17,7 +17,7 @@ import za.co.neroland.nerolandcore.map.MapMarker;
 import za.co.neroland.neromaps.network.Payloads;
 
 /**
- * Conversion of Core map items to the wire form, and the per-viewer delta (decision 001, consumer side). Pure:
+ * Conversion of Core map items to the wire form, and the per-viewer delta (consumer side). Pure:
  * no server, no player. Detail lines are not sent in 0.1.0 (the label is).
  */
 public final class LayerItems {

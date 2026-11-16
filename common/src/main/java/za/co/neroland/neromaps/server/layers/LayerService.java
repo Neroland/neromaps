@@ -34,7 +34,7 @@ import za.co.neroland.neromaps.network.Payloads;
 import za.co.neroland.neromaps.server.MapServer;
 
 /**
- * NeroMaps as the consumer of Core's map API (decision 001 and its consumer obligations). For each online viewer it
+ * NeroMaps as the consumer of Core's map API (and its consumer obligations). For each online viewer it
  * queries every registered provider through {@link MapLayerRegistry#query} (the guarded path) for that viewer, their
  * dimension and the bounds they look at, on a bounded schedule and when a {@link MapEvents} hint marks them dirty, and
  * sends that viewer only the changes since the last refresh.

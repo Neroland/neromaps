@@ -23,7 +23,7 @@ public final class MapBlockProperties {
     /** Trail marker: cap colour, an index into the seven marker colours. */
     public static final IntegerProperty COLOUR = IntegerProperty.create("colour", 0, 6);
 
-    /** The seven colour-blind-safe marker colours (decision 013 section 1), in picker order. */
+    /** The seven colour-blind-safe marker colours, in picker order. */
     public static final int[] MARKER_COLOURS = {0xE69F00, 0x56B4E9, 0x009E73, 0xF0E442, 0xD55E00, 0xCC79A7, 0xF2F5F8};
     public static final String[] MARKER_COLOUR_NAMES = {"orange", "sky", "green", "yellow", "vermillion", "purple",
         "white"};

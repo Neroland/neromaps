@@ -15,7 +15,7 @@ import za.co.neroland.neromaps.engine.RgbaStaging;
 import za.co.neroland.neromaps.perf.PerfCounters;
 
 /**
- * One square RGBA texture created once and updated by sub-rectangle, never reallocated (decision 005). Every
+ * One square RGBA texture created once and updated by sub-rectangle, never reallocated. Every
  * {@code //?} of the upload path lives here:
  * <ul>
  *   <li>26.2+: {@code writeToTexture(GpuTexture, ByteBuffer, mip, layer, x, y, w, h)} from one reused direct
@@ -25,7 +25,7 @@ import za.co.neroland.neromaps.perf.PerfCounters;
  *   <li>1.21.1 - 1.21.4: bind, then {@code NativeImage.upload}.</li>
  * </ul>
  * Backed by a {@code DynamicTexture} on every line, which keeps a CPU copy: memory is charged twice (GPU + CPU),
- * exactly as decision 005 accounts for the fallback. Render thread only.
+ * exactly as the texture budget accounts for the fallback. Render thread only.
  */
 public final class MapTexture {
 

@@ -23,7 +23,7 @@ import za.co.neroland.neromaps.atlas.WallPrint;
 import za.co.neroland.neromaps.store.ExploredMap;
 
 /**
- * Stage 5: no item, block entity or chunk NBT NeroMaps writes carries a UUID or a player name. Items: the atlas and
+ * No item, block entity or chunk NBT NeroMaps writes carries a UUID or a player name. Items: the atlas and
  * print components are serialised to NBT exactly as the game stores them and scanned. Block entities (the only thing
  * NeroMaps puts in chunk NBT) cannot be constructed without a bootstrapped registry, so their source is scanned: no
  * block, block entity, atlas or survival class touches a UUID, a profile or a player name.

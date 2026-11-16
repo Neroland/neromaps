@@ -126,7 +126,7 @@ public final class MapCommands {
         c.getSource().sendSuccess(() -> msg, false);
     }
 
-    // --- export (decision 008) -------------------------------------------------------------------------------
+    // --- export -------------------------------------------------------------------------------
 
     private static final java.util.Map<java.util.UUID, Long> EXPORTED = new java.util.HashMap<>();
 

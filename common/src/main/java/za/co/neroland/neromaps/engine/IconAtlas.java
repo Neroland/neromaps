@@ -13,7 +13,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 /**
- * The shared map icon atlas ({@code assets/neromaps/map/map_icons.json}, decision 013): icon id to its 16 x 16 cell
+ * The shared map icon atlas ({@code assets/neromaps/map/map_icons.json}): icon id to its 16 x 16 cell
  * in {@code textures/gui/map_icons.png}. Sibling layers name an icon id and ship no art; an unknown id resolves to
  * the generic fallback. Pure (Gson only); the client loads it from the resource manager, tests from the classpath.
  */

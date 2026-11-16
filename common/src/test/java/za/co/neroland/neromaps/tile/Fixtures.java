@@ -3,7 +3,7 @@ package za.co.neroland.neromaps.tile;
 import java.util.Random;
 
 /**
- * Synthetic terrain fixtures for the codec size and speed tests (decision 004 M1). Deterministic, shaped like
+ * Synthetic terrain fixtures for the codec size and speed tests. Deterministic, shaped like
  * captured terrain: plains with rivers and flowers, a deep ocean with a sand/gravel floor, and mountains.
  */
 public final class Fixtures {

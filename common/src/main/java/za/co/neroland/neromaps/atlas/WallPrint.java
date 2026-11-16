@@ -10,7 +10,7 @@ import za.co.neroland.neromaps.store.Waypoint;
  * what every panel of a wall-map array stores. An area and a dimension, <b>never an owner</b>: the centre of the
  * array in block coordinates and {@code span}, the blocks each panel block covers (north up, east right).
  *
- * <p>What a viewer sees of it is decided per viewer at read time (decision 007, the private reading): the wall map
+ * <p>What a viewer sees of it is decided per viewer at read time (the private reading): the wall map
  * draws server tiles through the same fog-checked path as the world map, so
  * every viewer sees only the parts of the area inside <i>their own</i> fog of war (or everything on a public-map
  * server). A wall map can never show anyone terrain they could not already see.

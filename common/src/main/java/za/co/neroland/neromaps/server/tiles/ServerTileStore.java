@@ -21,7 +21,7 @@ import za.co.neroland.neromaps.tile.TileKey;
 import za.co.neroland.neromaps.tile.TileLod;
 
 /**
- * One dimension's server tiles (decision 006), owned by the capture worker thread. LOD-0 tiles are updated chunk by
+ * One dimension's server tiles, owned by the capture worker thread. LOD-0 tiles are updated chunk by
  * chunk from scans and written as plain files ({@code <dir>/<lod>/<tx>.<tz>.nmt}) with atomic replace; parents at
  * LOD 1-4 are rebuilt incrementally from their four children whenever a child was written. Decoded tiles and their
  * encoded bytes are kept in memory up to a byte budget. A corrupt or unknown-schema file is deleted, counted, and its
@@ -73,29 +73,52 @@ public final class ServerTileStore implements LinkTiles.Source {
 
     // --- writes ------------------------------------------------------------------------------------------------
 
-    /** Writes one scanned chunk into its LOD-0 tile (loaded from disk first, so other chunks are kept). */
+    /**
+     * Writes one scanned chunk into its LOD-0 tile (loaded from disk first, so other chunks are kept). A rescan that
+     * leaves every pixel as it was (crops growing under a roof, redstone, furnaces) changes nothing: the tile is not
+     * marked unsaved, nothing is rewritten and the link module is told nothing, so block activity that does not change
+     * the map leaves no trace any viewer could read.
+     */
     public void apply(int chunkX, int chunkZ, ChunkColumns c, String[] blockIds, String[] biomeIds) {
         int tx = chunkX >> 4;
         int tz = chunkZ >> 4;
         long key = TileKey.tile(0, tx, tz);
         Tile t = tile(0, tx, tz);
+        boolean fresh = t == null;
         if (t == null) {
             t = new Tile(0);
-            tiles.put(key, t);
         }
         int x0 = (chunkX & 15) << 4;
         int z0 = (chunkZ & 15) << 4;
+        boolean diff = false;
         for (int z = 0; z < 16; z++) {
             for (int x = 0; x < 16; x++) {
                 int i = (z << 4) | x;
                 int f = c.flags[i] & 0xFF;
+                int ti = Tile.index(x0 + x, z0 + z);
                 if ((f & Tile.F_PRESENT) == 0) {
-                    t.set(x0 + x, z0 + z, 0, 0, 0, 0, 0);
+                    if (t.present(ti)) {
+                        t.set(x0 + x, z0 + z, 0, 0, 0, 0, 0);
+                        diff = true;
+                    }
                     continue;
                 }
-                t.set(x0 + x, z0 + z, f, c.height[i], t.internBlock(blockIds[i]), t.internBiome(biomeIds[i]),
-                        c.depth[i] & 0xFF);
+                int b = t.internBlock(blockIds[i]);
+                int bi = t.internBiome(biomeIds[i]);
+                int d = c.depth[i] & 0xFF;
+                int h = Math.max(Tile.MIN_HEIGHT, Math.min(Tile.MAX_HEIGHT, c.height[i]));
+                if (!t.present(ti) || (t.flags[ti] & 0xFF) != f || t.height[ti] != h || t.block[ti] != b
+                        || (t.biome[ti] & 0xFF) != bi || (t.depth[ti] & 0xFF) != d) {
+                    t.set(x0 + x, z0 + z, f, h, b, bi, d);
+                    diff = true;
+                }
             }
+        }
+        if (!diff) {
+            return;
+        }
+        if (fresh) {
+            tiles.put(key, t);
         }
         t.touchChunk(chunkX & 15, chunkZ & 15);
         t.unsaved = true;
@@ -103,6 +126,10 @@ public final class ServerTileStore implements LinkTiles.Source {
         Encoded old = encoded.remove(key);
         if (old != null) {
             encodedBytes -= old.bytes.length;
+        }
+        LinkTiles.Listener l = listener;
+        if (l != null) {
+            l.chunkChanged(chunkX, chunkZ);
         }
     }
 

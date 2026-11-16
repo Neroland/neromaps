@@ -221,7 +221,7 @@ class EngineTest {
         b.uploadBudget = 99;
         b.zoomStep(true);
         assertEquals(MinimapSettings.MAX_SIZE, b.size);
-        assertEquals(16, b.uploadBudget, "decision 004 B2 cap");
+        assertEquals(16, b.uploadBudget, "upload budget cap");
         Files.writeString(f, "size=abc\nshape=triangle\n");
         MinimapSettings c = new MinimapSettings();
         c.load(f);

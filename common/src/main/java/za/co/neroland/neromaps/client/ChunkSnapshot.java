@@ -26,7 +26,7 @@ import za.co.neroland.neromaps.scan.ColumnSource;
 
 /**
  * An immutable copy of what the scan needs from one loaded chunk, taken on the client thread and read on the
- * scan worker (decision 002): the WORLD_SURFACE heights, copies of the block-state containers in the band the scan
+ * scan worker: the WORLD_SURFACE heights, copies of the block-state containers in the band the scan
  * can reach, and the biome of each 4 x 4 quart column at the surface. Nothing else leaves the chunk.
  */
 public final class ChunkSnapshot implements ColumnSource {

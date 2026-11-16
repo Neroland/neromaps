@@ -1,7 +1,7 @@
 package za.co.neroland.neromaps.colour;
 
 /**
- * The NeroMaps palette (decision 013 section 1), byte-for-byte with the art tools. ARGB, opaque unless stated.
+ * The NeroMaps palette, byte-for-byte with the art tools. ARGB, opaque unless stated.
  */
 public final class MapPalette {
 
@@ -47,7 +47,7 @@ public final class MapPalette {
     private MapPalette() {
     }
 
-    /** The seven marker colours in picker order (decision 013 section 1: Okabe-Ito derived). */
+    /** The seven marker colours in picker order (Okabe-Ito derived). */
     public static final int[] MARKERS = {M_ORANGE, M_SKY, M_GREEN, M_YELLOW, M_VERMILLION, M_PURPLE, M_WHITE};
     /** The same seven roles in Paul Tol's "bright" scheme, the alternative colour-blind-safe palette. */
     public static final int[] MARKERS_TOL = {0xFFEE6677, 0xFF66CCEE, 0xFF228833, 0xFFCCBB44, 0xFFAA3377, 0xFF4477AA,

@@ -8,7 +8,7 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.UUIDUtil;
 
 /**
- * A pending offer, stored on the <em>recipient's</em> record (decision 009). Only the recipient can accept or decline
+ * A pending offer, stored on the <em>recipient's</em> record. Only the recipient can accept or decline
  * it, by the server-issued random {@code requestId}; nobody can accept on someone else's behalf.
  *
  * @param day the epoch day it was made (requests expire after {@link #EXPIRE_DAYS})

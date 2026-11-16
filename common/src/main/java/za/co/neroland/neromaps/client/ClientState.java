@@ -196,6 +196,7 @@ public final class ClientState implements ClientSink {
     }
 
     private void clear() {
+        EXPORTS.clear();
         serverHasMod = false;
         worldId = "default";
         policy = PolicySnapshot.CLIENT_ONLY;
@@ -276,20 +277,40 @@ public final class ClientState implements ClientSink {
         PlayerMessages.chat(mc.player, msg);
     }
 
-    /** Writes the server's export of this player's data to {@code <game>/neromaps/exports/} on this machine. */
+    /** The export the server sent last, waiting for the player's Save click. */
+    public static final ExportInbox EXPORTS = new ExportInbox();
+
+    /**
+     * The server's export of this player's data. Nothing is written on arrival (a server may send one unasked, as
+     * often as it likes): it is held in memory and saved to {@code <game>/neromaps/exports/} only when the player
+     * clicks Save, see {@link #saveExport()}.
+     */
     @Override
     public void export(Payloads.Export p) {
+        Minecraft mc = Minecraft.getInstance();
+        if (mc.player == null || !EXPORTS.hold(p.deflated())) {
+            return;
+        }
+        PlayerMessages.chat(mc.player, Component.translatable("neromaps.export.arrived").append(" ")
+                .append(button("neromaps.export.button.save", "/" + ClientCommands.ROOT + " export save",
+                        ChatFormatting.GREEN)));
+    }
+
+    /** {@code /neromaps-client export save}: writes the held export, if any (one click, one file). */
+    public static void saveExport() {
         Minecraft mc = Minecraft.getInstance();
         if (mc.player == null) {
             return;
         }
-        String file = "neromaps-export-" + java.time.LocalDateTime.now()
+        if (!EXPORTS.holding()) {
+            PlayerMessages.chat(mc.player, Component.translatable("neromaps.export.none"));
+            return;
+        }
+        String file = ExportInbox.PREFIX + java.time.LocalDateTime.now()
                 .format(java.time.format.DateTimeFormatter.ofPattern("yyyyMMdd-HHmmss")) + ".json";
         try {
-            byte[] json = za.co.neroland.neromaps.store.PlayerExport.inflate(p.deflated());
             java.nio.file.Path dir = mc.gameDirectory.toPath().resolve("neromaps").resolve("exports");
-            java.nio.file.Files.createDirectories(dir);
-            java.nio.file.Files.write(dir.resolve(file), json);
+            EXPORTS.save(dir, file);
             PlayerMessages.chat(mc.player, Component.translatable("neromaps.export.saved", "neromaps/exports/" + file));
         } catch (java.io.IOException | RuntimeException e) {
             PlayerMessages.chat(mc.player, Component.translatable("neromaps.export.failed"));

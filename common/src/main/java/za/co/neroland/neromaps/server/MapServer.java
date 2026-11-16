@@ -188,7 +188,8 @@ public final class MapServer {
         SESSIONS.remove(id);
         ServerHandlers.forget(id);
         LayerService.left(id);
-        za.co.neroland.neromaps.server.tiles.TileService.dropViewer(id);
+        za.co.neroland.neromaps.server.tiles.TileService.forget(id);
+        za.co.neroland.neromaps.survival.SurvivalHandlers.forget(id);
     }
 
     public static void hello(MinecraftServer s, ServerPlayer p) {
@@ -218,7 +219,7 @@ public final class MapServer {
         }
     }
 
-    // --- exploration (decision 007) --------------------------------------------------------------------------
+    // --- exploration --------------------------------------------------------------------------
 
     private static void explore(MinecraftServer s, List<ServerPlayer> players) {
         MapPlayerState state = PlayerStore.get(s);
@@ -256,7 +257,7 @@ public final class MapServer {
         }
     }
 
-    // --- live positions (decision 009) -----------------------------------------------------------------------
+    // --- live positions -----------------------------------------------------------------------
 
     /** True when {@code p} may currently be shown to others at all (never sneaking, invisible or spectating). */
     public static boolean shareable(ServerPlayer p) {
@@ -431,7 +432,7 @@ public final class MapServer {
         } else {
             LayerService.left(erased);
         }
-        za.co.neroland.neromaps.server.tiles.TileService.dropViewer(erased);
+        za.co.neroland.neromaps.server.tiles.TileService.forget(erased);
     }
 
     /** Server counter lines for {@code /neromaps perf} (global numbers only). */
@@ -440,6 +441,7 @@ public final class MapServer {
         lines.add("sessions " + SESSIONS.size());
         lines.addAll(CaptureService.perfLines());
         lines.addAll(LayerService.perfLines());
+        lines.addAll(za.co.neroland.neromaps.server.tiles.LinkTiles.LIVE.perfLines());
         return lines;
     }
 }

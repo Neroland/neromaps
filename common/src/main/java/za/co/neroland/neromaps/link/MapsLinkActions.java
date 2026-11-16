@@ -25,7 +25,7 @@ import za.co.neroland.neromaps.store.Waypoint;
 /**
  * The write side of the {@code neromaps} link module: waypoint add / edit / delete and share offer / accept /
  * decline / revoke, for the requesting player's own record only, validated exactly as in game (name filter, limit,
- * dimension, coordinate clamp, consent rules of decision 009) and limited to {@value #PER_MINUTE} actions a minute per
+ * dimension, coordinate clamp, consent rules) and limited to {@value #PER_MINUTE} actions a minute per
  * player (offers also to 10 a minute). All of them touch only the store, so they work while the player is offline.
  * No teleport, no world change. Refusals are {@code VALIDATION} with a short reason. Server thread only.
  */
@@ -251,7 +251,7 @@ public final class MapsLinkActions implements LinkActionHandler {
         return LinkActionResult.ok(o);
     }
 
-    // --- sharing (decision 009) -------------------------------------------------------------------------------
+    // --- sharing -------------------------------------------------------------------------------
 
     private LinkActionResult shareOffer(MapsLinkWorld w, UUID me, JsonObject p) {
         if (!offers.tryAcquire(me)) {
@@ -266,8 +266,9 @@ public final class MapsLinkActions implements LinkActionHandler {
             return refuse("no_player");
         }
         ShareScope scope = scope(p);
-        if (scope == null) {
-            return refuse("bad_scope");
+        if (scope == null || (scope.kind() == ShareScope.Kind.EXPLORED_MAP && !ShareScope.ALL.equals(scope.arg())
+                && !MapsLinkSnapshots.knownDimension(w, scope.arg()))) {
+            return refuse("bad_scope"); // a map share names "*" or one of the server's dimensions, nothing else
         }
         long[] id = new long[1];
         ConsentLedger.Offer o = new ConsentLedger(w.state(), new java.security.SecureRandom()::nextLong)

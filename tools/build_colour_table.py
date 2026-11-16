@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Builds the NeroMaps block and biome colour table (decision 003).
+"""Builds the NeroMaps block and biome colour table.
 
 Reads block textures from a vanilla client jar and from each Nero mod's own namespace, averages the top face of
 every block (pixels with alpha >= 128, in linear RGB, back to sRGB), records the biome tint class, and writes one

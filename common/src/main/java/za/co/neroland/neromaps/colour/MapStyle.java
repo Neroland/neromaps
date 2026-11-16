@@ -1,6 +1,6 @@
 package za.co.neroland.neromaps.colour;
 
-/** The map colour styles (decision 013 section 2). All are draw-time transforms over one tile. */
+/** The map colour styles. All are draw-time transforms over one tile. */
 public enum MapStyle {
     /** Base x biome tint x hillshade x water steps; night darkening is a vertex colour, not re-rasterised. */
     DAY_NIGHT,

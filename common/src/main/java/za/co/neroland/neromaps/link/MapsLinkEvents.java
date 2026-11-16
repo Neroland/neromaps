@@ -17,7 +17,6 @@ import za.co.neroland.nerolandcore.link.NeroLinkRegistry;
 import za.co.neroland.neromaps.fog.Visibility;
 import za.co.neroland.neromaps.server.tiles.LinkTiles;
 import za.co.neroland.neromaps.store.MapPlayerState;
-import za.co.neroland.neromaps.tile.TileKey;
 
 /**
  * Live events of the {@code neromaps} link module, player-scoped through Core's event bus (the bridge's notify
@@ -133,9 +132,13 @@ public final class MapsLinkEvents {
         }
     }
 
-    /** Coarse tile events: changed LOD-0 blocks each recent app reader can see. */
+    /**
+     * Coarse tile events: for each recent app reader, the LOD-0 blocks holding at least one changed chunk <em>that
+     * reader can see</em>. Filtered per chunk, not per block: a change in a chunk outside a reader's fog never puts a
+     * block in their event, even when they have explored other chunks of the same block.
+     */
     static void tiles(MapPlayerState state, LinkTiles tiles, boolean publicMap, long nowMs) {
-        Map<String, long[]> changed = tiles.drainChangedBlocks();
+        Map<String, long[]> changed = tiles.drainChangedChunks();
         if (changed.isEmpty()) {
             return;
         }
@@ -143,18 +146,23 @@ public final class MapsLinkEvents {
         for (UUID viewer : viewers) {
             for (Map.Entry<String, long[]> e : changed.entrySet()) {
                 Visibility v = Visibility.of(state, viewer, e.getKey(), publicMap);
+                // sorted, so neither order nor count depends on anything outside this reader's fog
+                java.util.TreeSet<Long> seen = new java.util.TreeSet<>();
+                for (long chunk : e.getValue()) {
+                    int cx = LinkTiles.chunkX(chunk);
+                    int cz = LinkTiles.chunkZ(chunk);
+                    if (v.chunk(cx, cz)) {
+                        seen.add(LinkTiles.chunkKey(cx >> 7, cz >> 7)); // 16 chunks per tile, 8 tiles per block
+                    }
+                }
                 JsonArray blocks = new JsonArray();
-                for (long key : e.getValue()) {
-                    int bx = TileKey.tx(key);
-                    int bz = TileKey.tz(key);
-                    if (visible(v, bx, bz)) {
-                        JsonArray b = new JsonArray(2);
-                        b.add(bx);
-                        b.add(bz);
-                        blocks.add(b);
-                        if (blocks.size() >= MAX_BLOCKS_PER_EVENT) {
-                            break;
-                        }
+                for (long k : seen) {
+                    JsonArray b = new JsonArray(2);
+                    b.add(LinkTiles.chunkX(k));
+                    b.add(LinkTiles.chunkZ(k));
+                    blocks.add(b);
+                    if (blocks.size() >= MAX_BLOCKS_PER_EVENT) {
+                        break;
                     }
                 }
                 if (!blocks.isEmpty()) {
@@ -166,17 +174,5 @@ public final class MapsLinkEvents {
                 }
             }
         }
-    }
-
-    private static boolean visible(Visibility v, int bx, int bz) {
-        if (v.everything()) {
-            return true;
-        }
-        for (int i = 0; i < LinkTiles.TILES; i++) {
-            if (v.anyInTile(bx * LinkTiles.BLOCK + (i & 7), bz * LinkTiles.BLOCK + (i >> 3))) {
-                return true;
-            }
-        }
-        return false;
     }
 }

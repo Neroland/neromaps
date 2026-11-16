@@ -2,12 +2,15 @@ package za.co.neroland.neromaps.fog;
 
 import za.co.neroland.neromaps.store.ExploredMap;
 import za.co.neroland.neromaps.tile.Tile;
+import za.co.neroland.neromaps.tile.TileCodec;
 
 /**
- * Per-chunk visibility of one tile and the masked copy built from it (decision 007). At LOD {@code l} a tile covers
- * {@code 16 << l} chunks per side and one chunk covers {@code 16 >> l} pixels per side (LOD is capped at 4, so every
- * pixel lies inside exactly one chunk). Hidden pixels are cleared to absent, so a masked tile carries nothing from
- * outside the viewer's fog. The etag of a masked tile mixes the mask in, so etags never reveal hidden content.
+ * Per-chunk visibility of one tile and the masked copy built from it (fog of war is an access control on every server
+ * read of terrain). At LOD {@code l} a tile covers {@code 16 << l} chunks per side and one chunk covers {@code 16 >> l}
+ * pixels per side (LOD is capped at 4, so every pixel lies inside exactly one chunk). Hidden pixels are cleared to
+ * absent, so a masked tile carries nothing from outside the viewer's fog. The etag a viewer sees for a masked tile is
+ * the content hash of the masked bytes themselves ({@link #encodeMasked}), so it moves only when something the viewer
+ * can see moves: a change in a hidden chunk leaves it, and every other signal derived from it, unchanged.
  */
 public final class TileMask {
 
@@ -130,14 +133,23 @@ public final class TileMask {
         return h;
     }
 
-    /** The etag a viewer sees: the content etag unchanged when fully visible, mixed with the mask otherwise. */
-    public long etag(long contentEtag) {
-        if (all()) {
-            return contentEtag;
+    /** Bytes held by the mask bits (cache accounting). */
+    public long byteSize() {
+        return bits.length * 8L;
+    }
+
+    /**
+     * The encoded masked copy of {@code t} ({@link TileCodec#encode} of {@link #apply}), or null when the masked copy has
+     * no present pixel: a tile the viewer can see nothing of is reported exactly like a missing one. Its
+     * {@link TileCodec#contentHash} is the etag the viewer sees; it depends on the visible pixels only.
+     */
+    public byte @org.jetbrains.annotations.Nullable [] encodeMasked(Tile t) {
+        Tile out = apply(t);
+        boolean any = false;
+        for (int i = 0; i < Tile.AREA && !any; i++) {
+            any = out.present(i);
         }
-        long h = contentEtag ^ (hash() * 0x9E3779B97F4A7C15L);
-        h ^= h >>> 33;
-        return h == 0 ? 1 : h;
+        return any ? TileCodec.encode(out) : null;
     }
 
     /** A copy of {@code t} with every pixel of a hidden chunk cleared to absent. */

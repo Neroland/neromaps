@@ -14,7 +14,7 @@ import za.co.neroland.neromaps.atlas.WallPrint;
 import za.co.neroland.neromaps.block.SimpleTickingBlockEntity;
 
 /**
- * The Map Table's flat map of its surroundings (decision 013's fallback for the holographic relief), centred on the
+ * The Map Table's flat map of its surroundings (the fallback for a holographic relief), centred on the
  * table, {@code span} blocks across, drawn in the glass top inside x/z 1..15. Fog-checked server tiles only.
  *
  * <p><b>Culling — never blanket true:</b> within {@value #RANGE} blocks and only when the camera is above the top;

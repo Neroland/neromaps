@@ -4,7 +4,7 @@ package za.co.neroland.neromaps.engine;
  * Screen positions and texture coordinates of the minimap surface: one quad when square, a fan of
  * {@link #SEGMENTS} wedges when round (masking by geometry: no stencil, no shader, no pre-masked texture).
  * Rotation turns the texture coordinates, not the screen shape; the texture is a toroidal window sampled with
- * REPEAT, so coordinates outside 0..1 wrap. Lifted from the Stage 0 spike. Allocation-free.
+ * REPEAT, so coordinates outside 0..1 wrap. Allocation-free.
  */
 public final class MinimapGeometry {
 

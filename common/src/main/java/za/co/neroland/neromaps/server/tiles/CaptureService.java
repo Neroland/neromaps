@@ -26,7 +26,7 @@ import za.co.neroland.neromaps.scan.ChunkColumns;
 import za.co.neroland.neromaps.scan.ColumnScanner;
 
 /**
- * Server terrain capture (decision 006). Block changes and newly explored chunks only add a dirty mark (always on,
+ * Server terrain capture. Block changes and newly explored chunks only add a dirty mark (always on,
  * cheap). Capture itself runs only while the {@code serverCapture} policy is on <em>and</em> something needs server
  * tiles: a tile request within {@code captureDemandMinutes}, or a loaded wall map. Then, at the end of each tick, it
  * snapshots dirty chunks that are already loaded until {@code captureBudgetMicros} is spent (a quarter of it while the
@@ -91,7 +91,7 @@ public final class CaptureService {
         demandUntil = System.nanoTime() + NeroMapsConfig.captureDemandMinutes() * 60_000_000_000L;
     }
 
-    /** Loaded wall maps (maintained by the wall map block entities in a later stage). */
+    /** Loaded wall maps and map tables (maintained by their block entities through the placed-block index). */
     public static void setWallMaps(int count) {
         wallMaps = Math.max(0, count);
     }
