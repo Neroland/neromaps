@@ -101,6 +101,19 @@ jobs:
       - name: Make Gradle wrapper executable
         run: chmod +x ./gradlew
 
+      # setup-gradle restores ~/.gradle/caches, which includes ForgeGradle's Minecraft Maven
+      # (mavenizer) cache. If an earlier run left a truncated download there, every later run
+      # restores it, and the Forge cells fail at recompile[forge][official-*] with
+      # "error reading .../JarJarMetadata-0.3.26.jar; zip file is empty". A valid jar is never
+      # under 100 bytes (an empty zip is 22), so drop anything smaller and let mavenizer
+      # download it again. Logs only cache-relative paths.
+      - name: Purge truncated jars from the mavenizer cache
+        run: |
+          cache="${GRADLE_USER_HOME:-$HOME/.gradle}/caches/minecraftforge/forgegradle/mavenizer/caches"
+          if [ -d "$cache" ]; then
+            find "$cache" -type f -name '*.jar' -size -100c -print -delete | sed "s|^$cache/|purged: |"
+          fi
+
       # The repo's gradle.properties sets -Xmx12G for local dev machines. On a 16 GB hosted
       # runner that heap, plus the forked JVMs ForgeGradle's Minecraft Maven uses to decompile
       # and recompile Minecraft for nine Forge cells, exhausts memory and fails
