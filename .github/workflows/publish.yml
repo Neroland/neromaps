@@ -101,6 +101,17 @@ jobs:
       - name: Make Gradle wrapper executable
         run: chmod +x ./gradlew
 
+      # The repo's gradle.properties sets -Xmx12G for local dev machines. On a 16 GB hosted
+      # runner that heap, plus the forked JVMs ForgeGradle's Minecraft Maven uses to decompile
+      # and recompile Minecraft for nine Forge cells, exhausts memory and fails
+      # recompile[forge][official-*]. Gradle-user-home properties override the project file,
+      # so cap the daemon here (the sibling repos build all 27 cells on 3 GB) without touching
+      # the local setting.
+      - name: Cap Gradle memory for the hosted runner
+        run: |
+          mkdir -p "${GRADLE_USER_HOME:-$HOME/.gradle}"
+          echo "org.gradle.jvmargs=-Xmx4G -XX:MaxMetaspaceSize=1G" >> "${GRADLE_USER_HOME:-$HOME/.gradle}/gradle.properties"
+
       # --- Neroland Core dependency ---
       # Core is consumed as a published Maven artifact from GitHub Packages (see the
       # NerolandCoreGitHubPackages repo in stonecutter.gradle). The version comes solely from
