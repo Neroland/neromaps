@@ -41,6 +41,8 @@ public final class MapSettingsScreen extends Screen {
     private enum Tab { MINIMAP, STYLE, READOUTS, WAYPOINTS, PRESETS, ACCESSIBILITY }
 
     private static final int ROW = 22;
+    /** Padding between the preview well's edge and the minimap's map area (room for the frame and north tab). */
+    private static final int WELL_PAD = 12;
     private static Tab lastTab = Tab.MINIMAP;
 
     private final @Nullable Screen parent;
@@ -74,7 +76,7 @@ public final class MapSettingsScreen extends Screen {
         boolean narrow = panelW < 460;
         int tabW = narrow ? 70 : 96;
         controlsX = left + tabW + 6;
-        int previewW = s().size + 24;
+        int previewW = s().size + WELL_PAD * 2 + 12;
         controlsW = Math.max(150, Math.min(220, panelW - tabW - 12 - previewW));
         previewX = controlsX + controlsW + 12;
         previewY = top + 4;
@@ -361,19 +363,23 @@ public final class MapSettingsScreen extends Screen {
     private void drawExtras(GuiGraphicsExtractor g) {
         g.text(font, title.getString(), left, 8, MapPalette.TEXT);
         // the preview well: the real minimap, with every value as set right now
+        // The well holds the whole minimap as the HUD draws it: frame, north tab and the readout block under it, so
+        // the caption below never shares space with the readouts however many are switched on.
         int size = s().size;
-        int well = size + 16;
-        g.fill(previewX - 1, previewY - 1, previewX + well + 1, previewY + well + 1, MapPalette.PANEL_EDGE);
-        g.fill(previewX, previewY, previewX + well, previewY + well, MapPalette.PANEL);
+        int fw = MinimapFrame.frameWidth(s().border, s().highContrast || s().style == MapStyle.HIGH_CONTRAST);
+        int well = size + WELL_PAD * 2;
+        int wellH = well + (s().enabled ? fw + za.co.neroland.neromaps.engine.MinimapLayout.readoutHeight(
+                za.co.neroland.neromaps.client.Readouts.count) : 0);
+        g.fill(previewX - 1, previewY - 1, previewX + well + 1, previewY + wellH + 1, MapPalette.PANEL_EDGE);
+        g.fill(previewX, previewY, previewX + well, previewY + wellH, MapPalette.PANEL);
         if (s().enabled) {
-            MinimapHud.preview(g, previewX + 8 - MinimapFrame.frameWidth(s().border, s().highContrast), previewY + 8
-                    - MinimapFrame.frameWidth(s().border, s().highContrast));
+            MinimapHud.preview(g, previewX + WELL_PAD - fw, previewY + WELL_PAD - fw);
         } else {
             g.text(font, Component.translatable("gui.neromaps.settings.preview_off").getString(), previewX + 6,
                     previewY + well / 2, MapPalette.TEXT_SECONDARY);
         }
         g.text(font, Component.translatable("gui.neromaps.settings.preview").getString(), previewX,
-                previewY + well + 4, MapPalette.TEXT_SECONDARY);
+                previewY + wellH + 5, MapPalette.TEXT_SECONDARY);
         for (Note n : notes) {
             g.text(font, n.text().getString(), n.x(), n.y(), MapPalette.TEXT_SECONDARY);
         }

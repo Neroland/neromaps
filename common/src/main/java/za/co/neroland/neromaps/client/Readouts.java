@@ -20,6 +20,9 @@ public final class Readouts {
     /** Lines to draw this frame, in order; only the first {@link #count} are valid. */
     public static final String[] LINES = new String[MAX];
     public static int count;
+    /** True when {@code LINES[0]} is the coordinates; {@link #AXIS} then holds x, y, z as separate strings. */
+    public static boolean coordsFirst;
+    public static final String[] AXIS = {"", "", ""};
 
     private static int lx = Integer.MIN_VALUE;
     private static int ly;
@@ -51,9 +54,13 @@ public final class Readouts {
                 ly = pos.getY();
                 lz = pos.getZ();
                 coords = lx + ", " + ly + ", " + lz;
+                AXIS[0] = Integer.toString(lx);
+                AXIS[1] = Integer.toString(ly);
+                AXIS[2] = Integer.toString(lz);
             }
             LINES[n++] = coords;
         }
+        coordsFirst = s.showCoords;
         if (s.showFacing) {
             int f = Math.floorMod(Math.round(player.getYRot() / 45f), 8);
             if (f != lastFacing) {

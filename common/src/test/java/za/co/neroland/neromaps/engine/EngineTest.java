@@ -123,6 +123,15 @@ class EngineTest {
         assertTrue(lod.present(Tile.index(3 * 8, 4 * 8)));
         assertTrue(lod.present(Tile.index(128 + 4 * 8, 4 * 8)), "the east child landed in the east half");
         assertTrue(cache.exists(TileDiskCache.tileFile(dir, 1, 0, 0)), "built LODs are cached");
+        // a change under a built LOD tile keeps it on screen while its replacement is made (no blank frame)
+        s2.apply(result(5, 5, "minecraft:dirt", 80, false));
+        s2.flush();
+        assertTrue(s2.request(1, 0, 0) == lod, "a stale LOD tile is still served, never dropped");
+        s2.tick(0, 0);
+        Tile fresh = s2.request(1, 0, 0);
+        assertNotNull(fresh);
+        assertTrue(fresh != lod, "and is replaced once rebuilt");
+        assertTrue(fresh.present(Tile.index(5 * 8, 5 * 8)), "with the change in it");
     }
 
     @Test

@@ -187,12 +187,22 @@ public final class ClientState implements ClientSink {
 
     /** Client tick: forgets everything when the connection changes (logout, server switch). */
     public void tick(Minecraft mc) {
+        attach(mc);
+        WallTiles.tick();
+    }
+
+    /**
+     * Notices a new connection and forgets the old one's state. Runs on the client tick and before every server
+     * message is applied: the server sends its hello and the waypoints the moment the player joins, and when those
+     * were handled before the next tick saw the new connection, that tick wiped them (no waypoints until the next
+     * sync, most often right after starting the game).
+     */
+    private void attach(Minecraft mc) {
         Object c = mc.getConnection();
         if (c != connection) {
             connection = c;
             clear();
         }
-        WallTiles.tick();
     }
 
     private void clear() {
@@ -220,6 +230,7 @@ public final class ClientState implements ClientSink {
 
     @Override
     public void hello(Payloads.Hello p) {
+        attach(Minecraft.getInstance());
         serverHasMod = true;
         String id = za.co.neroland.neromaps.cache.TileDiskCache.safe(p.worldId());
         boolean changed = !id.equals(worldId);
@@ -233,6 +244,7 @@ public final class ClientState implements ClientSink {
 
     @Override
     public void waypoints(Payloads.Waypoints p) {
+        attach(Minecraft.getInstance());
         own = p.own();
         deaths = p.deaths();
         shared = p.shared();
@@ -241,6 +253,7 @@ public final class ClientState implements ClientSink {
 
     @Override
     public void shares(Payloads.Shares p) {
+        attach(Minecraft.getInstance());
         boolean hadMap = shares != null && !shares.incoming().isEmpty();
         shares = p;
         if (hadMap && p.incoming().stream().noneMatch(l -> l.scope().kind() == ShareScope.Kind.EXPLORED_MAP)) {
@@ -252,12 +265,14 @@ public final class ClientState implements ClientSink {
 
     @Override
     public void positions(Payloads.Positions p) {
+        attach(Minecraft.getInstance());
         positions = p.positions();
         version++;
     }
 
     @Override
     public void notice(Payloads.Notice p) {
+        attach(Minecraft.getInstance());
         Minecraft mc = Minecraft.getInstance();
         if (mc.player == null) {
             return;
@@ -287,6 +302,7 @@ public final class ClientState implements ClientSink {
      */
     @Override
     public void export(Payloads.Export p) {
+        attach(Minecraft.getInstance());
         Minecraft mc = Minecraft.getInstance();
         if (mc.player == null || !EXPORTS.hold(p.deflated())) {
             return;
@@ -329,6 +345,7 @@ public final class ClientState implements ClientSink {
 
     @Override
     public void layerCatalogue(Payloads.LayerCatalogue p) {
+        attach(Minecraft.getInstance());
         catalogue.clear();
         for (Payloads.LayerInfo l : p.layers()) {
             catalogue.put(l.id(), l);
@@ -338,6 +355,7 @@ public final class ClientState implements ClientSink {
 
     @Override
     public void layerDelta(Payloads.LayerDelta p) {
+        attach(Minecraft.getInstance());
         if (p.reset() || !p.dimension().equals(layerDimension)) {
             items.clear();
             layerDimension = p.dimension();
@@ -355,12 +373,14 @@ public final class ClientState implements ClientSink {
 
     @Override
     public void dimensionBadges(Payloads.DimensionBadges p) {
+        attach(Minecraft.getInstance());
         badges = p.badges();
         version++;
     }
 
     @Override
     public void signpostOpen(Payloads.SignpostOpen p) {
+        attach(Minecraft.getInstance());
         Minecraft mc = Minecraft.getInstance();
         if (mc.player != null) {
             ClientMap.setScreen(mc, new za.co.neroland.neromaps.client.screen.SignpostEditScreen(p));
@@ -369,6 +389,7 @@ public final class ClientState implements ClientSink {
 
     @Override
     public void tile(Payloads.TileData p) {
+        attach(Minecraft.getInstance());
         WallTiles.accept(p);
         if (!p.dimension().equals(sharedTilesDim)) {
             sharedTiles.clear();
@@ -395,6 +416,7 @@ public final class ClientState implements ClientSink {
 
     @Override
     public void perf(Payloads.Perf p) {
+        attach(Minecraft.getInstance());
         Minecraft mc = Minecraft.getInstance();
         PerfOverlay.serverLines = List.copyOf(p.serverLines());
         switch (p.op()) {

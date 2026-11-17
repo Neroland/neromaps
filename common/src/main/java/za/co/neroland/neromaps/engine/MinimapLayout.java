@@ -12,6 +12,14 @@ public final class MinimapLayout {
 
     public static final int EFFECT_ROW = 26;
     public static final int READOUT_LINE = 10;
+    /** Space between the frame and the readout block, and the block's inner padding above and below its text. */
+    public static final int READOUT_GAP = 2;
+    public static final int READOUT_PAD = 4;
+
+    /** Height the readout block takes under the map, gap included; 0 with no lines. */
+    public static int readoutHeight(int lines) {
+        return lines > 0 ? READOUT_GAP + lines * READOUT_LINE + READOUT_PAD * 2 - 2 : 0;
+    }
 
     /** Map area (inside the frame). */
     public int left;
@@ -38,7 +46,7 @@ public final class MinimapLayout {
         this.readoutLines = readoutLines;
         int m = s.margin;
         int box = size + frame * 2;
-        int readH = readoutLines > 0 ? readoutLines * READOUT_LINE + 2 : 0;
+        int readH = readoutHeight(readoutLines);
         int x;
         int y;
         Anchor a = s.anchor;
@@ -71,7 +79,7 @@ public final class MinimapLayout {
         left = x + frame;
         top = y + frame;
         readoutX = left;
-        readoutY = top + size + frame + 2;
+        readoutY = top + size + frame + READOUT_GAP;
     }
 
     private static int clamp(int v, int lo, int hi) {

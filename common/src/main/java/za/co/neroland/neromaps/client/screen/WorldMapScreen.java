@@ -94,33 +94,62 @@ public final class WorldMapScreen extends Screen {
             textures = new WorldMapTextures(budgetTextures);
         }
         listDimensions();
-        int y = 4;
-        dimButton = addRenderableWidget(Button.builder(dimLabel(), b -> cycleDimension()).bounds(4, y, 150, 20).build());
+        // The toolbar flows: the Layers / Waypoints column keeps the right edge, and the left group takes the width
+        // its labels need and wraps onto further rows when the window is narrow in GUI pixels (a high GUI scale, a
+        // small window, a long translation), so no two buttons ever share space.
+        Component layersLabel = Component.translatable("gui.neromaps.worldmap.layers");
+        Component waypointsLabel = Component.translatable("gui.neromaps.worldmap.waypoints.header");
+        Component settingsLabel = Component.translatable("gui.neromaps.worldmap.settings");
+        int rightW = Math.min(RIGHT_W, Math.max(60, Math.max(font.width(layersLabel), font.width(waypointsLabel)) + 12));
+        rightW = Math.min(rightW, Math.max(60, width / 3));
+        int rightX = width - rightW - 4;
+        flowX = 4;
+        flowY = 4;
+        flowLimit = rightX - 4;
+        int dimW = 90;
+        for (int i = 0; i < Math.max(1, dimensions.size()); i++) {
+            dimW = Math.max(dimW, font.width(dimLabel(i)) + 12);
+        }
+        dimW = Math.min(dimW, 150);
+        int followW = Math.max(font.width(Component.translatable("gui.neromaps.worldmap.follow.on")),
+                font.width(Component.translatable("gui.neromaps.worldmap.follow.off"))) + 12;
+        int measureW = Math.max(font.width(Component.translatable("gui.neromaps.worldmap.measure.on")),
+                font.width(Component.translatable("gui.neromaps.worldmap.measure.off"))) + 12;
+        int settingsW = font.width(settingsLabel) + 12;
+        int w = flow(dimW);
+        dimButton = addRenderableWidget(Button.builder(dimLabel(), b -> cycleDimension())
+                .bounds(flowX - w - 4, flowY, w, 20).build());
+        w = flow(followW);
         followButton = addRenderableWidget(Button.builder(followLabel(), b -> {
             follow = !follow;
             b.setMessage(followLabel());
-        }).bounds(158, y, 90, 20).build());
+        }).bounds(flowX - w - 4, flowY, w, 20).build());
+        w = flow(measureW);
         measureButton = addRenderableWidget(Button.builder(measureLabel(), b -> {
             measuring = !measuring;
             measureAx = Double.NaN;
             measureBx = Double.NaN;
             b.setMessage(measureLabel());
-        }).bounds(252, y, 90, 20).build());
-        addRenderableWidget(Button.builder(Component.translatable("gui.neromaps.worldmap.settings"), b ->
+        }).bounds(flowX - w - 4, flowY, w, 20).build());
+        w = flow(settingsW);
+        addRenderableWidget(Button.builder(settingsLabel, b ->
                 ClientMap.setScreen(Minecraft.getInstance(),
                         new za.co.neroland.neromaps.client.screen.MapSettingsScreen(this)))
-                .bounds(346, y, 70, 20).tooltip(net.minecraft.client.gui.components.Tooltip.create(
+                .bounds(flowX - w - 4, flowY, w, 20).tooltip(net.minecraft.client.gui.components.Tooltip.create(
                         Component.translatable("gui.neromaps.worldmap.settings.tooltip"))).build());
-        addRenderableWidget(Button.builder(Component.translatable("gui.neromaps.worldmap.layers"), b -> {
+        badgeY = flowY + 24;
+        addRenderableWidget(Button.builder(layersLabel, b -> {
             panel = panel == Panel.LAYERS ? Panel.NONE : Panel.LAYERS;
             page = 0;
             rebuildWidgets();
-        }).bounds(width - 98, y, 94, 20).build());
-        addRenderableWidget(Button.builder(Component.translatable("gui.neromaps.worldmap.waypoints.header"), b -> {
+        }).bounds(rightX, 4, rightW, 20).build());
+        addRenderableWidget(Button.builder(waypointsLabel, b -> {
             panel = panel == Panel.WAYPOINTS ? Panel.NONE : Panel.WAYPOINTS;
             page = 0;
             rebuildWidgets();
-        }).bounds(width - 98, y + 24, 94, 20).build());
+        }).bounds(rightX, 28, rightW, 20).build());
+        // the side panel starts under whichever is taller: the two-button right column or the wrapped left group
+        panelTop = Math.max(52, flowY + 24);
         if (panel == Panel.LAYERS) {
             panelRows = layerRows();
         } else if (panel == Panel.WAYPOINTS) {
@@ -128,6 +157,33 @@ public final class WorldMapScreen extends Screen {
         } else {
             panelRows = 0;
         }
+    }
+
+    // --- toolbar flow ------------------------------------------------------------------------------------------
+
+    /** Widest the Layers / Waypoints column gets. */
+    private static final int RIGHT_W = 94;
+    private int flowX;
+    private int flowY;
+    private int flowLimit;
+    /** Top of the side panel's content, below the toolbar however many rows it took. */
+    private int panelTop = 52;
+    /** Row of the dimension badges, under the last toolbar row of the left group. */
+    private int badgeY = 28;
+
+    /**
+     * Reserves the next toolbar slot of the wanted width, wrapping to a new row when it would cross the right
+     * column, and returns the width granted (never wider than a whole row). The slot's left edge is
+     * {@code flowX - width - 4} at {@code flowY} once this returns.
+     */
+    private int flow(int want) {
+        int w = Math.max(20, Math.min(want, flowLimit - 4));
+        if (flowX > 4 && flowX + w > flowLimit) {
+            flowX = 4;
+            flowY += 24;
+        }
+        flowX += w + 4;
+        return w;
     }
 
     // --- side panels (waypoints, layers) -------------------------------------------------------------------
@@ -146,7 +202,7 @@ public final class WorldMapScreen extends Screen {
     }
 
     private int rowsPerPage() {
-        return Math.max(3, (height - 80) / ROW - 1);
+        return Math.max(3, (height - 28 - panelTop) / ROW - 1);
     }
 
     /** Adds the paging buttons and returns the first row index of this page. */
@@ -155,7 +211,7 @@ public final class WorldMapScreen extends Screen {
         int pages = Math.max(1, (total + per - 1) / per);
         page = Math.max(0, Math.min(page, pages - 1));
         if (pages > 1) {
-            int y = 52 + per * ROW;
+            int y = panelTop + per * ROW;
             addRenderableWidget(Button.builder(Component.literal("<"), b -> {
                 page = Math.max(0, page - 1);
                 rebuildWidgets();
@@ -176,7 +232,7 @@ public final class WorldMapScreen extends Screen {
         int first = pager(infos.size());
         int per = rowsPerPage();
         MinimapSettings s = ClientMap.SETTINGS;
-        int y = 52;
+        int y = panelTop;
         for (int i = first; i < Math.min(infos.size(), first + per); i++) {
             za.co.neroland.neromaps.network.Payloads.LayerInfo info = infos.get(i);
             boolean w = s.layerOnWorld(info.id(), info.defaultVisible());
@@ -283,7 +339,7 @@ public final class WorldMapScreen extends Screen {
         List<WpRow> rows = wpRowList();
         int per = rowsPerPage() - 2;
         int first = pager(rows.size() + 1);
-        int y = 52;
+        int y = panelTop;
         net.minecraft.client.gui.components.EditBox box = new net.minecraft.client.gui.components.EditBox(font,
                 panelX(), y, PANEL_W, 18, Component.translatable("gui.neromaps.worldmap.search"));
         box.setMaxLength(32);
@@ -351,8 +407,8 @@ public final class WorldMapScreen extends Screen {
             return;
         }
         int x = panelX();
-        g.fill(x - 4, 48, width, height - 16, (MapPalette.PANEL & 0xFFFFFF) | 0xD0000000);
-        int y = 52;
+        g.fill(x - 4, panelTop - 4, width, height - 16, (MapPalette.PANEL & 0xFFFFFF) | 0xD0000000);
+        int y = panelTop;
         if (panel == Panel.LAYERS) {
             List<za.co.neroland.neromaps.network.Payloads.LayerInfo> infos =
                     new ArrayList<>(ClientState.INSTANCE.catalogue().values());
@@ -483,13 +539,13 @@ public final class WorldMapScreen extends Screen {
             if (!b.dimension().equals(dim) && !b.id().startsWith("nerospace:visited")) {
                 continue;
             }
-            icon(g, bx, 28, 12, atlas().uv(b.icon()));
-            if (mouseX >= bx && mouseX < bx + 12 && mouseY >= 28 && mouseY < 40) {
+            icon(g, bx, badgeY, 12, atlas().uv(b.icon()));
+            if (mouseX >= bx && mouseX < bx + 12 && mouseY >= badgeY && mouseY < badgeY + 12) {
                 hover = b.label().isEmpty() ? b.dimension() : b.literal() ? b.label()
                         : Component.translatable(b.label()).getString();
             }
             bx += 14;
-            if (bx > 300) {
+            if (bx > Math.min(300, flowLimit - 14)) {
                 break;
             }
         }
@@ -640,7 +696,11 @@ public final class WorldMapScreen extends Screen {
     }
 
     private Component dimLabel() {
-        String id = dimensions.isEmpty() ? ClientMap.dimensionId() : dimensions.get(dimension);
+        return dimLabel(dimension);
+    }
+
+    private Component dimLabel(int index) {
+        String id = dimensions.isEmpty() ? ClientMap.dimensionId() : dimensions.get(index);
         int c = id.indexOf(':');
         String path = c < 0 ? id : id.substring(c + 1);
         return Component.translatable("gui.neromaps.worldmap.dimension",
@@ -902,8 +962,13 @@ public final class WorldMapScreen extends Screen {
 
     // --- input --------------------------------------------------------------------------------------------
 
+    // Mouse buttons are compared by name, never by number: 26.3 renumbered them (left 0 -> 1, right 1 -> 3), which
+    // made a left click open the new-waypoint screen instead of starting a pan.
+    private static final int LEFT = com.mojang.blaze3d.platform.InputConstants.MOUSE_BUTTON_LEFT;
+    private static final int RIGHT = com.mojang.blaze3d.platform.InputConstants.MOUSE_BUTTON_RIGHT;
+
     private boolean click(double mx, double my, int button) {
-        if (button == 1 && (panel == Panel.NONE || mx < panelX() - 4)) {
+        if (button == RIGHT && (panel == Panel.NONE || mx < panelX() - 4)) {
             int wx = (int) Math.floor(worldX(mx));
             int wz = (int) Math.floor(worldZ(my));
             LocalPlayer p = Minecraft.getInstance().player;
@@ -916,8 +981,11 @@ public final class WorldMapScreen extends Screen {
             newWaypointAt(wx, wy, wz);
             return true;
         }
-        if (button != 0) {
+        if (button != LEFT) {
             return false;
+        }
+        if (panel != Panel.NONE && mx >= panelX() - 4) {
+            return false; // the side panel is not map either
         }
         if (!measuring && (panel == Panel.NONE || mx < panelX() - 4)) {
             String dim = dimensions.isEmpty() ? ClientMap.dimensionId() : dimensions.get(dimension);
@@ -973,6 +1041,11 @@ public final class WorldMapScreen extends Screen {
     @Override
     public void tick() {
         super.tick();
+        MapStore other = foreign;
+        if (other != null) {
+            // another dimension's store is this screen's alone: nothing else installs its loaded tiles
+            other.tick((int) Math.floor(camX) >> 8, (int) Math.floor(camZ) >> 8);
+        }
         if (searchChanged) {
             searchChanged = false;
             rebuildWidgets();
@@ -984,8 +1057,8 @@ public final class WorldMapScreen extends Screen {
         }
     }
 
-    private void drag(double dx, double dy) {
-        if (!dragging) {
+    private void drag(int button, double dx, double dy) {
+        if (!dragging || button != LEFT) {
             return;
         }
         follow = false;
@@ -1007,14 +1080,19 @@ public final class WorldMapScreen extends Screen {
 
     @Override
     public boolean mouseReleased(net.minecraft.client.input.MouseButtonEvent event) {
-        dragging = false;
+        if (event.button() == LEFT) {
+            dragging = false;
+        }
         return super.mouseReleased(event);
     }
 
     @Override
     public boolean mouseDragged(net.minecraft.client.input.MouseButtonEvent event, double dx, double dy) {
-        drag(dx, dy);
-        return true;
+        if (dragging) {
+            drag(event.button(), dx, dy);
+            return true;
+        }
+        return super.mouseDragged(event, dx, dy);
     }
 
     @Override
@@ -1039,14 +1117,19 @@ public final class WorldMapScreen extends Screen {
 
     @Override
     public boolean mouseReleased(double mx, double my, int button) {
-        dragging = false;
+        if (button == LEFT) {
+            dragging = false;
+        }
         return super.mouseReleased(mx, my, button);
     }
 
     @Override
     public boolean mouseDragged(double mx, double my, int button, double dx, double dy) {
-        drag(dx, dy);
-        return true;
+        if (dragging) {
+            drag(button, dx, dy);
+            return true;
+        }
+        return super.mouseDragged(mx, my, button, dx, dy);
     }
 
     @Override

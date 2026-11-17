@@ -6,7 +6,7 @@ NeroMaps is the minimap and world-map mod of the Neroland mod family, built on *
 the heart of the mod and is on by default; the world map, waypoints, sharing and the companion-app map follow.
 It has to be performant, highly customisable, and show features from the other Nero mods.
 
-**Status: 0.1.0-beta.1 working tree (release candidate, untagged; needs Core 1.19.0 released first).** The client map engine (minimap, world map, caches),
+**Status: 0.1.0-beta.2 working tree (untagged; last tag `v0.1.0-beta.1`; needs Core 1.19.0 released first).** The client map engine (minimap, world map, caches),
 waypoints with the one player store, server policy and sync, the `neromaps:main` payloads, server commands, the
 Waypoint Compass, server terrain capture with fog of war, consent-only sharing, and the consumer side of Core's map
 layer API, the survival blocks and screens, compliance (erasure, `/neromaps export`, retention) and the `neromaps`

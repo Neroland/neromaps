@@ -40,6 +40,9 @@ public final class MapStore implements TileLookup {
     private final Executor io;
     private int memoryTiles;
     private long clock;
+    /** Ticks between background rebuilds of out-of-date LOD tiles that are already on screen. */
+    private static final int LOD_REFRESH_TICKS = 5;
+    private long lastLodRefresh = -LOD_REFRESH_TICKS;
     private volatile boolean closed;
 
     /** @param dir this dimension's cache directory, or null for a memory-only map */
@@ -163,7 +166,9 @@ public final class MapStore implements TileLookup {
     private void install(long key, @Nullable Tile fromDisk) {
         if (TileKey.lod(key) > 0) {
             lodRequested.remove(key);
-            if (fromDisk != null && !stale.contains(key)) {
+            if (fromDisk != null) {
+                // newer than what is shown even if the area changed again meanwhile (request(..) refreshes it again)
+                fromDisk.lastUse = clock;
                 lodTiles.put(key, fromDisk);
                 if (lodTiles.size() > 96) {
                     evictLod();
@@ -313,8 +318,9 @@ public final class MapStore implements TileLookup {
     private void markAncestorsStale(int tx, int tz) {
         for (int l = 1; l <= TileLod.MAX_LOD; l++) {
             long k = TileKey.tile(l, tx >> l, tz >> l);
+            // The copy in memory stays on screen until its replacement is built: dropping it here blanked the world
+            // map's zoomed-out tiles around the player on every chunk scan (a visible flicker).
             stale.add(k);
-            lodTiles.remove(k);
         }
     }
 
@@ -327,6 +333,15 @@ public final class MapStore implements TileLookup {
         Tile t = lod == 0 ? tiles.get(key) : lodTiles.get(key);
         if (t != null) {
             t.lastUse = clock;
+            if (lod > 0 && cache != null && dir != null && clock - lastLodRefresh >= LOD_REFRESH_TICKS
+                    && stale.contains(key) && !lodRequested.containsKey(key)) {
+                // out of date: rebuild it behind the one on screen, a few a second at most
+                lastLodRefresh = clock;
+                lodRequested.put(key, Boolean.TRUE);
+                TileDiskCache c = cache;
+                Path d = dir;
+                submit(() -> loaded.add(new Object[] {key, buildLod(c, d, lod, tx, tz)}));
+            }
             return t;
         }
         if (lodRequested.containsKey(key) || (lod == 0 && waiting.containsKey(key))) {

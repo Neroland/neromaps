@@ -4,7 +4,7 @@ NeroMaps is the minimap and world map of the Neroland mod family: a fast minimap
 world map of everywhere you have been, waypoints you share only with the people you choose, survival cartography
 blocks, map layers from the other Nero mods, and a 2D and 3D map in the NeroLink companion app.
 
-**Current version: 0.1.0-beta.1.**
+**Current version: 0.1.0-beta.2.**
 
 ## Requirements
 

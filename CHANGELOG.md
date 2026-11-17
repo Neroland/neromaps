@@ -6,6 +6,34 @@ All notable changes to NeroMaps are documented here. The format follows
 
 ## [Unreleased]
 
+## [0.1.0-beta.2]
+
+A fix release for the minimap HUD and the world map. Requirements are unchanged from 0.1.0-beta.1.
+
+### Changed
+
+- Minimap readouts are drawn as a panel matching the frame: edged, centred, with the coordinates as labelled
+  `X` / `Y` / `Z` values and the other lines in the quieter text colour. High contrast stays plain black and white.
+
+### Fixed
+
+- Waypoint beams and distance labels no longer jump as you turn or move: they are projected from the camera the world
+  was drawn with that frame (interpolated position and rotation, live field of view) and placed at sub-pixel positions,
+  instead of from the player's last-tick values rounded to a whole GUI pixel.
+- World map on Minecraft 26.3: left-drag pans again and right-click places a waypoint again. 26.3 renumbered the mouse
+  buttons, so a left click was being read as a right click (opening the new-waypoint screen) and nothing panned.
+- Settings screen: the live preview well now holds the readouts too, so the "Live preview" caption no longer overlaps
+  them, and the north tab sits inside the well.
+- Waypoints (beams, labels, map markers) no longer go missing after joining a world: the server's hello and
+  waypoint list could be handled just before the client noticed the new connection, and were then wiped as "the old
+  server's" state until the next sync.
+- World map no longer flickers when zoomed out: a level-of-detail tile whose area changed was dropped from memory at
+  once and left a hole until it was rebuilt, on every chunk scan near you. The tile on screen now stays until its
+  replacement is ready, and replacements are rebuilt in the background a few times a second at most.
+- World map: tiles of another dimension (the Map button) are now installed as they load.
+- World map toolbar no longer overlaps at high GUI scales or in small windows: buttons size to their labels and wrap
+  onto extra rows, and the side panels start below however many rows the toolbar took.
+
 ## [0.1.0-beta.1]
 
 The first feature release. **Requires Neroland Core 1.19.0 or newer** (the map layer API); Core 1.19.0 must be

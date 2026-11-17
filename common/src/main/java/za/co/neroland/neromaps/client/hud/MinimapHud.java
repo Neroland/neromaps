@@ -235,14 +235,59 @@ public final class MinimapHud {
         }
     }
 
+    private static final String[] AXIS_LABEL = {"X ", "Y ", "Z "};
+    private static final int AXIS_GAP = 7;
+
+    /**
+     * The readout block: a panel as wide as the frame, edged like it, with each line centred. The coordinates read
+     * as {@code X .. Y .. Z ..} with the axis letters in the accent colour (so they are told apart by letter, not by
+     * colour alone); the other lines sit under them in the quieter text colour. High contrast is black, white, no tint.
+     */
     private static void drawReadouts(GuiGraphicsExtractor g, Font font, int n) {
+        MinimapSettings s = ClientMap.SETTINGS;
+        boolean hc = s.highContrast || s.style == MapStyle.HIGH_CONTRAST;
         int x = LAYOUT.readoutX - LAYOUT.frame;
         int y = LAYOUT.readoutY;
         int w = LAYOUT.size + LAYOUT.frame * 2;
-        g.fill(x, y - 1, x + w, y + n * MinimapLayout.READOUT_LINE + 1, (MapPalette.PANEL & 0xFFFFFF) | 0xB3000000);
-        for (int i = 0; i < n; i++) {
-            g.text(font, Readouts.LINES[i], x + 2, y + 1 + i * MinimapLayout.READOUT_LINE, MapPalette.TEXT);
+        int h = MinimapLayout.readoutHeight(n) - MinimapLayout.READOUT_GAP;
+        g.fill(x, y, x + w, y + h, hc ? 0xFF000000 : (MapPalette.PANEL & 0xFFFFFF) | 0xD8000000);
+        if (hc || s.border != MinimapSettings.Border.NONE) {
+            int edge = hc ? 0xFFFFFFFF : MapPalette.PANEL_EDGE;
+            g.fill(x, y, x + w, y + 1, edge);
+            g.fill(x, y + h - 1, x + w, y + h, edge);
+            g.fill(x, y + 1, x + 1, y + h - 1, edge);
+            g.fill(x + w - 1, y + 1, x + w, y + h - 1, edge);
         }
+        int inner = w - 8;
+        int ty = y + MinimapLayout.READOUT_PAD;
+        for (int i = 0; i < n; i++, ty += MinimapLayout.READOUT_LINE) {
+            if (i == 0 && Readouts.coordsFirst && axes(g, font, x, ty, w, inner, hc)) {
+                continue;
+            }
+            String line = Readouts.LINES[i];
+            int tw = font.width(line);
+            int colour = hc || i == 0 ? MapPalette.TEXT : MapPalette.TEXT_SECONDARY;
+            g.text(font, line, tw <= inner ? x + (w - tw) / 2 : x + 4, ty, hc ? 0xFFFFFFFF : colour);
+        }
+    }
+
+    /** Draws the coordinates as three labelled values, centred; false when they do not fit this map's width. */
+    private static boolean axes(GuiGraphicsExtractor g, Font font, int x, int y, int w, int inner, boolean hc) {
+        int total = AXIS_GAP * 2;
+        for (int k = 0; k < 3; k++) {
+            total += font.width(AXIS_LABEL[k]) + font.width(Readouts.AXIS[k]);
+        }
+        if (total > inner) {
+            return false;
+        }
+        int cx = x + (w - total) / 2;
+        for (int k = 0; k < 3; k++) {
+            g.text(font, AXIS_LABEL[k], cx, y, hc ? 0xFFFFFFFF : MapPalette.MAP_ACCENT_BRIGHT);
+            cx += font.width(AXIS_LABEL[k]);
+            g.text(font, Readouts.AXIS[k], cx, y, hc ? 0xFFFFFFFF : MapPalette.TEXT);
+            cx += font.width(Readouts.AXIS[k]) + AXIS_GAP;
+        }
+        return true;
     }
 
     /** Clipmap revisions: data revision per chunk (and its north/west neighbours) from the live store or cave slice. */

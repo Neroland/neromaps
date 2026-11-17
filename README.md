@@ -6,7 +6,7 @@
 minimap that is on by default, a world map, waypoints you can share by consent, and the features of the other
 Nero mods drawn on the map.
 
-> **Status: 0.1.0-beta.1.** Minimap and world map, waypoints, consent-only sharing, fog of war, the survival
+> **Status: 0.1.0-beta.2.** Minimap and world map, waypoints, consent-only sharing, fog of war, the survival
 > cartography blocks, map layers from the other Nero mods and the `neromaps` NeroLink module. See the
 > [CHANGELOG](CHANGELOG.md) for what shipped, what was cut and what is deferred, and the
 > [wiki](https://github.com/Neroland/neromaps/wiki) for how to use it.
