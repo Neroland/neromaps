@@ -13,6 +13,7 @@ import net.neoforged.neoforge.common.NeoForge;
 import za.co.neroland.neromaps.NeroMapsCommon;
 import za.co.neroland.neromaps.client.ClientCommands;
 import za.co.neroland.neromaps.client.ClientMap;
+import za.co.neroland.neromaps.client.ColourTables;
 import za.co.neroland.neromaps.client.MapKeys;
 import za.co.neroland.neromaps.client.hud.MinimapHud;
 
@@ -39,6 +40,17 @@ public final class NeoForgeClientSetup {
             event.registerBlockEntityRenderer(za.co.neroland.neromaps.registry.ModBlockEntities.MAP_TABLE.get(),
                     ctx -> new za.co.neroland.neromaps.client.render.MapTableRenderer());
         });
+        // Register the colour table with the resource reload during startup. NeoForge freezes the listener list
+        // after loading, so registering it lazily from the first client tick throws (MC-NEROMAPS-1).
+        ClientMap.colourTablesRegisteredByLoader = true;
+        //? if >=1.21.4 {
+        modEventBus.addListener((net.neoforged.neoforge.client.event.AddClientReloadListenersEvent event) ->
+                event.addListener(Identifier.fromNamespaceAndPath(NeroMapsCommon.MOD_ID, "colour_tables"),
+                        ColourTables.INSTANCE));
+        //?} else {
+        /*modEventBus.addListener((net.neoforged.neoforge.client.event.RegisterClientReloadListenersEvent event) ->
+                event.registerReloadListener(ColourTables.INSTANCE));
+        *///?}
         NeoForge.EVENT_BUS.addListener((ClientTickEvent.Post event) -> ClientMap.tick());
         NeoForge.EVENT_BUS.addListener((RegisterClientCommandsEvent event) ->
                 ClientCommands.register(event.getDispatcher()));

@@ -6,6 +6,16 @@ All notable changes to NeroMaps are documented here. The format follows
 
 ## [Unreleased]
 
+## [0.1.0-beta.3]
+
+A fix release for NeoForge. Requirements are unchanged from 0.1.0-beta.2.
+
+### Fixed
+
+- NeoForge: no longer crashes on the first client tick with `UnsupportedOperationException`. The map colour
+  table now registers with the resource reload during startup instead of after it, so it also follows
+  resource pack changes again.
+
 ## [0.1.0-beta.2]
 
 A fix release for the minimap HUD and the world map. Requirements are unchanged from 0.1.0-beta.1.

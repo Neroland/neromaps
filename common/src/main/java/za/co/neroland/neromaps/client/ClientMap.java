@@ -68,6 +68,12 @@ public final class ClientMap {
     private static long ticks;
     private static int pollRow;
     private static boolean listenerRegistered;
+    /**
+     * Set by a loader that registers {@link ColourTables#INSTANCE} through its own reload-listener event during
+     * startup. NeoForge makes the resource manager's listener list unmodifiable once loading finishes, so adding to
+     * it from the first client tick throws (MC-NEROMAPS-1).
+     */
+    public static volatile boolean colourTablesRegisteredByLoader;
     private static boolean roofed;
     private static int logicalTop;
     private static int caveSlice = Integer.MIN_VALUE;
@@ -207,7 +213,16 @@ public final class ClientMap {
         }
         if (!listenerRegistered && mc.getResourceManager() instanceof ReloadableResourceManager rm) {
             listenerRegistered = true;
-            rm.registerReloadListener(ColourTables.INSTANCE);
+            if (!colourTablesRegisteredByLoader) {
+                try {
+                    rm.registerReloadListener(ColourTables.INSTANCE);
+                } catch (UnsupportedOperationException ex) {
+                    // The loader froze the listener list after startup (NeoForge does). The table still loads
+                    // below; it just will not follow later resource reloads on this loader.
+                    NeroMapsCommon.LOGGER.warn("[NeroMaps] reload listeners are frozen; colour table will not "
+                            + "follow resource reloads");
+                }
+            }
             ColourTables.reload(rm);
         }
         ClientState.INSTANCE.tick(mc);
