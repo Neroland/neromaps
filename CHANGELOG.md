@@ -6,6 +6,12 @@ All notable changes to NeroMaps are documented here. The format follows
 
 ## [Unreleased]
 
+## [0.1.0] - 2026-11-21
+
+### Changed
+
+- Transitioning to stable versions: the alpha/beta label is dropped from the version number, so this release is **0.1.0** (previously 0.1.0-beta.3). Nothing else changes with the version label.
+
 ## [0.1.0-beta.3]
 
 A fix release for NeoForge. Requirements are unchanged from 0.1.0-beta.2.
