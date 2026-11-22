@@ -46,6 +46,8 @@ public final class MapServer {
         int exploredCz;
         String exploredDim = "";
         int lastPositionsHash;
+        /** Explored rungs already credited this session (-1 = not counted yet). In memory only. */
+        int exploredRungs = -1;
     }
 
     private static @Nullable MinecraftServer server;
@@ -243,6 +245,7 @@ public final class MapServer {
             ss.exploredCz = cz;
             ss.exploredDim = dim;
             ServerLevel level = level(p);
+            boolean revealed = false;
             int r2 = radius * radius + radius;
             for (int dz = -radius; dz <= radius; dz++) {
                 for (int dx = -radius; dx <= radius; dx++) {
@@ -251,8 +254,15 @@ public final class MapServer {
                     }
                     if (state.markExplored(p.getUUID(), dim, cx + dx, cz + dz, maxRegions)) {
                         CaptureService.explored(level, cx + dx, cz + dz);
+                        revealed = true;
                     }
                 }
+            }
+            if (revealed && ss.exploredRungs < za.co.neroland.neromaps.progression.MapMilestoneRules.EXPLORED_RUNGS.length) {
+                long chunks = za.co.neroland.neromaps.progression.MapMilestones.exploredChunks(
+                        state.record(p.getUUID()).explored());
+                ss.exploredRungs = za.co.neroland.neromaps.progression.MapMilestones.creditExplored(
+                        s, p.getUUID(), chunks, Math.max(0, ss.exploredRungs));
             }
         }
     }

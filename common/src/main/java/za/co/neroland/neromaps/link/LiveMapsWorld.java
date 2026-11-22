@@ -115,6 +115,11 @@ final class LiveMapsWorld implements MapsLinkWorld {
     }
 
     @Override
+    public void shareAccepted(UUID sharer, za.co.neroland.neromaps.store.ShareScope scope) {
+        za.co.neroland.neromaps.progression.MapMilestones.shareAccepted(server, sharer, scope);
+    }
+
+    @Override
     public void changed(Change change, UUID... players) {
         switch (change) {
             case WAYPOINTS -> {

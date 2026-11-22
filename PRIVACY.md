@@ -62,6 +62,15 @@ These are items and blocks, and **none of them holds an identity**: no UUID, no 
   blocks sees it and its label on their map. Nothing records who wrote it.
 - A **trail marker** stores only its colour. Anyone within 64 blocks sees it as a dot on their map.
 
+### Map milestones
+
+NeroMaps records four one-off milestones as player-scope Neroland Core progression gates, so other mods (such as
+trophies) can recognise them: `neromaps:explored/1000`, `/10000` and `/50000` (that many chunks revealed in your
+own fog of war, counted from the explored bits above; no new counter is kept) and
+`neromaps:first_shared_waypoint` (someone accepted a waypoint you offered). Only your UUID is stored, in Core's
+progression store, which Core's erasure removes. No coordinate, dimension, waypoint name or other player is part of
+a gate.
+
 ### Your client's map cache
 
 Your client keeps the terrain it has drawn under `neromaps/cache/` in your game folder, one folder per server

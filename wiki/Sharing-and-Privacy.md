@@ -71,6 +71,12 @@ Nothing is written on the server, and your game writes nothing you did not ask f
 points, explored map, the shares you gave, the requests waiting for you, your settings), the shares others gave you
 and the offers you made that are still waiting. Nothing from anyone else's record.
 
+## Map milestones
+
+Revealing 1,000, 10,000 and 50,000 chunks of your own map, and having a waypoint share accepted, open one-off
+milestones that other mods such as trophies can recognise. Only your UUID is stored for them, in Neroland Core,
+and erasing your data removes it. No position, dimension, waypoint name or other player is recorded.
+
 ## The companion app
 
 With the NeroLink bridge on the server, your paired phone sees the same things you do in game, and nothing more: your

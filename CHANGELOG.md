@@ -6,6 +6,16 @@ All notable changes to NeroMaps are documented here. The format follows
 
 ## [Unreleased]
 
+## [0.1.1] - 2026-11-26
+
+### Added
+
+- Player-scope progression gates for trophy and quest packs: `neromaps:explored/1000`, `neromaps:explored/10000`
+  and `neromaps:explored/50000` open when that many chunks are revealed in a player's fog of war (counted from the
+  explored map they already have, so earlier exploration counts on their next move), and
+  `neromaps:first_shared_waypoint` opens for the sharer when a waypoint share is accepted, in game or in the app.
+  Only the player UUID reaches Core's progression store.
+
 ## [0.1.0] - 2026-11-21
 
 ### Changed

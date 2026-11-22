@@ -9,6 +9,7 @@ import org.jetbrains.annotations.Nullable;
 
 import za.co.neroland.neromaps.server.tiles.LinkTiles;
 import za.co.neroland.neromaps.store.MapPlayerState;
+import za.co.neroland.neromaps.store.ShareScope;
 
 /**
  * Everything the {@code neromaps} link module reads or changes on the running server, behind one seam so the
@@ -59,4 +60,8 @@ public interface MapsLinkWorld {
 
     /** After a change made through the link: resync the players' clients and publish the matching link events. */
     void changed(Change change, UUID... players);
+
+    /** A share {@code sharer} offered was accepted through the link (records the sharer's map milestone). */
+    default void shareAccepted(UUID sharer, ShareScope scope) {
+    }
 }

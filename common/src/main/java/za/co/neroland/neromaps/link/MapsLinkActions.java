@@ -326,6 +326,7 @@ public final class MapsLinkActions implements LinkActionHandler {
         w.changed(MapsLinkWorld.Change.SHARES, me, q.from());
         JsonObject out = new JsonObject();
         if (accept) {
+            w.shareAccepted(q.from(), q.scope());
             out.add("grant", MapsLinkJson.grant(MapsLinkJson.grantId(q.from(), me, q.scope()), q.scope(),
                     w.nameOf(q.from()), w.state().find(q.from()).flatMap(r -> r.waypoint(q.scope().waypointId()))
                             .map(Waypoint::name).orElse(null)));

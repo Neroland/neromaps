@@ -263,6 +263,7 @@ public final class ServerHandlers {
         ServerPlayer sharer = s.getPlayerList().getPlayer(q.from());
         String who = MapServer.nameOf(s, q.from());
         if (accept) {
+            za.co.neroland.neromaps.progression.MapMilestones.shareAccepted(s, q.from(), q.scope());
             tell(p, "neromaps.share.accepted_you", who);
             if (sharer != null) {
                 tell(sharer, "neromaps.share.accepted_them", p.getGameProfile().name());
