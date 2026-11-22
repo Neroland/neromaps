@@ -117,6 +117,10 @@ when they join.
   are still waiting (to whom, what, which day). It holds nothing from anyone else's record: not their waypoints, map,
   position or settings. Once a minute. The file stays on your machine until you delete it, and it contains the UUIDs
   of the players you share with, so treat it like any other personal file before passing it on.
+- **Core's combined export.** `/neroland data exportme` (Neroland Core) also includes a summary of your NeroMaps
+  record: your waypoints and death points, how many chunks you have explored in each dimension, your sharing
+  settings, and the shares you gave or received by scope only. It never names another player (no UUIDs) and does not
+  include the explored-map bitsets; `/neromaps export` remains the complete copy. Nothing is written or logged.
 
 ## The NeroLink companion app
 
@@ -149,6 +153,8 @@ NeroMaps can send anonymous crash reports about its own errors to Sentry (EU ser
   and versions of your other installed mods.
 - It never holds your IP address, username, UUID, position, world data, chat or waypoint names. File paths are
   scrubbed of your account name. Only errors from NeroMaps code are sent, at most ten per session.
+- NeroMaps reports through its own Sentry client, never a shared one, so another mod's crash reporter cannot receive
+  or silence NeroMaps' reports.
 
 ## Contact
 

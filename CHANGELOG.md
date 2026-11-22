@@ -6,6 +6,23 @@ All notable changes to NeroMaps are documented here. The format follows
 
 ## [Unreleased]
 
+## [0.2.0] - 2026-11-22
+
+### Added
+
+- A summary of your NeroMaps record is now part of Neroland Core's `/neroland data exportme` (Core 1.20.1):
+  waypoints, death points, explored chunks per dimension, sharing settings and shares by scope. It never names
+  another player and leaves out the explored-map bitsets; `/neromaps export` still gives the complete record.
+
+### Fixed
+
+- Crash reports no longer go silent when another mod starts Sentry. NeroMaps now reports through its own
+  isolated Sentry client instead of the shared global one, with the same opt-out, filtering and scrubbing.
+
+### Changed
+
+- Requires Neroland Core 1.20.1 or newer.
+
 ## [0.1.1] - 2026-11-26
 
 ### Added

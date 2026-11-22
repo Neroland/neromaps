@@ -60,6 +60,9 @@ public final class PlayerStore {
     /** Registers the store with the composite eraser. Common init, before any server. */
     public static void init() {
         NeroMapsData.addStore(ERASER);
+        // The read-side twin for Core's /neroland data exportme: a readable summary of the same record.
+        za.co.neroland.nerolandcore.data.PlayerDataExport.register(za.co.neroland.neromaps.NeroMapsCommon.MOD_ID,
+                CoreExport::export);
     }
 
     public static MapPlayerState get(MinecraftServer server) {
