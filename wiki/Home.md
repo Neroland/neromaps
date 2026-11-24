@@ -4,13 +4,12 @@ NeroMaps is the minimap and world map of the Neroland mod family: a fast minimap
 world map of everywhere you have been, waypoints you share only with the people you choose, survival cartography
 blocks, map layers from the other Nero mods, and a 2D and 3D map in the NeroLink companion app.
 
-**Current version: 0.1.0-beta.3.**
-
 ## Requirements
 
 - Minecraft 26.3 (also built for 26.2, 26.1.2, 1.21.11, 1.21.10, 1.21.8, 1.21.5, 1.21.4 and 1.21.1)
 - NeoForge, Forge or Fabric (Fabric also needs Fabric API)
-- **Neroland Core 1.19.0 or newer** (below 2.0). Core is the only required mod.
+- Minecraft 1.20.5 on Fabric, and 1.20.6 on Fabric, Forge and NeoForge
+- **Neroland Core 1.23.0 or newer** (below 2.0). Core is the only required mod.
 - Optional: the NeroLink bridge mod for the companion app, and any other Nero mod for its map layers
 
 ## Pages

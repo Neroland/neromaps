@@ -533,7 +533,7 @@ public final class MinimapHud {
     }
     *///?}
 
-    //? if <1.21.2 {
+    //? if >=1.21 && <1.21.2 {
     /*private static void emitTesselator(GuiGraphicsExtractor g, MapTexture tex, MapTexture spr, int colour) {
         org.joml.Matrix4f pose = g.pose().last().pose();
         var s = FRAME.surface;
@@ -560,6 +560,36 @@ public final class MinimapHud {
         }
         com.mojang.blaze3d.systems.RenderSystem.disableBlend();
     }
+    *///?} else if <1.21 {
+    /*private static void emitTesselator(GuiGraphicsExtractor g, MapTexture tex, MapTexture spr, int colour) {
+        var pose = g.pose().last().pose();
+        var surface = FRAME.surface;
+        var overlay = FRAME.overlay;
+        com.mojang.blaze3d.systems.RenderSystem.enableBlend();
+        com.mojang.blaze3d.systems.RenderSystem.setShader(net.minecraft.client.renderer.GameRenderer::getPositionTexColorShader);
+        try {
+            drawLegacyQuads(tex, pose, surface.xy, surface.uv, null, colour, surface.quads);
+            drawLegacyQuads(spr, pose, overlay.xy, overlay.uv, overlay.colour, -1, overlay.quads);
+        } finally {
+            com.mojang.blaze3d.systems.RenderSystem.disableBlend();
+        }
+    }
+
+    private static void drawLegacyQuads(MapTexture texture, org.joml.Matrix4f pose, float[] xy, float[] uv,
+            int @Nullable [] colours, int colour, int count) {
+        if (count == 0) {
+            return;
+        }
+        com.mojang.blaze3d.systems.RenderSystem.setShaderTexture(0, texture.id);
+        var buffer = com.mojang.blaze3d.vertex.Tesselator.getInstance().getBuilder();
+        buffer.begin(com.mojang.blaze3d.vertex.VertexFormat.Mode.QUADS,
+                com.mojang.blaze3d.vertex.DefaultVertexFormat.POSITION_TEX_COLOR);
+        quads(buffer, pose, xy, uv, colours, colour, count);
+        var mesh = buffer.endOrDiscardIfEmpty();
+        if (mesh != null) {
+            com.mojang.blaze3d.vertex.BufferUploader.drawWithShader(mesh);
+        }
+    }
     *///?}
 
     //? if <1.21.6 {
@@ -569,9 +599,21 @@ public final class MinimapHud {
             int argb = colours == null ? colour : colours[q];
             int o = q * 8;
             for (int k = 0; k < 8; k += 2) {
-                vc.addVertex(pose, xy[o + k], xy[o + k + 1], 0f).setUv(uv[o + k], uv[o + k + 1]).setColor(argb);
+                quadVertex(vc, pose, xy[o + k], xy[o + k + 1], uv[o + k], uv[o + k + 1], argb);
             }
         }
+    }
+    *///?}
+
+    //? if >=1.21 && <1.21.6 {
+    /*private static void quadVertex(com.mojang.blaze3d.vertex.VertexConsumer vc, org.joml.Matrix4f pose,
+            float x, float y, float u, float v, int argb) {
+        vc.addVertex(pose, x, y, 0f).setUv(u, v).setColor(argb);
+    }
+    *///?} else if <1.21 {
+    /*private static void quadVertex(com.mojang.blaze3d.vertex.VertexConsumer vc, org.joml.Matrix4f pose,
+            float x, float y, float u, float v, int argb) {
+        vc.vertex(pose, x, y, 0f).uv(u, v).color(argb).endVertex();
     }
     *///?}
 }

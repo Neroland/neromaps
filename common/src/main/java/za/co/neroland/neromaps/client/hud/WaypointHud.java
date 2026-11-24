@@ -45,8 +45,10 @@ public final class WaypointHud {
         /*net.minecraft.client.Camera cam = mc.gameRenderer.getMainCamera();
         *///?} else if >=1.21.2 {
         /*float partial = mc.getDeltaTracker().getGameTimeDeltaPartialTick(true);
-        *///?} else {
+        *///?} else if >=1.21 {
         /*float partial = mc.getTimer().getGameTimeDeltaPartialTick(true);
+        *///?} else {
+        /*float partial = mc.getFrameTime();
         *///?}
         //? if >=26.1 {
         if (!cam.isInitialized()) {

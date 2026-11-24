@@ -169,11 +169,21 @@ final class MapSurfaces {
     }
 
     private static void vertex(VertexConsumer c, PoseStack.Pose pose, float[] p, float u, float v, float[] n) {
+        //? if >=1.21 {
         c.addVertex(pose, p[0], p[1], p[2])
                 .setColor(255, 255, 255, 255)
                 .setUv(u, v)
                 .setOverlay(OverlayTexture.NO_OVERLAY)
                 .setLight(FULL_BRIGHT)
                 .setNormal(pose, n[0], n[1], n[2]);
+        //?} else {
+        /*c.vertex(pose, p[0], p[1], p[2])
+                .color(255, 255, 255, 255)
+                .uv(u, v)
+                .overlayCoords(OverlayTexture.NO_OVERLAY)
+                .uv2(FULL_BRIGHT)
+                .normal(pose, n[0], n[1], n[2])
+                .endVertex();
+        *///?}
     }
 }
