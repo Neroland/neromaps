@@ -23,9 +23,15 @@ public final class Wire {
     private Wire() {
     }
 
+    //? if >=1.20.5 {
     public static <T extends CustomPacketPayload> CustomPacketPayload.Type<T> type(String path) {
         return new CustomPacketPayload.Type<>(Identifier.fromNamespaceAndPath(NeroMapsCommon.MOD_ID, path));
     }
+    //?} else {
+    /*public static <T extends CustomPacketPayload> CustomPacketPayload.Type<T> type(String path, Class<T> payloadType) {
+        return new CustomPacketPayload.Type<>(Identifier.fromNamespaceAndPath(NeroMapsCommon.MOD_ID, path), payloadType);
+    }
+    *///?}
 
     public static void string(FriendlyByteBuf buf, String value) {
         buf.writeUtf(value == null ? "" : value, MAX_STRING);

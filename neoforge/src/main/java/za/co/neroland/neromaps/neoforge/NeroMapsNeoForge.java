@@ -21,8 +21,17 @@ public final class NeroMapsNeoForge {
         // to our mod event bus.
         RegistrationProvider.attach(modEventBus);
         NeoForgeMapNetwork.register(modEventBus);
+        //? if >=1.20.5 {
         net.neoforged.neoforge.common.NeoForge.EVENT_BUS.addListener(
                 (net.neoforged.neoforge.event.tick.ServerTickEvent.Post event) -> MapServer.tick(event.getServer()));
+        //?} else {
+        /*net.neoforged.neoforge.common.NeoForge.EVENT_BUS.addListener(
+                (net.neoforged.neoforge.event.TickEvent.ServerTickEvent event) -> {
+                    if (event.phase == net.neoforged.neoforge.event.TickEvent.Phase.END) {
+                        MapServer.tick(event.getServer());
+                    }
+                });
+        *///?}
         net.neoforged.neoforge.common.NeoForge.EVENT_BUS.addListener(
                 (net.neoforged.neoforge.event.RegisterCommandsEvent event) -> MapCommands.register(event.getDispatcher()));
         net.neoforged.neoforge.common.NeoForge.EVENT_BUS.addListener(

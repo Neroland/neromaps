@@ -1,5 +1,6 @@
 package za.co.neroland.neromaps.forge;
 
+//? if >=1.20.5 {
 import net.minecraft.resources.Identifier;
 import net.minecraftforge.client.event.AddGuiOverlayLayersEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -28,3 +29,4 @@ final class ForgeHudOverlays {
         *///?}
     }
 }
+//?}

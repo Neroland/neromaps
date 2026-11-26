@@ -120,7 +120,11 @@ public final class CaptureService {
         }
         PERF.idle = false;
         ensureWorker(s);
+        //? if >=1.20.3 {
         double mspt = s.getAverageTickTimeNanos() / 1_000_000.0;
+        //?} else {
+        /*double mspt = s.getAverageTickTime();
+        *///?}
         lastMspt = mspt;
         long budget = CaptureBudget.nanos(NeroMapsConfig.captureBudgetMicros(), mspt, NeroMapsConfig.captureMinTps());
         if (ticks % 200 == 0) {

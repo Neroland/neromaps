@@ -13,7 +13,12 @@ import za.co.neroland.neromaps.server.MapServer;
 @Mod(NeroMapsCommon.MOD_ID)
 public final class NeroMapsForge {
 
+    //? if >=1.20.5 {
     public NeroMapsForge(FMLJavaModLoadingContext context) {
+    //?} else {
+    /*public NeroMapsForge() {
+        FMLJavaModLoadingContext context = FMLJavaModLoadingContext.get();
+    *///?}
         NeroMapsCommon.LOGGER.info("[NeroMaps] Forge bootstrap");
         NeroMapsCommon.init();
         // Common init created NeroMaps' deferred registers through Core's registration seam; this attaches them
@@ -33,8 +38,17 @@ public final class NeroMapsForge {
         net.minecraftforge.event.RegisterCommandsEvent.BUS.addListener(event -> MapCommands.register(event.getDispatcher()));
         net.minecraftforge.event.server.ServerStoppingEvent.BUS.addListener(event -> MapServer.stopping());
         *///?} else {
-        /*net.minecraftforge.common.MinecraftForge.EVENT_BUS.addListener(
+        /*//? if >=1.20.5 {
+        net.minecraftforge.common.MinecraftForge.EVENT_BUS.addListener(
                 (net.minecraftforge.event.TickEvent.ServerTickEvent.Post event) -> MapServer.tick(event.getServer()));
+        //?} else {
+        net.minecraftforge.common.MinecraftForge.EVENT_BUS.addListener(
+                (net.minecraftforge.event.TickEvent.ServerTickEvent event) -> {
+                    if (event.phase == net.minecraftforge.event.TickEvent.Phase.END) {
+                        MapServer.tick(event.getServer());
+                    }
+                });
+        //?}
         net.minecraftforge.common.MinecraftForge.EVENT_BUS.addListener(
                 (net.minecraftforge.event.RegisterCommandsEvent event) -> MapCommands.register(event.getDispatcher()));
         net.minecraftforge.common.MinecraftForge.EVENT_BUS.addListener(

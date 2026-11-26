@@ -2,11 +2,15 @@ package za.co.neroland.neromaps.neoforge;
 
 import net.minecraft.resources.Identifier;
 import net.neoforged.bus.api.IEventBus;
+//? if >=1.20.5 {
 import net.neoforged.neoforge.client.event.ClientTickEvent;
+//?}
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import net.neoforged.neoforge.client.event.RegisterClientCommandsEvent;
+//? if >=1.20.5 {
 import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent;
+//?}
 import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent;
 import net.neoforged.neoforge.common.NeoForge;
 
@@ -28,8 +32,14 @@ public final class NeoForgeClientSetup {
 
     public static void init(IEventBus modEventBus) {
         za.co.neroland.neromaps.client.ClientState.install();
+        //? if >=1.20.5 {
         modEventBus.addListener((RegisterGuiLayersEvent event) -> event.registerAboveAll(
                 Identifier.fromNamespaceAndPath(NeroMapsCommon.MOD_ID, "minimap"), (g, delta) -> MinimapHud.render(g)));
+        //?} else {
+        /*modEventBus.addListener((net.neoforged.neoforge.client.event.RegisterGuiOverlaysEvent event) ->
+                event.registerAboveAll(Identifier.fromNamespaceAndPath(NeroMapsCommon.MOD_ID, "minimap"),
+                        (gui, graphics, delta, width, height) -> MinimapHud.render(graphics)));
+        *///?}
         modEventBus.addListener((RegisterKeyMappingsEvent event) -> MapKeys.all().forEach(event::register));
         modEventBus.addListener((RegisterMenuScreensEvent event) -> event.register(
                 za.co.neroland.neromaps.registry.ModMenus.CARTOGRAPHY_DESK.get(),
@@ -51,7 +61,15 @@ public final class NeoForgeClientSetup {
         /*modEventBus.addListener((net.neoforged.neoforge.client.event.RegisterClientReloadListenersEvent event) ->
                 event.registerReloadListener(ColourTables.INSTANCE));
         *///?}
+        //? if >=1.20.5 {
         NeoForge.EVENT_BUS.addListener((ClientTickEvent.Post event) -> ClientMap.tick());
+        //?} else {
+        /*NeoForge.EVENT_BUS.addListener((net.neoforged.neoforge.event.TickEvent.ClientTickEvent event) -> {
+            if (event.phase == net.neoforged.neoforge.event.TickEvent.Phase.END) {
+                ClientMap.tick();
+            }
+        });
+        *///?}
         NeoForge.EVENT_BUS.addListener((RegisterClientCommandsEvent event) ->
                 ClientCommands.register(event.getDispatcher()));
     }

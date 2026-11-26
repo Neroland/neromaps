@@ -62,10 +62,19 @@ public final class ForgeClientSetup {
             event.registerBlockEntityRenderer(ModBlockEntities.MAP_TABLE.get(), ctx -> new MapTableRenderer());
         });
         context.getModEventBus().addListener((RegisterKeyMappingsEvent event) -> MapKeys.all().forEach(event::register));
+        //? if >=1.20.5 {
         MinecraftForge.EVENT_BUS.addListener((TickEvent.ClientTickEvent.Post event) -> ClientMap.tick());
+        //?} else {
+        MinecraftForge.EVENT_BUS.addListener((TickEvent.ClientTickEvent event) -> {
+            if (event.phase == TickEvent.Phase.END) {
+                ClientMap.tick();
+            }
+        });
+        //?}
         MinecraftForge.EVENT_BUS.addListener((RegisterClientCommandsEvent event) ->
                 ClientCommands.register(event.getDispatcher()));
         *///?}
+        //? if >=1.20.5 {
         try {
             Class.forName(ForgeHudOverlays.EVENT_CLASS, false, ForgeClientSetup.class.getClassLoader());
         } catch (ClassNotFoundException | LinkageError e) {
@@ -79,5 +88,9 @@ public final class ForgeClientSetup {
             NeroMapsCommon.LOGGER.warn("[NeroMaps] Could not register the minimap HUD layer on this Forge build ({}).",
                     e.getClass().getSimpleName());
         }
+        //?} else {
+        /*MinecraftForge.EVENT_BUS.addListener((net.minecraftforge.client.event.RenderGuiEvent.Post event) ->
+                za.co.neroland.neromaps.client.hud.MinimapHud.render(event.getGuiGraphics()));
+        *///?}
     }
 }

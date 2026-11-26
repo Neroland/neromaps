@@ -947,7 +947,7 @@ public final class WorldMapScreen extends Screen {
         super.extractRenderState(g, mouseX, mouseY, partialTick);
         drawOverlay(g, mouseX, mouseY);
     }
-    //?} else {
+    //?} else if >=1.20.2 {
     /*@Override
     public void renderBackground(GuiGraphicsExtractor g, int mouseX, int mouseY, float partialTick) {
         drawMap(g, mouseX, mouseY);
@@ -955,6 +955,13 @@ public final class WorldMapScreen extends Screen {
 
     @Override
     public void render(GuiGraphicsExtractor g, int mouseX, int mouseY, float partialTick) {
+        super.render(g, mouseX, mouseY, partialTick);
+        drawOverlay(g, mouseX, mouseY);
+    }
+    *///?} else {
+    /*@Override
+    public void render(GuiGraphicsExtractor g, int mouseX, int mouseY, float partialTick) {
+        drawMap(g, mouseX, mouseY);
         super.render(g, mouseX, mouseY, partialTick);
         drawOverlay(g, mouseX, mouseY);
     }
@@ -1146,7 +1153,11 @@ public final class WorldMapScreen extends Screen {
     *///?}
 
     @Override
+    //? if >=1.20.2 {
     public boolean mouseScrolled(double mx, double my, double scrollX, double scrollY) {
+    //?} else {
+    /*public boolean mouseScrolled(double mx, double my, double scrollY) {
+    *///?}
         double wx = worldX(mx);
         double wz = worldZ(my);
         int next = Math.max(0, Math.min(ZOOMS.length - 1, zoom + (scrollY > 0 ? 1 : scrollY < 0 ? -1 : 0)));

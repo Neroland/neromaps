@@ -6,7 +6,9 @@ import java.util.Optional;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.GlobalPos;
+//? if >=1.20.5 {
 import net.minecraft.core.component.DataComponents;
+//?}
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
@@ -23,7 +25,9 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+//? if >=1.20.5 {
 import net.minecraft.world.item.component.LodestoneTracker;
+//?}
 import net.minecraft.world.level.Level;
 
 import za.co.neroland.neromaps.compat.PlayerMessages;
@@ -55,7 +59,13 @@ public final class WaypointCompassItem extends Item {
         ServerLevel sl = sp.level();
         MinecraftServer server = sl.getServer();
         if (player.isShiftKeyDown()) {
+            //? if >=1.20.5 {
             stack.remove(DataComponents.LODESTONE_TRACKER);
+            //?} else {
+            /*stack.removeTagKey("LodestonePos");
+            stack.removeTagKey("LodestoneDimension");
+            stack.removeTagKey("LodestoneTracked");
+            *///?}
             PlayerMessages.overlay(player, Component.translatable("neromaps.compass.cleared"));
             return true;
         }
@@ -81,10 +91,17 @@ public final class WaypointCompassItem extends Item {
             PlayerMessages.overlay(player, Component.translatable("neromaps.compass.none"));
             return true;
         }
+        //? if >=1.20.5 {
         LodestoneTracker current = stack.get(DataComponents.LODESTONE_TRACKER);
         int next = 0;
         if (current != null && current.target().isPresent()) {
             BlockPos at = current.target().get().pos();
+        //?} else {
+        /*var tag = stack.getTag();
+        int next = 0;
+        if (tag != null && tag.contains("LodestonePos", net.minecraft.nbt.Tag.TAG_COMPOUND)) {
+            BlockPos at = net.minecraft.nbt.NbtUtils.readBlockPos(tag.getCompound("LodestonePos"));
+        *///?}
             for (int k = 0; k < targets.size(); k++) {
                 if (targets.get(k).pos().equals(at)) {
                     next = (k + 1) % targets.size();
@@ -94,7 +111,14 @@ public final class WaypointCompassItem extends Item {
         }
         Target t = targets.get(next);
         ResourceKey<Level> key = ResourceKey.create(Registries.DIMENSION, Identifier.parse(t.dimension()));
+        //? if >=1.20.5 {
         stack.set(DataComponents.LODESTONE_TRACKER, new LodestoneTracker(Optional.of(GlobalPos.of(key, t.pos())), false));
+        //?} else {
+        /*var lodestone = stack.getOrCreateTag();
+        lodestone.put("LodestonePos", net.minecraft.nbt.NbtUtils.writeBlockPos(t.pos()));
+        lodestone.putString("LodestoneDimension", t.dimension());
+        lodestone.putBoolean("LodestoneTracked", false);
+        *///?}
         PlayerMessages.overlay(player, Component.translatable("neromaps.compass.locked", t.name()));
         return true;
     }
