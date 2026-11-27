@@ -357,7 +357,7 @@ public final class ClientMap {
         var dim = lvl.dimension().identifier();
         dimensionId = dim.toString();
         roofed = lvl.dimensionType().hasCeiling();
-        //? if >=1.21.4 {
+        //? if >=1.21.2 {
         int minY = lvl.getMinY();
         //?} else {
         /*int minY = lvl.getMinBuildHeight();

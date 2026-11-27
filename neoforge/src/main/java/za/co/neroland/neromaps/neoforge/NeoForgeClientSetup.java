@@ -6,7 +6,9 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.client.event.ClientTickEvent;
 //?}
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
+//? if >=1.20.4 {
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
+//?}
 import net.neoforged.neoforge.client.event.RegisterClientCommandsEvent;
 //? if >=1.20.5 {
 import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent;
@@ -41,9 +43,16 @@ public final class NeoForgeClientSetup {
                         (gui, graphics, delta, width, height) -> MinimapHud.render(graphics)));
         *///?}
         modEventBus.addListener((RegisterKeyMappingsEvent event) -> MapKeys.all().forEach(event::register));
+        //? if >=1.20.4 {
         modEventBus.addListener((RegisterMenuScreensEvent event) -> event.register(
                 za.co.neroland.neromaps.registry.ModMenus.CARTOGRAPHY_DESK.get(),
                 za.co.neroland.neromaps.client.screen.CartographyDeskScreen::new));
+        //?} else {
+        /*modEventBus.addListener((net.neoforged.fml.event.lifecycle.FMLClientSetupEvent event) ->
+                event.enqueueWork(() -> net.minecraft.client.gui.screens.MenuScreens.register(
+                        za.co.neroland.neromaps.registry.ModMenus.CARTOGRAPHY_DESK.get(),
+                        za.co.neroland.neromaps.client.screen.CartographyDeskScreen::new)));
+        *///?}
         modEventBus.addListener((EntityRenderersEvent.RegisterRenderers event) -> {
             event.registerBlockEntityRenderer(za.co.neroland.neromaps.registry.ModBlockEntities.WALL_MAP.get(),
                     ctx -> new za.co.neroland.neromaps.client.render.WallMapRenderer());

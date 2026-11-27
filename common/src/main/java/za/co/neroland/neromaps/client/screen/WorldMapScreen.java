@@ -828,9 +828,13 @@ public final class WorldMapScreen extends Screen {
             camX = player.getX();
             camZ = player.getZ();
         }
+        float ppb = ppb();
+        double left = camX - width / 2.0 / ppb;
+        double top = camZ - height / 2.0 / ppb;
         MapStore store = viewed();
         WorldMapTextures tex = textures;
         if (store == null || tex == null) {
+            drawPlayer(g, player, left, top, ppb);
             return;
         }
         tex.beginFrame();
@@ -838,12 +842,9 @@ public final class WorldMapScreen extends Screen {
         boolean overlays = ClientMap.overlaysAllowed();
         raster.set(s.effectiveStyle(), s.chunkBorders && overlays, s.grid && overlays, 63);
         int rasterVersion = raster.version * 31 + ColourTables.current().version();
-        float ppb = ppb();
         int lod = lod();
         int span = Tile.SIZE << lod; // blocks per tile
         int tilePx = Math.round(span * ppb);
-        double left = camX - width / 2.0 / ppb;
-        double top = camZ - height / 2.0 / ppb;
         int tx0 = (int) Math.floor(left / span);
         int tz0 = (int) Math.floor(top / span);
         int tx1 = (int) Math.floor((left + width / ppb) / span);
@@ -873,16 +874,6 @@ public final class WorldMapScreen extends Screen {
         String dimId = dimensions.isEmpty() ? ClientMap.dimensionId() : dimensions.get(dimension);
         overlays(g, left, top, ppb, dimId, mouseX, mouseY);
         serverTraffic(left, top, ppb, lod, dimId);
-        // the player
-        if (player != null && dimension == 0) {
-            int px = (int) Math.round((player.getX() - left) * ppb);
-            int pz = (int) Math.round((player.getZ() - top) * ppb);
-            blit(g, PRISM, px - 5, pz - 6, 11, 11, 11);
-            double a = Math.toRadians(player.getYRot());
-            int nx = px + (int) Math.round(-Math.sin(a) * 9);
-            int nz = pz + (int) Math.round(Math.cos(a) * 9);
-            g.fill(nx - 1, nz - 1, nx + 2, nz + 2, MapPalette.MAP_ACCENT_BRIGHT);
-        }
         // measure line
         if (!Double.isNaN(measureAx)) {
             double bx = Double.isNaN(measureBx) ? worldX(mouseX) : measureBx;
@@ -901,6 +892,47 @@ public final class WorldMapScreen extends Screen {
             g.text(font, Component.translatable("gui.neromaps.worldmap.measure_result", (long) Math.floor(d)).getString(),
                     ex + 6, ez - 4, MapPalette.TEXT);
         }
+        // the player last, so no layer, marker or line is ever drawn over it
+        drawPlayer(g, player, left, top, ppb);
+    }
+
+    /**
+     * The player's own marker, always shown when the map is of their dimension: the prism with a facing dot, or,
+     * once the view has been panned away from them, a marker pinned to the nearest screen edge in their direction
+     * so they can always find themselves.
+     */
+    private void drawPlayer(GuiGraphicsExtractor g, @Nullable LocalPlayer player, double left, double top, float ppb) {
+        if (player == null || dimension != 0) {
+            return;
+        }
+        int px = (int) Math.round((player.getX() - left) * ppb);
+        int pz = (int) Math.round((player.getZ() - top) * ppb);
+        int margin = 8;
+        int maxX = Math.max(margin, (panel != Panel.NONE ? panelX() - 4 : width) - margin);
+        int maxZ = Math.max(margin, height - 16 - margin);
+        if (px < margin || pz < margin || px > maxX || pz > maxZ) {
+            // off screen: pin to the edge along the line from the centre of the view
+            double cx = (margin + maxX) / 2.0;
+            double cz = (margin + maxZ) / 2.0;
+            double dx = px - cx;
+            double dz = pz - cz;
+            double k = Math.min(dx == 0 ? Double.MAX_VALUE : (maxX - cx) / Math.abs(dx),
+                    dz == 0 ? Double.MAX_VALUE : (maxZ - cz) / Math.abs(dz));
+            int ex = (int) Math.round(cx + dx * k);
+            int ez = (int) Math.round(cz + dz * k);
+            g.fill(ex - 6, ez - 6, ex + 7, ez + 7, 0xFF1A1D22);
+            blit(g, PRISM, ex - 5, ez - 6, 11, 11, 11);
+            double len = Math.max(1.0, Math.sqrt(dx * dx + dz * dz));
+            int tx = ex + (int) Math.round(dx / len * 9);
+            int tz = ez + (int) Math.round(dz / len * 9);
+            g.fill(tx - 1, tz - 1, tx + 2, tz + 2, MapPalette.MAP_ACCENT_BRIGHT);
+            return;
+        }
+        blit(g, PRISM, px - 5, pz - 6, 11, 11, 11);
+        double a = Math.toRadians(player.getYRot());
+        int nx = px + (int) Math.round(-Math.sin(a) * 9);
+        int nz = pz + (int) Math.round(Math.cos(a) * 9);
+        g.fill(nx - 1, nz - 1, nx + 2, nz + 2, MapPalette.MAP_ACCENT_BRIGHT);
     }
 
     private void drawOverlay(GuiGraphicsExtractor g, int mouseX, int mouseY) {

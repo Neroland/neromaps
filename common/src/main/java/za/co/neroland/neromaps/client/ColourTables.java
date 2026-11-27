@@ -29,9 +29,12 @@ import za.co.neroland.neromaps.colour.ColourTable;
 
 /**
  * Loads the colour table from {@code assets/<ns>/map_colours/*.json} (every pack, bottom to top, later keys win)
- * and the biome-style families from {@code assets/neromaps/map/biome_styles.json}, again on every resource reload,
- * so a resource pack can recolour single blocks. Blocks missing from the table use their vanilla map colour.
- * Client main thread only.
+ * and the biome-style families from {@code assets/neromaps/map/biome_styles.json}, again on every resource reload.
+ * NeroMaps' own bundled tables sit below the colours sampled from the block textures the client renders
+ * ({@link BlockTextureColours}); any other {@code map_colours} file (a resource pack, another mod) is an explicit
+ * override and wins over both, so a resource pack can still recolour single blocks. Blocks nothing knows use their
+ * vanilla map colour. Biome colours come from the client's own biomes as they are first seen. Client main thread
+ * only.
  */
 public final class ColourTables implements ResourceManagerReloadListener {
 
@@ -56,7 +59,8 @@ public final class ColourTables implements ResourceManagerReloadListener {
 
     /** Rebuilds the table from the resource manager. */
     public static void reload(ResourceManager rm) {
-        ColourTable t = new ColourTable(ColourTables::vanillaMapColour);
+        BlockTextureColours.clear();
+        ColourTable t = new ColourTable(ColourTables::vanillaMapColour, BlockTextureColours::sample);
         int files = 0;
         try {
             Map<Identifier, List<Resource>> stacks =
@@ -65,11 +69,20 @@ public final class ColourTables implements ResourceManagerReloadListener {
             java.util.ArrayList<Identifier> ids = new java.util.ArrayList<>(stacks.keySet());
             ids.sort((a, b) -> a.toString().compareTo(b.toString()));
             for (Identifier id : ids) {
-                for (Resource r : stacks.get(id)) {
+                List<Resource> stack = stacks.get(id);
+                for (int k = 0; k < stack.size(); k++) {
+                    Resource r = stack.get(k);
+                    // NeroMaps' own generated table (the bottom of a neromaps stack) is the fallback under the
+                    // sampled textures; anything a pack or another mod adds on top is a deliberate override.
+                    boolean bundled = k == 0 && id.getNamespace().equals(NeroMapsCommon.MOD_ID);
                     try (Reader reader = r.openAsReader()) {
                         JsonElement e = JsonParser.parseReader(reader);
                         if (e.isJsonObject()) {
-                            t.merge(e.getAsJsonObject());
+                            if (bundled) {
+                                t.merge(e.getAsJsonObject());
+                            } else {
+                                t.mergeOverride(e.getAsJsonObject());
+                            }
                             files++;
                         }
                     } catch (Exception ex) {
@@ -122,13 +135,22 @@ public final class ColourTables implements ResourceManagerReloadListener {
         }
     }
 
-    /** Gives a biome first seen this session its Biome-style family through its tags (main thread). */
+    /**
+     * Gives a biome first seen this session the grass, foliage and water colours the client renders it with, and
+     * its Biome-style family through its tags (main thread).
+     */
     @SuppressWarnings("unchecked")
     static void resolveBiome(Holder<Biome> h, String id) {
         if (RESOLVED.putIfAbsent(h, Boolean.TRUE) != null) {
             return;
         }
         ColourTable t = current;
+        try {
+            Biome b = h.value();
+            t.setBiomeColours(id, b.getGrassColor(0.0, 0.0), b.getFoliageColor(), b.getWaterColor());
+        } catch (RuntimeException | LinkageError e) {
+            // keeps the bundled table's colours for this biome
+        }
         for (Object[] tag : TAGS) {
             if (h.is((TagKey<Biome>) tag[0])) {
                 t.setBiomeStyle(id, (Integer) tag[1]);

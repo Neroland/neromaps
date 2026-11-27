@@ -50,7 +50,7 @@ public final class ChunkSnapshot implements ColumnSource {
     private ChunkSnapshot(LevelChunk chunk, Level level, Mode mode, int caveY) {
         this.chunkX = chunk.getPos().getMinBlockX() >> 4;
         this.chunkZ = chunk.getPos().getMinBlockZ() >> 4;
-        //? if >=1.21.4 {
+        //? if >=1.21.2 {
         this.minY = level.getMinY();
         //?} else {
         /*this.minY = level.getMinBuildHeight();

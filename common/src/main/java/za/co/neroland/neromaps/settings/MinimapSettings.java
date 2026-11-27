@@ -29,6 +29,11 @@ public final class MinimapSettings {
     public static final int MAX_SIZE = 192;
     public static final float MIN_ZOOM = 0.25f;
     public static final float MAX_ZOOM = 8f;
+    /**
+     * Version of the settings file layout. 1 (no {@code settingsVersion} key) predates the time readout being on by
+     * default; see {@link #migrate}.
+     */
+    public static final int SETTINGS_VERSION = 2;
 
     public boolean enabled = true;
     public Shape shape = Shape.SQUARE;
@@ -54,7 +59,7 @@ public final class MinimapSettings {
     public boolean showFacing;
     public boolean showBiome = true;
     public boolean showDimension;
-    public boolean showTime;
+    public boolean showTime = true;
     public boolean showLight;
     /** Chunk patches uploaded per frame (default 8, cap 16). */
     public int uploadBudget = 8;
@@ -165,6 +170,7 @@ public final class MinimapSettings {
 
     public Properties toProperties() {
         Properties p = new Properties();
+        p.setProperty("settingsVersion", Integer.toString(SETTINGS_VERSION));
         p.setProperty("enabled", Boolean.toString(enabled));
         p.setProperty("shape", shape.name());
         p.setProperty("anchor", anchor.name());
@@ -257,6 +263,21 @@ public final class MinimapSettings {
         changed();
     }
 
+    /**
+     * Brings a settings file written by an older NeroMaps up to the current defaults, without overriding a choice
+     * the player made. A file from before {@link #SETTINGS_VERSION} 2 that still carries the untouched default look
+     * (preset {@code explorer}: any change made by hand clears the preset) gets the minimap and the in-game time
+     * readout switched on, the defaults those files predate. A file with a customised look is left as it is.
+     * Preset exports and imports carry no version and are never migrated.
+     */
+    void migrate(Properties p) {
+        int from = integer(p, "settingsVersion", 1);
+        if (from < 2 && "explorer".equals(preset)) {
+            enabled = true;
+            showTime = true;
+        }
+    }
+
     /** Loads from {@code file}; a missing or unreadable file keeps the defaults. */
     public void load(Path file) {
         if (!Files.isRegularFile(file)) {
@@ -269,6 +290,8 @@ public final class MinimapSettings {
             return;
         }
         fromProperties(p);
+        migrate(p);
+        changed();
     }
 
     /** Saves atomically (temp file, then move). */

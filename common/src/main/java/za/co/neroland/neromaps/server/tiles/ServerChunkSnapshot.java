@@ -48,7 +48,7 @@ public final class ServerChunkSnapshot implements ChunkAccess.Snapshot {
     private ServerChunkSnapshot(LevelChunk chunk, ServerLevel level) {
         this.chunkX = chunk.getPos().getMinBlockX() >> 4;
         this.chunkZ = chunk.getPos().getMinBlockZ() >> 4;
-        //? if >=1.21.4 {
+        //? if >=1.21.2 {
         this.minY = level.getMinY();
         //?} else {
         /*this.minY = level.getMinBuildHeight();

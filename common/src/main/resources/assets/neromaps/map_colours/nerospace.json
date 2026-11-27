@@ -21,10 +21,6 @@
    "rgb": "4b7161",
    "tint": "none"
   },
-  "nerospace:amber_sap_ore": {
-   "rgb": "6b543d",
-   "tint": "none"
-  },
   "nerospace:anorthosite": {
    "rgb": "c8c8c1",
    "tint": "none"
@@ -61,20 +57,12 @@
    "rgb": "758659",
    "tint": "none"
   },
-  "nerospace:cheese_ore": {
-   "rgb": "bda882",
-   "tint": "none"
-  },
   "nerospace:cheese_wheel": {
    "rgb": "eab639",
    "tint": "none"
   },
   "nerospace:cindrite_block": {
    "rgb": "885727",
-   "tint": "none"
-  },
-  "nerospace:cindrite_ore": {
-   "rgb": "8c827b",
    "tint": "none"
   },
   "nerospace:combustion_generator": {
@@ -99,10 +87,6 @@
   },
   "nerospace:dawnband_stone": {
    "rgb": "564147",
-   "tint": "none"
-  },
-  "nerospace:deepslate_nerosium_ore": {
-   "rgb": "6b4f5c",
    "tint": "none"
   },
   "nerospace:docking_port": {
@@ -145,10 +129,6 @@
    "rgb": "5c869d",
    "tint": "none"
   },
-  "nerospace:glacite_ore": {
-   "rgb": "818990",
-   "tint": "none"
-  },
   "nerospace:glowcap_block": {
    "rgb": "a2f555",
    "tint": "none"
@@ -169,10 +149,6 @@
    "rgb": "97a19d",
    "tint": "none"
   },
-  "nerospace:hematite_ore": {
-   "rgb": "ae512b",
-   "tint": "none"
-  },
   "nerospace:hull_plating": {
    "rgb": "7d888d",
    "tint": "none"
@@ -187,10 +163,6 @@
   },
   "nerospace:hydroponics_tray": {
    "rgb": "52ad7b",
-   "tint": "none"
-  },
-  "nerospace:ilmenite_ore": {
-   "rgb": "989893",
    "tint": "none"
   },
   "nerospace:landing_pod": {
@@ -261,16 +233,8 @@
    "rgb": "7a6987",
    "tint": "none"
   },
-  "nerospace:nerosium_ore": {
-   "rgb": "8c7d83",
-   "tint": "none"
-  },
   "nerospace:nerosteel_block": {
    "rgb": "698a6c",
-   "tint": "none"
-  },
-  "nerospace:nerosteel_ore": {
-   "rgb": "7f8880",
    "tint": "none"
   },
   "nerospace:nyx_crystal_cluster": {
@@ -319,10 +283,6 @@
   },
   "nerospace:quarry_landmark": {
    "rgb": "6d537c",
-   "tint": "none"
-  },
-  "nerospace:raw_nerosium_block": {
-   "rgb": "641d49",
    "tint": "none"
   },
   "nerospace:red_regolith": {
@@ -443,14 +403,6 @@
   },
   "nerospace:void_crystal": {
    "rgb": "a867e3",
-   "tint": "none"
-  },
-  "nerospace:voidglass_ore": {
-   "rgb": "494468",
-   "tint": "none"
-  },
-  "nerospace:xertz_quartz_ore": {
-   "rgb": "848a85",
    "tint": "none"
   },
   "nerospace:xertz_soil": {

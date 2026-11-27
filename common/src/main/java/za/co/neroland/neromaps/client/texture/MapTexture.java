@@ -68,7 +68,7 @@ public final class MapTexture {
         *///?} else if >=1.21.5 {
         /*copyToImage(argb, off, stride, x, y);
         RenderSystem.getDevice().createCommandEncoder().writeToTexture(texture.getTexture(), texture.getPixels(), 0, x, y, 16, 16, x, y);
-        *///?} else if >=1.21.2 {
+        *///?} else if >=1.21.4 {
         /*copyToImage(argb, off, stride, x, y);
         texture.bind();
         texture.getPixels().upload(0, x, y, x, y, 16, 16, false);

@@ -6,6 +6,35 @@ All notable changes to NeroMaps are documented here. The format follows
 
 ## [Unreleased]
 
+## [0.4.0] - 2026-11-27
+
+### Added
+
+- Minecraft 1.21.3, 26.1 and 26.1.1 on Fabric, Forge and NeoForge, and 1.20.2 and 1.20.3 on NeoForge (20.2.93 and
+  20.3.8-beta), with Neroland Core 1.25.0 or newer.
+
+### Changed
+
+- The map colours for every Nero ore now sit under their Neroland Core ids (`nerolandcore:`), since the ores moved to
+  Core 1.25.0. Requires Neroland Core 1.25.0 or newer.
+- The in-game time readout under the minimap is now on by default, and part of the default Explorer preset.
+- Settings files from earlier versions that still use the untouched default look (preset Explorer) get the
+  minimap and the time readout switched on once. Settings you changed by hand are kept as they are.
+
+### Fixed
+
+- Map colours now match the blocks in game. Each block's colour is read on the client from the texture it is
+  actually drawn with (the top face of its model, through your resource packs), so modded blocks and resource
+  packs show their real colours instead of an approximate map colour. Grass, leaves and water use the colours your
+  client gives each biome, modded and planet biomes included; constant tints such as spruce and birch leaves are
+  kept; cut-out and see-through pixels are left out. Water is drawn as its texture tinted by the biome, as in game.
+  The colours are worked out once per block and cached, and tiles already on the map redraw with them. A
+  `map_colours` file in a resource pack still overrides single blocks.
+- Your own player marker is always drawn: on the minimap it always sits on top of every marker (it can no longer
+  be pushed out by a full marker list) and also shows on the fallback minimap some 1.21.6 to 1.21.11 setups use; on
+  the world map it is drawn last, over every layer, waypoint and line, shows while the map's tiles are still
+  loading, and stays pinned to the edge of the screen, pointing your way, when you pan away from yourself.
+
 ## [0.3.1]
 
 ### Added

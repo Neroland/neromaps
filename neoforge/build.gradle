@@ -85,6 +85,14 @@ dependencies {
 
 tasks.named('test', Test) {
     useJUnitPlatform()
+    // Minecraft 1.20.2's registries refuse to initialise without a game bootstrap, which these plain-JVM tests
+    // do not run. The two suites that build registry keys (fake layer worlds) run on every other cell.
+    if (mc == '1.20.2') {
+        filter {
+            excludeTestsMatching 'za.co.neroland.neromaps.link.MapsLinkLayersTest'
+            excludeTestsMatching 'za.co.neroland.neromaps.server.layers.LayerItemsTest'
+        }
+    }
 }
 
 dependencies {
@@ -123,6 +131,10 @@ def generateModMetadata = tasks.register('generateModMetadata', ProcessResources
             name = 'mods.toml'
             filter { line -> line.replace('type = "required"', 'mandatory = true')
                                  .replace('type = "optional"', 'mandatory = false') }
+            // NeoForge before 20.4 reads no [[mixins]] tables; those cells name the configs in the jar manifest.
+            if (stonecutter.eval(mc, '<1.20.4')) {
+                filter { line -> line ==~ /\s*\[\[mixins]]\s*/ || line ==~ /\s*config\s*=\s*"neromaps-.*\.mixins\.json"\s*/ ? '' : line }
+            }
         }
     }
     into layout.buildDirectory.dir('generated/sources/modMetadata')
@@ -164,9 +176,15 @@ def generateWikiResources = tasks.register('generateWikiResources', Copy) {
 }
 sourceSets.main.resources.srcDir generateWikiResources
 
-// NeoForge 20.5's POM predates the ModDevGradle variants. The original userdev jar supplies the
-// game patches and the original POM supplies dependencies for the compile and test classpaths.
-if (mc == '1.20.5') {
+if (stonecutter.eval(mc, '<1.20.4')) {
+    tasks.named('jar', Jar) {
+        manifest.attributes('MixinConfigs': 'neromaps-common.mixins.json,neromaps-gui.mixins.json')
+    }
+}
+
+// These NeoForge POMs (20.2, 20.3, 20.5) predate the ModDevGradle variants. The original userdev jar supplies
+// the game patches and the original POM supplies dependencies for the compile and test classpaths.
+if (mc in ['1.20.2', '1.20.3', '1.20.5']) {
     dependencies.components.withModule('net.neoforged:neoforge') { details ->
         if (details.id.version == neoVersion) {
             details.withVariant('sources') {

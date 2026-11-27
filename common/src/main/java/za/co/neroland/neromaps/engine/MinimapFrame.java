@@ -120,7 +120,8 @@ public final class MinimapFrame {
         // markers
         float limit = radius - markerHalf;
         float limitSq = limit * limit;
-        for (int i = 0; i < markers; i++) {
+        // the last slot is kept for the player arrow, so a full batch can never drop it
+        for (int i = 0; i < markers && b.quads < b.capacity - 1; i++) {
             float dx = (float) (markerX[i] - px) * zoom;
             float dz = (float) (markerZ[i] - pz) * zoom;
             float sx = dx * cos + dz * sin;
@@ -131,7 +132,8 @@ public final class MinimapFrame {
             b.rect(cx + sx - markerHalf, cy + sy - markerHalf, cx + sx + markerHalf, cy + sy + markerHalf,
                     Sprites.DOT_U0, Sprites.DOT_V0, Sprites.DOT_U1, Sprites.DOT_V1, markerColour[i]);
         }
-        // the player: on a rotating map the arrow points up, on a north-locked map it turns
+        // the player, last so it sits on top of every marker: on a rotating map the arrow points up, on a
+        // north-locked map it turns. Always drawn, whatever the zoom, mode or data under it.
         float arrowSin = 0f;
         float arrowCos = 1f;
         if (!rotate) {

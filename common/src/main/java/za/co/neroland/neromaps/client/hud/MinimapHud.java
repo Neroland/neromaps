@@ -444,7 +444,7 @@ public final class MinimapHud {
                 stateFailed = true;
             }
         }
-        emitBlit(g, tex);
+        emitBlit(g, mc, tex, spr);
         *///?} else if >=1.21.2 {
         /*emitDrawSpecial(g, tex, spr, surfaceColour);
         *///?} else {
@@ -496,7 +496,7 @@ public final class MinimapHud {
     /*private static boolean fallbackLogged;
     private static boolean stateFailed;
 
-    private static void emitBlit(GuiGraphicsExtractor g, MapTexture tex) {
+    private static void emitBlit(GuiGraphicsExtractor g, Minecraft mc, MapTexture tex, MapTexture spr) {
         if (!fallbackLogged) {
             fallbackLogged = true;
             NeroMapsCommon.LOGGER.warn("[NeroMaps] GUI accessor mixin unavailable: the minimap falls back to a square,"
@@ -504,6 +504,16 @@ public final class MinimapHud {
         }
         float[] uv = FRAME.surface.uv;
         g.blit(tex.id, LAYOUT.left, LAYOUT.top, LAYOUT.right(), LAYOUT.bottom(), uv[0], uv[4], uv[1], uv[5]);
+        // the player arrow is never left out, even here: centred, turning with the player, on top of the map
+        if (mc.player != null) {
+            g.pose().pushMatrix();
+            g.pose().translate(LAYOUT.left + LAYOUT.size * 0.5f, LAYOUT.top + LAYOUT.size * 0.5f);
+            g.pose().rotate((float) Math.toRadians(mc.player.getYRot() + 180.0));
+            g.blit(spr.id, -4, -4, 5, 5, za.co.neroland.neromaps.engine.Sprites.ARROW_U0,
+                    za.co.neroland.neromaps.engine.Sprites.ARROW_U1, za.co.neroland.neromaps.engine.Sprites.ARROW_V0,
+                    za.co.neroland.neromaps.engine.Sprites.ARROW_V1);
+            g.pose().popMatrix();
+        }
     }
     *///?}
 

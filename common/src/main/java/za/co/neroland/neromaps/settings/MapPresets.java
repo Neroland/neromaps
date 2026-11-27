@@ -76,6 +76,7 @@ public final class MapPresets {
                 s.border = MinimapSettings.Border.NERO;
                 s.opacity = 1f;
                 readouts(s, true, false, true);
+                s.showTime = true;
                 s.waypointsOnMinimap = true;
                 s.deathPointsShown = true;
                 s.beams = true;

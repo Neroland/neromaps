@@ -1,8 +1,20 @@
 {
  "version": 1,
  "blocks": {
+  "nerolandcore:amber_sap_ore": {
+   "rgb": "6b543d",
+   "tint": "none"
+  },
   "nerolandcore:battery": {
    "rgb": "7b6970",
+   "tint": "none"
+  },
+  "nerolandcore:cheese_ore": {
+   "rgb": "bda882",
+   "tint": "none"
+  },
+  "nerolandcore:cindrite_ore": {
+   "rgb": "8c827b",
    "tint": "none"
   },
   "nerolandcore:creative_battery": {
@@ -21,12 +33,32 @@
    "rgb": "9d6790",
    "tint": "none"
   },
+  "nerolandcore:deepslate_nerosium_ore": {
+   "rgb": "6b4f5c",
+   "tint": "none"
+  },
+  "nerolandcore:embedded_meteor_ore": {
+   "rgb": "353836",
+   "tint": "none"
+  },
   "nerolandcore:fluid_tank": {
    "rgb": "596da5",
    "tint": "none"
   },
   "nerolandcore:gas_tank": {
    "rgb": "5f916f",
+   "tint": "none"
+  },
+  "nerolandcore:glacite_ore": {
+   "rgb": "818990",
+   "tint": "none"
+  },
+  "nerolandcore:hematite_ore": {
+   "rgb": "ae512b",
+   "tint": "none"
+  },
+  "nerolandcore:ilmenite_ore": {
+   "rgb": "989893",
    "tint": "none"
   },
   "nerolandcore:item_store": {
@@ -37,12 +69,24 @@
    "rgb": "26a79b",
    "tint": "none"
   },
+  "nerolandcore:nerosium_ore": {
+   "rgb": "8c7d83",
+   "tint": "none"
+  },
+  "nerolandcore:nerosteel_ore": {
+   "rgb": "7f8880",
+   "tint": "none"
+  },
   "nerolandcore:plasma_glass_block": {
    "rgb": "69e9ff",
    "tint": "none"
   },
   "nerolandcore:plasma_glass_pane": {
    "rgb": "69e9ff",
+   "tint": "none"
+  },
+  "nerolandcore:raw_nerosium_block": {
+   "rgb": "641d49",
    "tint": "none"
   },
   "nerolandcore:sentry_test": {
@@ -59,6 +103,14 @@
   },
   "nerolandcore:void_crystal_block": {
    "rgb": "9e5ccf",
+   "tint": "none"
+  },
+  "nerolandcore:voidglass_ore": {
+   "rgb": "494468",
+   "tint": "none"
+  },
+  "nerolandcore:xertz_quartz_ore": {
+   "rgb": "848a85",
    "tint": "none"
   }
  }

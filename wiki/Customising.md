@@ -53,7 +53,7 @@ Settings live in `config/neromaps-client.properties`:
 | `highContrast` | true / false | false | Force the high-contrast style everywhere |
 | `grid`, `chunkBorders` | true / false | false | Overlay lines |
 | `caveMode` | true / false | false | Cave slice (if the server allows it) |
-| `showCoords`, `showFacing`, `showBiome`, `showDimension`, `showTime`, `showLight` | true / false | coords and biome on | Readouts under the map |
+| `showCoords`, `showFacing`, `showBiome`, `showDimension`, `showTime`, `showLight` | true / false | coords, biome and time on | Readouts under the map |
 | `uploadBudget` | 1 to 16 | 8 | Map patches uploaded per frame (see [Performance](Performance)) |
 | `textureBudgetMb` | 16 to 1024 | 64 | Texture memory cap |
 | `cacheMb` | 0 to 16384 | 256 | Disk cache cap. 0 turns the cache off |
@@ -69,6 +69,10 @@ Settings live in `config/neromaps-client.properties`:
 | `layersOffWorld`, `layersOnWorld`, `layersOffMinimap`, `layersOnMinimap` | layer ids | empty | Your per-layer choices from the world map's Layers panel (overrides of each layer's default) |
 | `preset` | a preset name | `explorer` | The preset last applied |
 
-Resource packs can recolour single blocks. Add `assets/<namespace>/map_colours/<anything>.json` in the same format
-as NeroMaps' own tables. Later packs win for each block. Biome-style colours come from
+Map colours are read from the block textures your game actually draws (the top face of each block, through your
+resource packs), with grass, leaves and water tinted by the colours your game gives each biome. So a resource pack
+that changes a texture changes the map too.
+
+Resource packs can also recolour single blocks on purpose. Add `assets/<namespace>/map_colours/<anything>.json` in
+the same format as NeroMaps' own tables; those entries win over the texture colour. Later packs win for each block. Biome-style colours come from
 `assets/neromaps/map/biome_styles.json`.

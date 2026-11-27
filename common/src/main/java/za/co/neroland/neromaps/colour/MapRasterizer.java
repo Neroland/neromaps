@@ -12,6 +12,7 @@ import za.co.neroland.neromaps.tile.Tile;
 public final class MapRasterizer {
 
     private static final int[] SHADE = {200, 228, 256, 276, 297}; // 0.78, 0.89, 1.00, 1.08, 1.16 (x256)
+    private static final String WATER_ID = "minecraft:water";
 
     private MapRasterizer() {
     }
@@ -26,6 +27,8 @@ public final class MapRasterizer {
         int[] foliage = new int[16];
         int[] water = new int[16];
         int[] style = new int[16];
+        /** The water texture's colour (the biome water colour is multiplied by it, as the game does). */
+        int waterTexture = 0xFFFFFF;
     }
 
     static TileColours colours(Tile t, ColourTable table) {
@@ -38,6 +41,7 @@ public final class MapRasterizer {
             c.version = table.version();
             c.blocks = 0;
             c.biomes = 0;
+            c.waterTexture = ColourTable.rgb(table.block(WATER_ID));
         }
         int nb = t.blockPaletteSize();
         if (c.blocks < nb) {
@@ -225,7 +229,8 @@ public final class MapRasterizer {
         int packed = c.block[t.block[i]];
         int base = tinted(packed, c, bi);
         if (water) {
-            int w = c.water[bi];
+            // the water texture tinted by the biome water colour, as the game draws it seen from above
+            int w = multiply(c.water[bi], c.waterTexture);
             if (style == MapStyle.FLAT) {
                 return 0xFF000000 | w;
             }
